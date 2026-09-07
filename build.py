@@ -388,11 +388,27 @@ def parse_frontmatter(md_text):
     fm = {}
     m = re.match(r'^(?:<title>.*?</title>\s*)?---\n(.*?)\n---', md_text, flags=re.S)
     if m:
-        for ln in m.group(1).split('\n'):
-            ln = ln.strip()
-            if ':' in ln:
-                k, _, v = ln.partition(':')
-                fm[k.strip().lower()] = v.strip().strip('"').strip('\'')
+        lines = m.group(1).split('\n')
+        i = 0
+        while i < len(lines):
+            ln = lines[i]
+            stripped = ln.strip()
+            if ':' in stripped and not stripped.startswith('-'):
+                k, _, v = stripped.partition(':')
+                key = k.strip().lower()
+                val = v.strip()
+                if val == '|':
+                    block = []
+                    i += 1
+                    while i < len(lines) and (lines[i].startswith('  ') or lines[i].startswith('\t') or lines[i].strip() == ''):
+                        if lines[i].strip():
+                            block.append(lines[i].strip())
+                        i += 1
+                    fm[key] = '\n'.join(block)
+                    continue
+                else:
+                    fm[key] = val.strip('"').strip('\'')
+            i += 1
     return fm
 
 def section_after(md_text, keywords):
