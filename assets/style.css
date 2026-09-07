@@ -102,7 +102,10 @@ main { max-width: var(--max-width); margin: 0 auto; padding: 0 28px; }
   padding: 30px 28px; transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
 }
 .cap-card:hover { transform: translateY(-3px); border-color: rgba(0,113,227,0.35); box-shadow: 0 12px 32px rgba(0,0,0,0.06); }
-.cap-num { font-size: 13px; font-weight: 600; color: var(--accent); letter-spacing: 0.1em; margin-bottom: 12px; }
+.cap-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+.cap-icon { width: 32px; height: 32px; color: var(--accent); display: flex; align-items: center; justify-content: center; }
+.cap-icon svg { width: 28px; height: 28px; }
+.cap-num { font-size: 13px; font-weight: 600; color: var(--fg-tertiary); letter-spacing: 0.1em; }
 .cap-card h3 { font-size: 20px; font-weight: 600; letter-spacing: -0.01em; margin-bottom: 10px; }
 .cap-card p { font-size: 14px; color: var(--fg-secondary); margin-bottom: 14px; }
 .cap-evidence { list-style: none; }

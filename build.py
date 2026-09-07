@@ -157,69 +157,69 @@ def index_shell(title, body, desc=''):
 # ============ capability CV (trilingual) ============
 CAPS = {
 'zh': [
-  ('01', '港股 IPO 执行',
+  ('01', '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="16" y2="17"/></svg>', '港股 IPO 执行',
    '从行业格局与竞争壁垒研究，到招股书章节起草与可比公司估值，覆盖 IPO 全流程的关键环节。',
    ['中信里昂证券 CLSA · 投行部分析师（2026.06 – 至今）',
     '参与多家拟港股上市企业的 IPO 执行，覆盖医疗健康、科技与消费',
     '为 A 股上市公司 H 股上市补充材料提供估值与报告支持']),
-  ('02', '跨境并购与财务顾问',
+  ('02', '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>', '跨境并购与财务顾问',
    '卖方项目从投资故事到交易执行：估值、买家分析与英文提案。',
    ['东南亚跨境医疗健康机构少数股权出售 · FA 项目',
     'Trading Comps / Transaction Comps 估值与战略买家分析',
     '英文 RFP 提案制作']),
-  ('03', '消费行业深度研究',
+  ('03', '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>', '消费行业深度研究',
    '以投资视角拆解消费公司与行业：从 Pre-IPO 尽调到潮玩、现制茶饮、出海。',
    ['元生资本 · 消费投资（货拉拉 / 东鹏特饮 / 宁德时代 Pre-IPO 尽调）',
     '源一资本 · 港股新消费（老铺黄金 / 泡泡玛特 / 布鲁可 / 名创优品）',
     '潮玩行业 50+ 页深度报告 · 300 份消费者问卷',
     '研报：<a href="research/popmart.html">POP MART</a>  · <a href="research/wandian.html">万店连锁</a> · <a href="research/kuoshouji.html">阔手机</a>']),
-  ('04', '估值建模与投研叙事',
+  ('04', '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg>', '估值建模与投研叙事',
    '把复杂公司讲成清晰投资故事：建模、对标与案例复盘。',
    ['HollySys LBO 分析 · 投资银行课程',
     '<a href="research/newfrontier.html">新风天域估值案例复盘</a>（港股 IPO 过会级）',
     '跨消费零售与医疗健康的深度研究体系']),
 ],
 'tw': [
-  ('01', '港股 IPO 執行',
+  ('01', '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="16" y2="17"/></svg>', '港股 IPO 執行',
    '從行業格局與競爭壁壘研究，到招股書章節起草與可比公司估值，覆蓋 IPO 全流程的關鍵環節。',
    ['中信里昂證券 CLSA · 投行部分析師（2026.06 – 至今）',
     '參與多家擬港股上市企業的 IPO 執行，覆蓋醫療健康、科技與消費',
     '為 A 股上市公司 H 股上市補充材料提供估值與報告支持']),
-  ('02', '跨境併購與財務顧問',
+  ('02', '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>', '跨境併購與財務顧問',
    '賣方項目從投資故事到交易執行：估值、買家分析與英文提案。',
    ['東南亞跨境醫療健康機構少數股權出售 · FA 項目',
     'Trading Comps / Transaction Comps 估值與戰略買家分析',
     '英文 RFP 提案製作']),
-  ('03', '消費行業深度研究',
+  ('03', '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>', '消費行業深度研究',
    '以投資視角拆解消費公司與行業：從 Pre-IPO 盡調到潮玩、現製茶飲、出海。',
    ['元生資本 · 消費投資（貨拉拉 / 東鵬特飲 / 寧德時代 Pre-IPO 盡調）',
     '源壹資本 · 港股新消費（老鋪黃金 / 泡泡瑪特 / 布魯可 / 名創優品）',
     '潮玩行業 50+ 頁深度報告 · 300 份消費者問卷',
     '研報：<a href="research/popmart.html">POP MART</a>  · <a href="research/wandian.html">萬店連鎖</a> · <a href="research/kuoshouji.html">闊手機</a>']),
-  ('04', '估值建模與投研敘事',
+  ('04', '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg>', '估值建模與投研敘事',
    '把複雜公司講成清晰投資故事：建模、對標與案例復盤。',
    ['HollySys LBO 分析 · 投資銀行課程',
     '<a href="research/newfrontier.html">新風天域估值案例復盤</a>（港股 IPO 過會級）',
     '跨消費零售與醫療健康的深度研究體系']),
 ],
 'en': [
-  ('01', 'Hong Kong IPO Execution',
+  ('01', '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="16" y2="17"/></svg>', 'Hong Kong IPO Execution',
    'From industry landscape and competitive moat research to prospectus drafting and comparable valuation — across the critical stages of an IPO.',
    ['Analyst, Investment Banking at CLSA (Jun 2026 – Present)',
     'IPO execution for multiple Hong Kong-bound companies across healthcare, TMT and consumer',
     'Valuation and report support for an A-share issuer\u2019s H-share listing']),
-  ('02', 'Cross-border M&A Advisory',
+  ('02', '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>', 'Cross-border M&A Advisory',
    'Sell-side mandates from investment story to execution: valuation, buyer analysis and English proposals.',
    ['Sell-side FA on a minority stake disposal in a Southeast Asian healthcare institution',
     'Trading Comps & Transaction Comps, strategic and financial buyer analysis',
     'English RFP pitch book']),
-  ('03', 'Consumer Sector Research',
+  ('03', '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>', 'Consumer Sector Research',
    'Deconstructing consumer companies through an investment lens — from Pre-IPO due diligence to collectibles, tea chains and going-global.',
    ['Genesis Capital · Consumer Investing (Lalamove / Eastroc / CATL Pre-IPO CDD)',
     'Being Capital · HK-listed new consumer (LAOPU / POPMART / Bloks / MINISO)',
     '50+ page collectibles deep-dive · 300 consumer surveys',
     'Reports: <a href="research/popmart.html">POP MART</a>  · <a href="research/wandian.html">Wan-dian chains</a> · <a href="research/kuoshouji.html">Wide phones</a>']),
-  ('04', 'Valuation & Investment Narrative',
+  ('04', '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg>', 'Valuation & Investment Narrative',
    'Turning complex companies into clear stories: modeling, benchmarking and case teardowns.',
    ['HollySys LBO analysis · Investment Banking coursework',
     '<a href="research/newfrontier.html">New Frontier valuation teardown</a> (HK IPO pass-level)',
@@ -272,9 +272,9 @@ def life_photos(items):
 def build_index():
     def caps_html(lang):
         cards = ''
-        for num, title, desc, ev in CAPS[lang]:
+        for num, icon, title, desc, ev in CAPS[lang]:
             lis = ''.join(f'<li>{e}</li>' for e in ev)
-            cards += f'''<div class="cap-card"><div class="cap-num">{num}</div><h3>{title}</h3><p>{desc}</p><ul class="cap-evidence">{lis}</ul></div>'''
+            cards += f'''<div class="cap-card"><div class="cap-head"><div class="cap-icon">{icon}</div><div class="cap-num">{num}</div></div><h3>{title}</h3><p>{desc}</p><ul class="cap-evidence">{lis}</ul></div>'''
         return f'<div class="caps">{cards}</div>'
     def timeline_html(lang):
         items = ''
@@ -374,9 +374,9 @@ def build_index():
   <div data-lang-block="tw" hidden>{hero_tw}</div>
   <div data-lang-block="en" hidden>{hero_en}</div>
 
-  <div data-lang-block="zh">{section('capabilities','Capabilities','核心能力','先说我擅长什么，再用经历与作品证明。', caps_html('zh'))}</div>
-  <div data-lang-block="tw" hidden>{section('capabilities','Capabilities','核心能力','先說我擅長什麼，再用經歷與作品證明。', caps_html('tw'))}</div>
-  <div data-lang-block="en" hidden>{section('capabilities','Capabilities','Core Capabilities','What I do well — proven by work, not titles.', caps_html('en'))}</div>
+  <div data-lang-block="zh">{section('capabilities','Capabilities','核心能力','中信里昂证券投行部分析师，横跨一级市场投资与二级市场研究，专注消费零售与医疗健康。', caps_html('zh'))}</div>
+  <div data-lang-block="tw" hidden>{section('capabilities','Capabilities','核心能力','中信里昂證券投行部分析師，橫跨一級市場投資與二級市場研究，專注消費零售與醫療健康。', caps_html('tw'))}</div>
+  <div data-lang-block="en" hidden>{section('capabilities','Capabilities','Core Capabilities','Investment Banking Analyst at CITIC CLSA, spanning primary market investing and secondary research, focused on consumer & retail and healthcare.', caps_html('en'))}</div>
 
   <div data-lang-block="zh">{section('track','Track Record','代表性项目','参与过的关键交易与投资。', logo_wall())}</div>
   <div data-lang-block="tw" hidden>{section('track','Track Record','代表性項目','參與過的關鍵交易與投資。', logo_wall())}</div>
