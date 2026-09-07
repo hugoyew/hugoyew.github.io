@@ -138,11 +138,11 @@ main { max-width: var(--max-width); margin: 0 auto; padding: 0 28px; }
 .r-meta { font-size: 12px; color: var(--fg-tertiary); display: flex; justify-content: space-between; }
 
 /* cover gradients — light, airy */
-.g1 { background: linear-gradient(135deg, #e8f0fe 0%, #d0e0f8 70%); }
-.g2 { background: linear-gradient(135deg, #fdf0e3 0%, #f7dfc2 70%); }
-.g3 { background: linear-gradient(135deg, #e6f6f2 0%, #c8e8e0 70%); }
-.g4 { background: linear-gradient(135deg, #efeafd 0%, #d9d0f2 70%); }
-.g5 { background: linear-gradient(135deg, #fdeef0 0%, #f6d4da 70%); }
+.g1 { background: linear-gradient(135deg, #f5f5f7 0%, #e8e8ed 70%); }
+.g2 { background: linear-gradient(135deg, #f4f4f6 0%, #e5e5ea 70%); }
+.g3 { background: linear-gradient(135deg, #f3f4f4 0%, #e2e5e4 70%); }
+.g4 { background: linear-gradient(135deg, #f4f3f6 0%, #e4e2ea 70%); }
+.g5 { background: linear-gradient(135deg, #f3f4f5 0%, #e2e4e6 70%); }
 
 /* ===== Life ===== */
 .life-photos { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 28px; }

@@ -230,15 +230,15 @@ HERO = {
 'zh': dict(kicker='INVESTMENT BANKING · CONSUMER RESEARCH · VENTURE',
            name='姚颂文', name2='Hugo Yew',
            pos='横跨投行与 VC 的分析师——参与港股 IPO 执行、跨境并购与消费投资研究，用深度研究驱动每一笔判断。',
-           meta='24210660148@m.fudan.edu.cn · (+86) 134-5005-0927 · Chung Man Yew'),
+           meta='hugoyewtt@gmail.com · (+86) 134-5005-0927 · (+852) 6956-9276'),
 'tw': dict(kicker='INVESTMENT BANKING · CONSUMER RESEARCH · VENTURE',
            name='姚頌文', name2='Hugo Yew',
            pos='橫跨投行與 VC 的分析師——參與港股 IPO 執行、跨境併購與消費投資研究，用深度研究驅動每一筆判斷。',
-           meta='24210660148@m.fudan.edu.cn · (+86) 134-5005-0927 · Chung Man Yew'),
+           meta='hugoyewtt@gmail.com · (+86) 134-5005-0927 · (+852) 6956-9276'),
 'en': dict(kicker='INVESTMENT BANKING · CONSUMER RESEARCH · VENTURE',
            name='Chung Man Yew', name2='Hugo Yew',
            pos='Analyst spanning investment banking and venture capital — IPO execution, cross-border M&A and consumer investing, driven by deep research.',
-           meta='24210660148@m.fudan.edu.cn · (+86) 134-5005-0927'),
+           meta='hugoyewtt@gmail.com · (+86) 134-5005-0927 · (+852) 6956-9276'),
 }
 TIMELINE = {
 'zh': [
