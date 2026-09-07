@@ -164,7 +164,7 @@ RESEARCH = {
     'wandian':   dict(title='万店连锁：什么样的零售业态能跑通？', cat='consumer', no='02',
                       logo='', cover='coffee.jpg',
                       desc='从蜜雪到瑞幸：万店连锁背后的渠道、供应链与心智三层识别框架。'),
-    'kuoshouji': dict(title='阔手机：下一个抢滩登陆是一门好生意吗？', cat='consumer', no='03',
+    'kuoshouji': dict(title='厂商抢滩登陆：我们真的需要更宽的手机吗？', cat='consumer', no='03',
                       logo='', cover='kuoshouji.jpg',
                       desc='折叠屏 → 阔手机：品类迁移的早期判断与跟踪。'),
     'newfrontier': dict(title='某 CN 龙头医疗服务企业 · 估值案例复盘', cat='healthcare', no='04',
