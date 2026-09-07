@@ -176,7 +176,7 @@ CATS = [
     ('healthcare', '医疗健康', 'Healthcare'),
 ]
 SLUG_TITLES = {'popmart':'泡泡玛特 IP 研究','wandian':'万店零售业态',
-               'kuoshouji':'阔手机品类研究','newfrontier':'新风天域估值案例'}
+               'kuoshouji':'阔手机品类研究','newfrontier':'医疗服务估值案例'}
 
 # ============ page shell ============
 def shell(title, body, desc='', lang_switch=False):
