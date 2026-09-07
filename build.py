@@ -274,6 +274,11 @@ TIMELINE = {
 ],
 }
 
+def life_photos(items):
+    return '<div class="life-photos">' + ''.join(
+        f'<div class="life-item"><div class="life-photo"><img src="assets/photos/{img}" alt="{alt}"></div><div class="cap">{cap}</div></div>'
+        for img, alt, cap in items) + '</div>'
+
 def build_index():
     def caps_html(lang):
         cards = ''
@@ -321,7 +326,7 @@ def build_index():
     <p class="position">{h['pos']}</p>
     <div class="meta">{h['meta']}</div>
   </div>
-  <div class="hero-photo" id="hero-photo"><span>职业照</span></div>
+  <div class="hero-photo"><img src="assets/photos/professional.jpg" alt="Hugo Yew"></div>
 </div></div>'''
     hero_zh = hero_block('zh'); hero_tw = hero_block('tw'); hero_en = hero_block('en')
     # duplicate hero ids must be unique per language — use data-lang wrappers
@@ -354,9 +359,9 @@ def build_index():
   <div data-lang-block="tw" hidden>{section('research','Research','研究','成體係的研究輸出：消費零售、醫療健康與跨行業框架。', research_grid())}</div>
   <div data-lang-block="en" hidden>{section('research','Research','Research','Systematic research output: consumer & retail, healthcare, and cross-industry frameworks.', research_grid())}</div>
 
-  <div data-lang-block="zh">{section('life','Life','生活之外','工作之外的我——待补充。', '<div class="life-photos"><div class="life-photo"><span>生活照</span></div><div class="life-photo"><span>生活照</span></div><div class="life-photo"><span>生活照</span></div></div><p class="life-note">篮球、健身、长跑、以及更多即将到来。</p>')}</div>
-  <div data-lang-block="tw" hidden>{section('life','Life','生活之外','工作之外的我——待補充。', '<div class="life-photos"><div class="life-photo"><span>生活照</span></div><div class="life-photo"><span>生活照</span></div><div class="life-photo"><span>生活照</span></div></div><p class="life-note">籃球、健身、長跑、以及更多即將到來。</p>')}</div>
-  <div data-lang-block="en" hidden>{section('life','Life','Beyond Work','Life outside the desk — coming soon.', '<div class="life-photos"><div class="life-photo"><span>Photo</span></div><div class="life-photo"><span>Photo</span></div><div class="life-photo"><span>Photo</span></div></div><p class="life-note">Basketball, fitness, running — and more to come.</p>')}</div>
+  <div data-lang-block="zh">{section('life','Life','生活之外','工作之外的我。', life_photos([('gym.jpg','健身','健身'),('nyc.jpg','纽约','Biodesign Challenge 纽约决赛'),('coffee.jpg','手冲','手冲咖啡'),('referee.jpg','篮球裁判','国家二级篮球裁判'),('captain.jpg','篮球指挥','岭南队 3 号 · 队长')]))}</div>
+  <div data-lang-block="tw" hidden>{section('life','Life','生活之外','工作之外的我。', life_photos([('gym.jpg','健身','健身'),('nyc.jpg','紐約','Biodesign Challenge 紐約決賽'),('coffee.jpg','手沖','手沖咖啡'),('referee.jpg','籃球裁判','國家二級籃球裁判'),('captain.jpg','籃球指揮','嶺南隊 3 號 · 隊長')]))}</div>
+  <div data-lang-block="en" hidden>{section('life','Life','Beyond Work','Life outside the desk.', life_photos([('gym.jpg','Fitness','Fitness'),('nyc.jpg','New York','Biodesign Challenge · NYC finals'),('coffee.jpg','Coffee','Pour-over'),('referee.jpg','Basketball','National Level II referee'),('captain.jpg','Captain','Lingnan #3 · team captain')]))}</div>
 </main>
 <footer>
   <span>© 2026 Hugo Yew · 簡中 / 繁中 / English</span>
