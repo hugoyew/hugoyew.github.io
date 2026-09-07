@@ -283,7 +283,17 @@ def build_index():
             items += f'''<div class="t-item"><div class="t-left"><div class="t-org">{org}</div><div class="t-role">{role}</div><div class="t-date">{date}</div></div><div class="t-right"><ul>{right}</ul></div></div>'''
         return f'<div class="timeline">{items}</div>'
     def logo_wall():
-        ib = [('新乳业', 'newhope.png', 'IPO 执行', '')]
+        ICONS = {
+          'glasses': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="6" cy="15" r="4"/><circle cx="18" cy="15" r="4"/><path d="M10 15h4M2 15l2-6M22 15l-2-6"/></svg>',
+          'beauty': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 3h12l4 6-10 12L2 9z"/></svg>',
+          'medical': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="7" width="18" height="14" rx="2"/><path d="M12 11v6M9 14h6M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>',
+          'ai': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9l-2 3 2 3M15 9l2 3-2 3M12 7v10"/></svg>',
+        }
+        ib = [('新乳业', 'newhope.png', 'IPO 执行 · 消费', ''),
+              ('某头部 AI 眼镜企业', '', 'H 股 IPO · 消费科技', 'glasses'),
+              ('某头部国货美妆', '', 'H 股 IPO · 消费', 'beauty'),
+              ('某东南亚龙头医疗服务机构', '', '并购 FA · 医疗', 'medical'),
+              ('某 CN 领先 AI 软件服务公司', '', 'H 股 IPO · TMT', 'ai')]
         pf = [('宁德时代 CATL', 'catl.png', '港股 · Pre-IPO 研究', ''),
               ('Yarbo', 'yarbo.png', '早期投资', ''),
               ('蜜雪冰城', 'mixue-text.png', '港股 · 研究', ''),
@@ -291,9 +301,14 @@ def build_index():
               ('货拉拉 Lalamove', 'lalamove.png', '港股 · 研究', ''),
               ('Uwant 友望', 'uwant.png', '早期投资', '')]
         def wall(items):
-            return '<div class="logo-wall">' + ''.join(
-                f'<div class="logo-card"><img src="assets/logos/{img}" class="{cls}" alt="{n}"><div class="co">{n}</div><div class="note">{note}</div></div>'
-                for n, img, note, cls in items) + '</div>'
+            cards = ''
+            for n, img, note, cls in items:
+                if cls in ICONS:
+                    media = f'<div class="logo-icon">{ICONS[cls]}</div>'
+                else:
+                    media = f'<img src="assets/logos/{img}" class="{cls}" alt="{n}">'
+                cards += f'<div class="logo-card">{media}<div class="co">{n}</div><div class="note">{note}</div></div>'
+            return f'<div class="logo-wall">{cards}</div>'
         return f'''<div class="track-cols">
   <div class="track-col"><div class="group-label">Investment Banking</div>{wall(ib)}</div>
   <div class="track-col"><div class="group-label">Investments</div>{wall(pf)}</div>
