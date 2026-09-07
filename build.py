@@ -52,6 +52,37 @@ def chart_html(ctype, title, data):
             ylabels += f'<text x="{pad_l-8}" y="{yy+3:.1f}" text-anchor="end" font-size="9" fill="#bbb">{vv:.0f}</text><line x1="{pad_l}" y1="{yy:.1f}" x2="{w-pad_r}" y2="{yy:.1f}" stroke="#eee" stroke-width="0.5"/>'
         path_len = 2000
         return f'<div class="chart chart-line">{title_html}<svg viewBox="0 0 {w} {h}" class="cl-svg">{ylabels}<polyline points="{poly}" fill="none" stroke="#0066FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="{path_len}" stroke-dashoffset="{path_len}"><animate attributeName="stroke-dashoffset" from="{path_len}" to="0" dur="1.5s" fill="freeze"/></polyline>{dots}{xlabels}</svg></div>'
+    if ctype == 'heatmap':
+        # data: [(row_label, "val1,val2,..."), ...] — first row is header
+        if len(data) < 2: return ''
+        # header row: first element is corner label, second is comma-separated col headers
+        header_cols = [x.strip() for x in data[0][1].split(',')] if data[0][1] else []
+        rows = []
+        for label, raw in data[1:]:
+            vals = []
+            for p in raw.split(','):
+                try: vals.append(float(p.strip()))
+                except: vals.append(0)
+            rows.append((label, vals))
+        if not header_cols or not rows: return ''
+        def heat_color(v):
+            t = max(0, min(100, v)) / 100.0
+            r = int(245 + (0 - 245) * t)
+            g = int(245 + (102 - 245) * t)
+            b = int(247 + (255 - 247) * t)
+            return f'rgb({r},{g},{b})'
+        def text_color(v):
+            return '#fff' if v > 50 else '#555'
+        thead = ''.join(f'<th>{c}</th>' for c in header_cols)
+        tbody = ''
+        for row_label, vals in rows:
+            cells = ''
+            for v in vals:
+                label_text = f'{int(v)}%' if v > 0 else ''
+                cells += f'<td style="background:{heat_color(v)};color:{text_color(v)}" data-val="{v}">{label_text}</td>'
+            tbody += f'<tr><th class="hm-row">{row_label}</th>{cells}</tr>'
+        legend = '<div class="hm-legend"><span>弱</span><div class="hm-bar"></div><span>强</span></div>'
+        return f'<div class="chart chart-heatmap">{title_html}<div class="hm-wrap"><table class="hm-table"><thead><tr><th></th>{thead}</tr></thead><tbody>{tbody}</tbody></table>{legend}</div></div>'
     return ''
 
 def inline(s):
@@ -92,9 +123,13 @@ def md_to_article(md_text):
             while i < len(lines) and not lines[i].strip().startswith(':::'):
                 cl = lines[i].strip()
                 if cl and ',' in cl:
-                    clabel, cval = cl.split(',', 1)
-                    try: cdata.append((clabel.strip(), float(cval.strip())))
-                    except: pass
+                    if ctype == 'heatmap':
+                        parts = cl.split(',', 1)
+                        cdata.append((parts[0].strip(), parts[1].strip() if len(parts) > 1 else ''))
+                    else:
+                        clabel, cval = cl.split(',', 1)
+                        try: cdata.append((clabel.strip(), float(cval.strip())))
+                        except: pass
                 i += 1
             i += 1  # skip closing :::
             out.append(chart_html(ctype, ctitle, cdata)); continue
@@ -167,9 +202,9 @@ RESEARCH = {
     'kuoshouji': dict(title='厂商抢滩登陆：我们真的需要更宽的手机吗？', cat='consumer', no='03',
                       logo='', cover='kuoshouji.jpg',
                       desc='折叠屏 → 阔手机：品类迁移的早期判断与跟踪。'),
-    'newfrontier': dict(title='某 CN 龙头医疗服务企业 · 估值案例复盘', cat='healthcare', no='04',
+    'newfrontier': dict(title='Wealth of Health：AI 时代无法被替代的是健康身体', cat='healthcare', no='04',
                         logo='', cover='', icon='medical',
-                        desc='从一次真实的港股 IPO 估值过会，提炼可复用的估值逻辑链与叙事手法。'),
+                        desc='从一次港股 IPO 估值过会，拆解医疗服务赛道的长期逻辑与估值方法论。'),
 }
 CATS = [
     ('consumer', '消费 & 零售', 'Consumer & Retail'),
@@ -242,7 +277,7 @@ CAPS = {
   ('04', '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg>', '估值建模与投研叙事',
    '把复杂公司讲成清晰投资故事：建模、对标与案例复盘。',
    ['HollySys LBO 分析 · 投资银行课程',
-    '<a href="research/newfrontier.html">新风天域估值案例复盘</a>（港股 IPO 过会级）',
+    '<a href="research/newfrontier.html">医疗服务估值案例复盘</a>（港股 IPO 过会级）',
     '跨消费零售与医疗健康的深度研究体系']),
 ],
 'tw': [
@@ -265,7 +300,7 @@ CAPS = {
   ('04', '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg>', '估值建模與投研敘事',
    '把複雜公司講成清晰投資故事：建模、對標與案例復盤。',
    ['HollySys LBO 分析 · 投資銀行課程',
-    '<a href="research/newfrontier.html">新風天域估值案例復盤</a>（港股 IPO 過會級）',
+    '<a href="research/newfrontier.html">醫療服務估值案例復盤</a>（港股 IPO 過會級）',
     '跨消費零售與醫療健康的深度研究體系']),
 ],
 'en': [
@@ -288,7 +323,7 @@ CAPS = {
   ('04', '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg>', 'Valuation & Investment Narrative',
    'Turning complex companies into clear stories: modeling, benchmarking and case teardowns.',
    ['HollySys LBO analysis · Investment Banking coursework',
-    '<a href="research/newfrontier.html">New Frontier valuation teardown</a> (HK IPO pass-level)',
+    '<a href="research/newfrontier.html">Healthcare valuation teardown</a> (HK IPO pass-level)',
     'A deep research system across consumer & retail and healthcare']),
 ],
 }
