@@ -161,27 +161,27 @@ main { max-width: var(--max-width); margin: 0 auto; padding: 0 28px; }
 
 /* ===== Life ===== */
 .life-masonry {
-  column-count: 3;
-  column-gap: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  align-items: flex-start;
 }
 .life-card {
-  break-inside: avoid;
-  margin-bottom: 20px;
+  flex: 1 1 calc(33.333% - 14px);
+  min-width: 240px;
   border-radius: 20px;
   position: relative;
   overflow: hidden;
-  background: linear-gradient(145deg, #f5f5f7, #e8e8ed);
+  background: #ffffff;
   border: 0.5px solid var(--hairline);
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.04);
 }
 .life-card img {
   position: absolute;
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
-  max-height: 82%;
+  max-height: 80%;
   width: auto;
   max-width: 88%;
   object-fit: contain;
@@ -196,18 +196,21 @@ main { max-width: var(--max-width); margin: 0 auto; padding: 0 28px; }
   left: 22px;
   font-size: 30px;
   font-weight: 800;
-  color: rgba(0,0,0,0.07);
+  color: rgba(0,0,0,0.06);
   letter-spacing: 3px;
   text-transform: uppercase;
   z-index: 1;
 }
 .life-cap {
-  position: relative;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
   z-index: 2;
-  padding: 14px 20px 16px;
+  padding: 40px 20px 16px;
   font-size: 13px;
   color: var(--fg-secondary);
-  background: linear-gradient(to top, rgba(255,255,255,0.85) 30%, transparent);
+  background: linear-gradient(to top, rgba(255,255,255,0.95) 40%, transparent);
 }
 .life-note { font-size: 14px; color: var(--fg-secondary); max-width: 560px; }
 
@@ -300,10 +303,10 @@ footer a:hover { color: var(--fg-secondary); }
   .t-item { flex-direction: column; gap: 10px; }
   .t-left { flex: auto; }
   .nav-links a { padding: 5px 8px; font-size: 12.5px; }
-  .life-masonry { column-count: 2; column-gap: 14px; }
-  .life-card { margin-bottom: 14px; border-radius: 16px; }
+  .life-masonry { gap: 14px; }
+  .life-card { flex: 1 1 calc(50% - 7px); min-width: 160px; border-radius: 16px; }
   .life-word { font-size: 22px; top: 14px; left: 16px; }
 }
 @media (max-width: 480px) {
-  .life-masonry { column-count: 1; }
+  .life-card { flex: 1 1 100%; }
 }
