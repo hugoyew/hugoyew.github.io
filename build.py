@@ -227,18 +227,12 @@ CAPS = {
 ],
 }
 HERO = {
-'zh': dict(kicker='INVESTMENT BANKING · CONSUMER RESEARCH · VENTURE',
-           name='姚颂文', name2='Hugo Yew',
-           pos='横跨投行与 VC 的分析师——参与港股 IPO 执行、跨境并购与消费投资研究，用深度研究驱动每一笔判断。',
-           meta='hugoyewtt@gmail.com · (+86) 134-5005-0927 · (+852) 6956-9276'),
-'tw': dict(kicker='INVESTMENT BANKING · CONSUMER RESEARCH · VENTURE',
-           name='姚頌文', name2='Hugo Yew',
-           pos='橫跨投行與 VC 的分析師——參與港股 IPO 執行、跨境併購與消費投資研究，用深度研究驅動每一筆判斷。',
-           meta='hugoyewtt@gmail.com · (+86) 134-5005-0927 · (+852) 6956-9276'),
-'en': dict(kicker='INVESTMENT BANKING · CONSUMER RESEARCH · VENTURE',
-           name='Chung Man Yew', name2='Hugo Yew',
-           pos='Analyst spanning investment banking and venture capital — IPO execution, cross-border M&A and consumer investing, driven by deep research.',
-           meta='hugoyewtt@gmail.com · (+86) 134-5005-0927 · (+852) 6956-9276'),
+'zh': dict(slogan='研究驱动执行 · 洞察挖掘价值',
+           name='姚颂文', name2='Hugo Yew'),
+'tw': dict(slogan='研究驅動執行 · 洞察挖掘價值',
+           name='姚頌文', name2='Hugo Yew'),
+'en': dict(slogan='Research-driven Execution · Insight-led Value',
+           name='Chung Man Yew', name2='Hugo Yew'),
 }
 TIMELINE = {
 'zh': [
@@ -326,15 +320,41 @@ def build_index():
         return f'''<div class="section" id="{ids}"><div class="section-tag">{tag}</div><h2 class="section-title">{title}</h2><p class="section-sub">{sub}</p>{inner}</div>'''
     def hero_block(lang):
         h = HERO[lang]
-        return f'''<div class="hero"><div class="hero-wrap">
-  <div class="hero-text">
-    <div class="hero-kicker">{h['kicker']}</div>
-    <h1>{h['name']}</h1>
-    <p class="position">{h['pos']}</p>
-    <div class="meta">{h['meta']}</div>
+        wc = '''<div class="hero-wordcloud">
+      <span class="wc wc-1">Investment Banking</span>
+      <span class="wc wc-2">消费研究</span>
+      <span class="wc wc-3">IPO</span>
+      <span class="wc wc-4">M&amp;A</span>
+      <span class="wc wc-5">Valuation</span>
+      <span class="wc wc-6">Venture</span>
+      <span class="wc wc-7">Equity Research</span>
+      <span class="wc wc-8">CLSA</span>
+      <span class="wc wc-9">Healthcare</span>
+      <span class="wc wc-10">TMT</span>
+      <span class="wc wc-11">Consumer &amp; Retail</span>
+      <span class="wc wc-12">Fudan</span>
+    </div>'''
+        return f'''<div class="hero" id="hero">
+  <div class="hero-slogan">{h['slogan']}</div>
+  <div class="hero-center">
+    {wc}
+    <div class="hero-photo-cutout"><img src="assets/photos/cutout/professional.png" alt="{h['name']}"></div>
+    <div class="hero-name">{h['name']} <span>{h['name2']}</span></div>
   </div>
-  <div class="hero-photo"><img src="assets/photos/professional.jpg" alt="Hugo Yew"></div>
-</div></div>'''
+  <div class="hero-contact">
+    <span class="hc-item">hugoyewtt@gmail.com</span>
+    <span class="hc-divider">·</span>
+    <span class="hc-item">(+86) 134-5005-0927</span>
+    <span class="hc-divider">·</span>
+    <span class="hc-item">(+852) 6956-9276</span>
+  </div>
+  <div class="hero-nav">
+    <a href="#capabilities"><span class="hn-en">Capabilities</span><span class="hn-zh">核心能力</span></a>
+    <a href="#track"><span class="hn-en">Track Record</span><span class="hn-zh">代表性项目</span></a>
+    <a href="#research"><span class="hn-en">Research</span><span class="hn-zh">研究</span></a>
+    <a href="#life"><span class="hn-en">Life</span><span class="hn-zh">生活之外</span></a>
+  </div>
+</div>'''
     hero_zh = hero_block('zh'); hero_tw = hero_block('tw'); hero_en = hero_block('en')
     # duplicate hero ids must be unique per language — use data-lang wrappers
     nav = '''<nav><div class="nav-inner">
