@@ -332,6 +332,25 @@ footer a:hover { color: var(--fg-secondary); }
   background: rgba(0,0,0,0.015);
 }
 .financials h2 { font-size: 15px; font-weight: 600; letter-spacing: 0.02em; margin: 0 0 12px; }
+/* ===== Charts ===== */
+.chart { margin: 24px 0; padding: 20px 22px; background: var(--bg-elev); border: 0.5px solid var(--hairline); border-radius: 14px; }
+.chart-title { font-size: 13px; font-weight: 600; color: var(--fg-secondary); margin-bottom: 16px; letter-spacing: 0.02em; }
+.cb-body { display: flex; flex-direction: column; gap: 12px; }
+.cb-row { display: flex; align-items: center; gap: 10px; }
+.cb-label { flex: 0 0 100px; font-size: 12.5px; color: var(--fg); text-align: right; }
+.cb-track { flex: 1; height: 22px; background: rgba(0,0,0,0.04); border-radius: 6px; overflow: hidden; }
+.cb-fill { height: 100%; width: 0; background: linear-gradient(90deg, var(--accent), #4D94FF); border-radius: 6px; animation: barGrow 1.2s cubic-bezier(0.22,1,0.36,1) forwards; }
+@keyframes barGrow { to { width: var(--target); } }
+.cb-value { flex: 0 0 50px; font-size: 12px; font-weight: 600; color: var(--fg-secondary); font-variant-numeric: tabular-nums; }
+.cp-body { display: flex; align-items: center; gap: 28px; flex-wrap: wrap; }
+.cp-circle { width: 140px; height: 140px; border-radius: 50%; flex-shrink: 0; animation: pieIn 1s ease-out; }
+@keyframes pieIn { from { transform: scale(0.6); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+.cp-legend { display: flex; flex-direction: column; gap: 8px; }
+.cp-item { display: flex; align-items: center; gap: 8px; font-size: 12.5px; }
+.cp-dot { width: 10px; height: 10px; border-radius: 3px; flex-shrink: 0; }
+.cp-label { color: var(--fg); }
+.cp-pct { color: var(--fg-tertiary); font-variant-numeric: tabular-nums; margin-left: auto; padding-left: 16px; }
+.cl-svg { width: 100%; height: auto; max-height: 220px; }
 .muted { font-size: 13px; color: var(--fg-tertiary) !important; }
 .article .a-disclaimer { font-size: 12px; color: var(--fg-tertiary); border-top: 0.5px solid var(--hairline); margin-top: 48px; padding-top: 18px; }
 .article img { max-width: 100%; border-radius: 12px; }

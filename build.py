@@ -80,6 +80,24 @@ def md_to_article(md_text):
                 in_code = False; out.append('</code></pre>'); i += 1; continue
         if in_code:
             out.append(html.escape(line)); i += 1; continue
+        # chart block :::chart type|title
+        if line.strip().startswith(':::chart'):
+            if in_list: out.append('</ul>'); in_list = False
+            if in_ol: out.append('</ol>'); in_ol = False
+            cm = re.match(r'^:::chart\s+(\w+)(?:\|(.+))?$', line.strip())
+            ctype = cm.group(1) if cm else 'bar'
+            ctitle = cm.group(2) if cm and cm.group(2) else ''
+            i += 1
+            cdata = []
+            while i < len(lines) and not lines[i].strip().startswith(':::'):
+                cl = lines[i].strip()
+                if cl and ',' in cl:
+                    clabel, cval = cl.split(',', 1)
+                    try: cdata.append((clabel.strip(), float(cval.strip())))
+                    except: pass
+                i += 1
+            i += 1  # skip closing :::
+            out.append(chart_html(ctype, ctitle, cdata)); continue
         # table
         if line.startswith('|') and i + 1 < len(lines) and re.match(r'^\|[\s:|-]+\|$', lines[i+1].strip()):
             if in_list: out.append('</ul>'); in_list = False
