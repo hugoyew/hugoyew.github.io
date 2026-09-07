@@ -443,6 +443,10 @@ def build_articles():
             summary = section_after(md, ['执行摘要', 'executive summary', '摘要', 'summary'])
         if not summary:
             summary = f'<p>{meta["desc"]}</p>'
+        # render bullet-list summary as <ul>
+        if summary and all(l.strip().startswith('- ') for l in summary.strip().split('\n') if l.strip()):
+            items = ''.join(f'<li>{inline(l.strip()[2:])}</li>' for l in summary.strip().split('\n') if l.strip())
+            summary = f'<ul>{items}</ul>'
 
         # conclusion: explicit section or placeholder
         conclusion = section_after(md, ['总结', '结论', '结语', 'conclusion', '结论与展望', '核心结论'])
