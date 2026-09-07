@@ -391,3 +391,165 @@ footer a:hover { color: var(--fg-secondary); }
 @media (max-width: 480px) {
   .life-card { flex: 1 1 100%; }
 }
+
+/* ===== carote logo bigger ===== */
+.logo-card img.carote { height: 52px !important; max-width: 92% !important; }
+
+/* ===== hero photo original (rounded, no cutout) ===== */
+.hero-photo-orig img {
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ===== research card teaser ===== */
+.r-teaser {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid var(--hairline);
+  font-size: 12.5px;
+}
+.rt-label { color: var(--fg-tertiary); font-size: 11px; }
+.rt-val { font-weight: 600; color: var(--fg); font-size: 14px; }
+.rt-divider { color: var(--fg-tertiary); }
+.rt-stat { display: flex; flex-direction: column; gap: 1px; }
+.rt-stat b { font-size: 15px; font-weight: 700; color: var(--accent); }
+.rt-stat em { font-style: normal; font-size: 10.5px; color: var(--fg-tertiary); }
+
+/* ===== pending badge ===== */
+.r-pending {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: rgba(255,180,50,0.9);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  padding: 3px 8px;
+  border-radius: 4px;
+  z-index: 2;
+}
+
+/* ===== article: icon cover ===== */
+.a-icon-cover {
+  background: linear-gradient(135deg, #f0f4ff, #e8f0fe);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.a-icon-svg { width: 72px; height: 72px; color: var(--accent); opacity: 0.7; }
+.a-icon-svg svg { width: 100%; height: 100%; }
+
+/* ===== price panel (equity research) ===== */
+.price-panel {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  background: var(--bg-elev);
+  border: 1px solid var(--hairline);
+  border-radius: 16px;
+  padding: 24px 28px;
+  margin-bottom: 28px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+}
+.pp-item { flex: 1; display: flex; flex-direction: column; gap: 4px; }
+.pp-label { font-size: 11px; color: var(--fg-tertiary); letter-spacing: 0.04em; text-transform: uppercase; }
+.pp-val { font-size: 26px; font-weight: 700; letter-spacing: -0.02em; }
+.pp-target { color: var(--accent); }
+.pp-current { color: var(--fg); }
+.pp-upside { color: #22a06b; font-size: 22px; }
+.pp-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  color: var(--fg-tertiary);
+  padding: 0 12px;
+}
+
+/* ===== stat cards (sector / healthcare research) ===== */
+.stat-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 14px;
+  margin-bottom: 28px;
+}
+.stat-card {
+  background: var(--bg-elev);
+  border: 1px solid var(--hairline);
+  border-radius: 14px;
+  padding: 20px;
+  text-align: center;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.stat-card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.06); }
+.sc-val { font-size: 28px; font-weight: 700; color: var(--accent); letter-spacing: -0.02em; line-height: 1.1; }
+.sc-label { font-size: 13px; font-weight: 600; color: var(--fg); margin-top: 6px; }
+.sc-sub { font-size: 11px; color: var(--fg-tertiary); margin-top: 2px; }
+
+/* ===== pending banner ===== */
+.pending-banner {
+  background: linear-gradient(135deg, rgba(255,180,50,0.08), rgba(255,150,50,0.05));
+  border: 1px solid rgba(255,180,50,0.3);
+  border-radius: 12px;
+  padding: 14px 20px;
+  margin-bottom: 24px;
+  font-size: 13.5px;
+  color: #9a6b1f;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.pending-banner::before {
+  content: '⏳';
+  font-size: 18px;
+}
+
+/* ===== life card v2 (composed image: blurred bg + sharp fg) ===== */
+.life-card-v2 {
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  overflow: hidden;
+  border-radius: 20px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.life-card-v2:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.12); }
+.life-card-v2 .life-word {
+  position: absolute;
+  top: 18px;
+  left: 20px;
+  font-size: 32px;
+  font-weight: 800;
+  color: #fff;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.4);
+  letter-spacing: 0.04em;
+  z-index: 2;
+}
+.life-card-v2 .life-cap {
+  position: absolute;
+  bottom: 16px;
+  left: 20px;
+  right: 20px;
+  font-size: 13px;
+  color: rgba(255,255,255,0.9);
+  text-shadow: 0 1px 6px rgba(0,0,0,0.5);
+  z-index: 2;
+}
+
+@media (max-width: 768px) {
+  .price-panel { flex-wrap: wrap; padding: 18px; gap: 12px; }
+  .pp-arrow { display: none; }
+  .pp-val { font-size: 22px; }
+  .stat-cards { grid-template-columns: repeat(2, 1fr); }
+  .sc-val { font-size: 22px; }
+  .life-card-v2 .life-word { font-size: 24px; }
+}

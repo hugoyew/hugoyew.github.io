@@ -193,25 +193,31 @@ def md_to_article(md_text):
 
 # ============ research metadata ============
 RESEARCH = {
-    'popmart':   dict(title='泡泡玛特会是下一个伟大的 IP 公司吗？', cat='consumer', no='01',
-                      logo='', cover='popmart.jpg',
+    'popmart':   dict(title='泡泡玛特会是下一个伟大的 IP 公司吗？', rtype='equity', no='01',
+                      cover='popmart.jpg', ticker='9992.HK',
+                      target_price='HK$172–220', current_price='HK$156.2', price_date='2026-09-07',
+                      upside='+10% ~ +41%',
                       desc='IP 投资引擎 × 全球化零售渠道：从效率三角到造星机制的完整拆解。'),
-    'wandian':   dict(title='万店连锁：什么样的零售业态能跑通？', cat='consumer', no='02',
-                      logo='', cover='coffee.jpg',
+    'wandian':   dict(title='万店连锁：什么样的零售业态能跑通？', rtype='sector', no='02',
+                      cover='coffee.jpg',
+                      stats=[('现制饮品', '¥7,464亿', '2025 市场规模'), ('零食饮料', '¥4.3万亿', '2025 市场规模'), ('连锁百强门店', '28.9万', '2025 年')],
                       desc='从蜜雪到瑞幸：万店连锁背后的渠道、供应链与心智三层识别框架。'),
-    'kuoshouji': dict(title='厂商抢滩登陆：我们真的需要更宽的手机吗？', cat='consumer', no='03',
-                      logo='', cover='kuoshouji.jpg',
+    'kuoshouji': dict(title='厂商抢滩登陆：我们真的需要更宽的手机吗？', rtype='sector', no='03',
+                      cover='kuoshouji.jpg',
+                      stats=[('全球折叠屏', '1,820万台', '2025 出货'), ('2026E 全球', '2,200万+', 'Omdia 预测'), ('中国市场', '~1,000万台', '2025 出货')],
                       desc='折叠屏 → 阔手机：品类迁移的早期判断与跟踪。'),
-    'newfrontier': dict(title='Wealth of Health：AI 时代无法被替代的是健康身体', cat='healthcare', no='04',
-                        logo='', cover='', icon='medical',
-                        desc='从一次港股 IPO 估值过会，拆解医疗服务赛道的长期逻辑与估值方法论。'),
+    'newfrontier': dict(title='Wealth of Health：AI 时代无法被替代的是健康身体', rtype='healthcare', no='04',
+                        icon='medical', pending=True,
+                        stats=[('医疗服务市场', '¥1.84万亿', '2025 年'), ('民营医疗', '¥1.3万亿', '2025 年'), ('民营医院', '26,481家', '2025 年末')],
+                        desc='医疗服务赛道的长期逻辑与估值框架。估值案例 pending 更新。'),
 }
-CATS = [
-    ('consumer', '消费 & 零售', 'Consumer & Retail'),
+RTYPES = [
+    ('equity', '个股研究', 'Equity Research'),
+    ('sector', '行业研究', 'Sector Research'),
     ('healthcare', '医疗健康', 'Healthcare'),
 ]
 SLUG_TITLES = {'popmart':'泡泡玛特 IP 研究','wandian':'万店零售业态',
-               'kuoshouji':'阔手机品类研究','newfrontier':'医疗服务估值案例'}
+               'kuoshouji':'阔手机品类研究','newfrontier':'医疗服务研究'}
 
 # ============ page shell ============
 def shell(title, body, desc='', lang_switch=False):
@@ -361,11 +367,9 @@ TIMELINE = {
 
 def life_photos(items):
     cards = ''
-    for img, bg, alt, word, cap, ratio in items:
-        cards += f'''<div class="life-card" style="aspect-ratio:{ratio};background-image:url(assets/photos/bg/{bg})">
-  <div class="life-overlay"></div>
+    for img, word, cap, ratio in items:
+        cards += f'''<div class="life-card life-card-v2" style="aspect-ratio:{ratio};background-image:url(assets/photos/composed/{img})">
   <div class="life-word">{word}</div>
-  <img src="assets/photos/cutout/{img}" alt="{alt}">
   <div class="life-cap">{cap}</div>
 </div>'''
     return f'<div class="life-masonry">{cards}</div>'
@@ -417,24 +421,30 @@ def build_index():
 </div>'''
     def research_grid():
         out = ''
-        for cat_key, cat_zh, cat_en in CATS:
+        for rtype_key, rt_zh, rt_en in RTYPES:
             cards = ''
             for slug, meta in RESEARCH.items():
-                if meta['cat'] != cat_key: continue
+                if meta['rtype'] != rtype_key: continue
+                pending_badge = '<span class="r-pending">PENDING</span>' if meta.get('pending') else ''
                 if meta.get('icon'):
                     icon_svg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="7" width="18" height="14" rx="2"/><path d="M12 11v6M9 14h6M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>'
-                    cover = f'''<div class="r-cover r-icon"><div class="r-icon-svg">{icon_svg}</div><div class="r-no">{meta['no']}</div><div class="r-cat">{cat_en}</div></div>'''
-                elif meta['logo']:
-                    cover = f'''<div class="r-cover r-logo"><img src="assets/logos/{meta['logo']}" alt="{meta['title']}"><div class="r-no">{meta['no']}</div><div class="r-cat">{cat_en}</div></div>'''
+                    cover = f'''<div class="r-cover r-icon"><div class="r-icon-svg">{icon_svg}</div><div class="r-no">{meta['no']}</div><div class="r-cat">{rt_en}</div>{pending_badge}</div>'''
                 elif meta.get('cover'):
-                    cover = f'''<div class="r-cover r-img" style="background-image:url(assets/covers/{meta['cover']})"><div class="r-no">{meta['no']}</div><div class="r-cat">{cat_en}</div><div class="r-title">{meta['title']}</div></div>'''
+                    cover = f'''<div class="r-cover r-img" style="background-image:url(assets/covers/{meta['cover']})"><div class="r-no">{meta['no']}</div><div class="r-cat">{rt_en}</div><div class="r-title">{meta['title']}</div>{pending_badge}</div>'''
                 else:
-                    cover = f'''<div class="r-cover g1"><div class="r-no">{meta['no']}</div><div class="r-cat">{cat_en}</div><div class="r-title">{meta['title']}</div></div>'''
+                    cover = f'''<div class="r-cover g1"><div class="r-no">{meta['no']}</div><div class="r-cat">{rt_en}</div><div class="r-title">{meta['title']}</div>{pending_badge}</div>'''
+                # equity: show price teaser; sector/healthcare: show stat teaser
+                if meta['rtype'] == 'equity':
+                    teaser = f'<div class="r-teaser"><span class="rt-label">目标价</span><span class="rt-val">{meta["target_price"]}</span><span class="rt-divider">·</span><span class="rt-label">现价</span><span class="rt-val">{meta["current_price"]}</span></div>'
+                elif meta.get('stats'):
+                    teaser = '<div class="r-teaser">' + ''.join(f'<span class="rt-stat"><b>{s[1]}</b><em>{s[0]}</em></span>' for s in meta['stats'][:2]) + '</div>'
+                else:
+                    teaser = ''
                 cards += f'''<a class="r-card" href="research/{slug}.html">
   {cover}
-  <div class="r-body"><div class="r-title-sm">{meta['title']}</div><div class="r-desc">{meta['desc']}</div><div class="r-meta"><span>{SLUG_TITLES[slug]}</span><span>→</span></div></div>
+  <div class="r-body"><div class="r-title-sm">{meta['title']}</div><div class="r-desc">{meta['desc']}</div>{teaser}<div class="r-meta"><span>{SLUG_TITLES[slug]}</span><span>→</span></div></div>
 </a>'''
-            out += f'''<div class="r-category"><h3>{cat_zh} <span style="color:var(--fg-tertiary);font-weight:400;font-size:13px;">{cat_en}</span></h3><div class="r-grid">{cards}</div></div>'''
+            out += f'''<div class="r-category"><h3>{rt_zh} <span style="color:var(--fg-tertiary);font-weight:400;font-size:13px;">{rt_en}</span></h3><div class="r-grid">{cards}</div></div>'''
         return out
     def section(ids, tag, title, sub, inner):
         return f'''<div class="section" id="{ids}"><div class="section-tag">{tag}</div><h2 class="section-title">{title}</h2><p class="section-sub">{sub}</p>{inner}</div>'''
@@ -458,7 +468,7 @@ def build_index():
   <div class="hero-slogan">{h['slogan']}</div>
   <div class="hero-center">
     {wc}
-    <div class="hero-photo-cutout"><img src="assets/photos/cutout/professional.png" alt="{h['name']}"></div>
+    <div class="hero-photo-cutout hero-photo-orig"><img src="assets/photos/professional.jpg" alt="{h['name']}"></div>
     <div class="hero-name">{h['name']} <span>{h['name2']}</span></div>
   </div>
   <div class="hero-contact">
@@ -506,9 +516,9 @@ def build_index():
   <div data-lang-block="tw" hidden>{section('research','Research','研究','成體係的研究輸出：消費零售、醫療健康與跨行業框架。', research_grid())}</div>
   <div data-lang-block="en" hidden>{section('research','Research','Research','Systematic research output: consumer & retail, healthcare, and cross-industry frameworks.', research_grid())}</div>
 
-  <div data-lang-block="zh">{section('life','Life','生活之外','工作之外的我。', life_photos([('gym.png','gym.jpg','健身','FITNESS','健身','3/4'),('nyc.png','nyc.jpg','纽约','NYC','Biodesign Challenge 纽约决赛','4/5'),('coffee.png','coffee.jpg','手冲','COFFEE','手冲咖啡','3/4'),('referee.png','referee.jpg','篮球裁判','REFEREE','国家二级篮球裁判','4/5'),('captain.png','captain.jpg','篮球指挥','CAPTAIN','岭南队 3 号 · 队长','3/4')]))}</div>
-  <div data-lang-block="tw" hidden>{section('life','Life','生活之外','工作之外的我。', life_photos([('gym.png','gym.jpg','健身','FITNESS','健身','3/4'),('nyc.png','nyc.jpg','紐約','NYC','Biodesign Challenge 紐約決賽','4/5'),('coffee.png','coffee.jpg','手沖','COFFEE','手沖咖啡','3/4'),('referee.png','referee.jpg','籃球裁判','REFEREE','國家二級籃球裁判','4/5'),('captain.png','captain.jpg','籃球指揮','CAPTAIN','嶺南隊 3 號 · 隊長','3/4')]))}</div>
-  <div data-lang-block="en" hidden>{section('life','Life','Beyond Work','Life outside the desk.', life_photos([('gym.png','gym.jpg','Fitness','FITNESS','Fitness','3/4'),('nyc.png','nyc.jpg','New York','NYC','Biodesign Challenge · NYC finals','4/5'),('coffee.png','coffee.jpg','Coffee','COFFEE','Pour-over','3/4'),('referee.png','referee.jpg','Basketball','REFEREE','National Level II referee','4/5'),('captain.png','captain.jpg','Captain','CAPTAIN','Lingnan #3 · team captain','3/4')]))}</div>
+  <div data-lang-block="zh">{section('life','Life','生活之外','工作之外的我。', life_photos([('gym.jpg','FITNESS','健身','3/4'),('nyc.jpg','NYC','Biodesign Challenge 纽约决赛','4/5'),('coffee.jpg','COFFEE','手冲咖啡','3/4'),('referee.jpg','REFEREE','国家二级篮球裁判','4/5'),('captain.jpg','CAPTAIN','岭南队 3 号 · 队长','3/4')]))}</div>
+  <div data-lang-block="tw" hidden>{section('life','Life','生活之外','工作之外的我。', life_photos([('gym.jpg','FITNESS','健身','3/4'),('nyc.jpg','NYC','Biodesign Challenge 紐約決賽','4/5'),('coffee.jpg','COFFEE','手沖咖啡','3/4'),('referee.jpg','REFEREE','國家二級籃球裁判','4/5'),('captain.jpg','CAPTAIN','嶺南隊 3 號 · 隊長','3/4')]))}</div>
+  <div data-lang-block="en" hidden>{section('life','Life','Beyond Work','Life outside the desk.', life_photos([('gym.jpg','FITNESS','Fitness','3/4'),('nyc.jpg','NYC','Biodesign Challenge · NYC finals','4/5'),('coffee.jpg','COFFEE','Pour-over','3/4'),('referee.jpg','REFEREE','National Level II referee','4/5'),('captain.jpg','CAPTAIN','Lingnan #3 · team captain','3/4')]))}</div>
 </main>
 <footer>
   <span>© 2026 Hugo Yew · 簡中 / 繁中 / English</span>
@@ -581,7 +591,25 @@ def build_articles():
             md = f.read()
         fm = parse_frontmatter(md)
         content = md_to_article(md)
-        cat_en = dict((k, en) for k, zh, en in CATS)[meta['cat']]
+        rtype_en = dict((k, en) for k, zh, en in RTYPES)[meta['rtype']]
+
+        # price panel for equity
+        price_panel = ''
+        if meta['rtype'] == 'equity' and meta.get('target_price'):
+            price_panel = f'''<div class="price-panel">
+  <div class="pp-item"><div class="pp-label">目标价 Target</div><div class="pp-val pp-target">{meta['target_price']}</div></div>
+  <div class="pp-arrow">→</div>
+  <div class="pp-item"><div class="pp-label">现价 Last · {meta.get('price_date','')}</div><div class="pp-val pp-current">{meta['current_price']}</div></div>
+  <div class="pp-item"><div class="pp-label">上行空间 Upside</div><div class="pp-val pp-upside">{meta.get('upside','')}</div></div>
+</div>'''
+
+        # stat cards for sector / healthcare
+        stat_cards = ''
+        if meta.get('stats'):
+            cards = ''.join(f'<div class="stat-card"><div class="sc-val">{s[1]}</div><div class="sc-label">{s[0]}</div><div class="sc-sub">{s[2]}</div></div>' for s in meta['stats'])
+            stat_cards = f'<div class="stat-cards">{cards}</div>'
+
+        pending_banner = '<div class="pending-banner">估值案例部分 pending 更新——待最新 equity story 与估值测算底稿。</div>' if meta.get('pending') else ''
 
         # executive summary: frontmatter summary -> explicit section -> meta desc
         summary = fm.get('summary', '')
@@ -605,22 +633,28 @@ def build_articles():
         if fm.get('last_updated') or fm.get('updated'): chips.append(f'<span class="chip">更新 {html.escape(fm.get("last_updated") or fm.get("updated"))}</span>')
         chips_html = '<div class="a-chips">' + ''.join(chips) + '</div>' if chips else ''
 
-        if meta['logo']:
+        if meta.get('logo'):
             hero_media = f'<img class="a-logo" src="../assets/logos/{meta["logo"]}" alt="">'
         elif meta.get('cover'):
             hero_media = f'<div class="a-cover" style="background-image:url(../assets/covers/{meta["cover"]})"></div>'
+        elif meta.get('icon'):
+            icon_svg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="7" width="18" height="14" rx="2"/><path d="M12 11v6M9 14h6M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>'
+            hero_media = f'<div class="a-cover a-icon-cover"><div class="a-icon-svg">{icon_svg}</div></div>'
         else:
             hero_media = ''
         body = f'''<div class="article-hero">
   {hero_media}
   <div class="a-hd">
-    <div class="r-cat">{cat_en} · {meta['no']}</div>
+    <div class="r-cat">{rtype_en} · {meta['no']}</div>
     <h1>{meta['title']}</h1>
     <div class="a-meta">{meta['desc']}</div>
     {chips_html}
   </div>
 </div>
 <div class="article">
+  {pending_banner}
+  {price_panel}
+  {stat_cards}
   <div class="exec-summary"><h2>执行摘要 · Executive Summary</h2>{summary}</div>
   <div class="a-body">
 {content}
