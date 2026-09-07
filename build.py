@@ -266,8 +266,9 @@ TIMELINE = {
 
 def life_photos(items):
     cards = ''
-    for img, alt, word, cap, ratio in items:
-        cards += f'''<div class="life-card" style="aspect-ratio:{ratio}">
+    for img, bg, alt, word, cap, ratio in items:
+        cards += f'''<div class="life-card" style="aspect-ratio:{ratio};background-image:url(assets/photos/bg/{bg})">
+  <div class="life-overlay"></div>
   <div class="life-word">{word}</div>
   <img src="assets/photos/cutout/{img}" alt="{alt}">
   <div class="life-cap">{cap}</div>
@@ -365,9 +366,9 @@ def build_index():
   <div data-lang-block="tw" hidden>{section('research','Research','研究','成體係的研究輸出：消費零售、醫療健康與跨行業框架。', research_grid())}</div>
   <div data-lang-block="en" hidden>{section('research','Research','Research','Systematic research output: consumer & retail, healthcare, and cross-industry frameworks.', research_grid())}</div>
 
-  <div data-lang-block="zh">{section('life','Life','生活之外','工作之外的我。', life_photos([('gym.png','健身','FITNESS','健身','3/4'),('nyc.png','纽约','NYC','Biodesign Challenge 纽约决赛','4/5'),('coffee.png','手冲','COFFEE','手冲咖啡','3/4'),('referee.png','篮球裁判','REFEREE','国家二级篮球裁判','4/5'),('captain.png','篮球指挥','CAPTAIN','岭南队 3 号 · 队长','3/4')]))}</div>
-  <div data-lang-block="tw" hidden>{section('life','Life','生活之外','工作之外的我。', life_photos([('gym.png','健身','FITNESS','健身','3/4'),('nyc.png','紐約','NYC','Biodesign Challenge 紐約決賽','4/5'),('coffee.png','手沖','COFFEE','手沖咖啡','3/4'),('referee.png','籃球裁判','REFEREE','國家二級籃球裁判','4/5'),('captain.png','籃球指揮','CAPTAIN','嶺南隊 3 號 · 隊長','3/4')]))}</div>
-  <div data-lang-block="en" hidden>{section('life','Life','Beyond Work','Life outside the desk.', life_photos([('gym.png','Fitness','FITNESS','Fitness','3/4'),('nyc.png','New York','NYC','Biodesign Challenge · NYC finals','4/5'),('coffee.png','Coffee','COFFEE','Pour-over','3/4'),('referee.png','Basketball','REFEREE','National Level II referee','4/5'),('captain.png','Captain','CAPTAIN','Lingnan #3 · team captain','3/4')]))}</div>
+  <div data-lang-block="zh">{section('life','Life','生活之外','工作之外的我。', life_photos([('gym.png','gym.jpg','健身','FITNESS','健身','3/4'),('nyc.png','nyc.jpg','纽约','NYC','Biodesign Challenge 纽约决赛','4/5'),('coffee.png','coffee.jpg','手冲','COFFEE','手冲咖啡','3/4'),('referee.png','referee.jpg','篮球裁判','REFEREE','国家二级篮球裁判','4/5'),('captain.png','captain.jpg','篮球指挥','CAPTAIN','岭南队 3 号 · 队长','3/4')]))}</div>
+  <div data-lang-block="tw" hidden>{section('life','Life','生活之外','工作之外的我。', life_photos([('gym.png','gym.jpg','健身','FITNESS','健身','3/4'),('nyc.png','nyc.jpg','紐約','NYC','Biodesign Challenge 紐約決賽','4/5'),('coffee.png','coffee.jpg','手沖','COFFEE','手沖咖啡','3/4'),('referee.png','referee.jpg','籃球裁判','REFEREE','國家二級籃球裁判','4/5'),('captain.png','captain.jpg','籃球指揮','CAPTAIN','嶺南隊 3 號 · 隊長','3/4')]))}</div>
+  <div data-lang-block="en" hidden>{section('life','Life','Beyond Work','Life outside the desk.', life_photos([('gym.png','gym.jpg','Fitness','FITNESS','Fitness','3/4'),('nyc.png','nyc.jpg','New York','NYC','Biodesign Challenge · NYC finals','4/5'),('coffee.png','coffee.jpg','Coffee','COFFEE','Pour-over','3/4'),('referee.png','referee.jpg','Basketball','REFEREE','National Level II referee','4/5'),('captain.png','captain.jpg','Captain','CAPTAIN','Lingnan #3 · team captain','3/4')]))}</div>
 </main>
 <footer>
   <span>© 2026 Hugo Yew · 簡中 / 繁中 / English</span>
