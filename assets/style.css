@@ -100,20 +100,24 @@ main { max-width: var(--max-width); margin: 0 auto; padding: 0 28px; }
 .cap-evidence a:hover { text-decoration: underline; }
 
 /* ===== Track record ===== */
-.track-cols { display: flex; gap: 24px; flex-wrap: wrap; }
-.track-col { flex: 1 1 340px; min-width: 300px; }
-.logo-wall { display: flex; flex-wrap: wrap; gap: 16px; }
-.logo-card {
-  flex: 1 1 180px; min-width: 160px;
+.track-cols { display: flex; gap: 24px; flex-wrap: wrap; align-items: stretch; }
+.track-col {
+  flex: 1 1 340px; min-width: 300px;
   background: var(--bg-elev); border: 0.5px solid var(--hairline); border-radius: var(--radius);
-  padding: 26px 18px; display: flex; flex-direction: column; align-items: center; gap: 12px;
-  text-align: center; transition: border-color 0.2s, box-shadow 0.2s;
+  padding: 26px 24px;
 }
-.logo-card:hover { border-color: rgba(0,113,227,0.35); box-shadow: 0 8px 24px rgba(0,0,0,0.05); }
-.logo-card img { max-width: 78%; height: 40px; object-fit: contain; }
-.logo-card .co { font-size: 14px; font-weight: 600; }
-.logo-card .note { font-size: 12px; color: var(--fg-tertiary); }
-.group-label { font-size: 13px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--fg-tertiary); margin: 10px 0 14px; }
+.logo-wall { display: flex; flex-wrap: wrap; gap: 14px; }
+.logo-card {
+  flex: 1 1 160px; min-width: 140px;
+  background: transparent; border: none; border-radius: 12px;
+  padding: 18px 12px; display: flex; flex-direction: column; align-items: center; gap: 10px;
+  text-align: center; transition: background 0.2s;
+}
+.logo-card:hover { background: rgba(0,0,0,0.03); }
+.logo-card img { max-width: 80%; height: 38px; object-fit: contain; }
+.logo-card .co { font-size: 13.5px; font-weight: 600; }
+.logo-card .note { font-size: 11.5px; color: var(--fg-tertiary); }
+.group-label { font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--fg-tertiary); margin: 0 0 18px; }
 
 /* ===== Research ===== */
 .r-category { margin-bottom: 44px; }
@@ -129,6 +133,17 @@ main { max-width: var(--max-width); margin: 0 auto; padding: 0 28px; }
 .r-cover { position: relative; height: 150px; display: flex; align-items: flex-end; padding: 18px; }
 .r-cover.r-logo { align-items: center; justify-content: center; background: #fff; }
 .r-cover.r-logo img { max-width: 72%; max-height: 96px; object-fit: contain; }
+.r-cover.r-img {
+  background-size: cover; background-position: center;
+  align-items: flex-end;
+}
+.r-cover.r-img::before {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.1) 50%, transparent 100%);
+}
+.r-cover.r-img .r-no, .r-cover.r-img .r-cat, .r-cover.r-img .r-title { position: relative; z-index: 1; color: #fff; }
+.r-cover.r-img .r-no { opacity: 0.8; }
+.r-cover.r-img .r-cat { opacity: 0.85; }
 .r-cover .r-no { position: absolute; top: 14px; right: 16px; font-size: 13px; font-weight: 600; letter-spacing: 0.08em; opacity: 0.55; }
 .r-cover .r-cat { position: absolute; top: 16px; left: 18px; font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.75; }
 .r-cover .r-title { font-size: 19px; font-weight: 700; letter-spacing: -0.01em; line-height: 1.25; }
@@ -169,6 +184,11 @@ footer a:hover { color: var(--fg-secondary); }
 /* ===== Article pages ===== */
 .article-hero { padding: 160px 0 40px; display: flex; align-items: center; gap: 32px; flex-wrap: wrap; }
 .a-logo { height: 72px; width: auto; max-width: 320px; object-fit: contain; }
+.a-cover {
+  flex: 1 1 340px; min-width: 300px; height: 220px;
+  background-size: cover; background-position: center;
+  border-radius: var(--radius); border: 0.5px solid var(--hairline);
+}
 .a-hd { flex: 1 1 360px; min-width: 280px; }
 .article-hero .r-cat { font-size: 12px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 14px; }
 .article-hero h1 { font-size: 44px; font-weight: 700; letter-spacing: -0.025em; line-height: 1.15; max-width: 800px; margin-bottom: 14px; }

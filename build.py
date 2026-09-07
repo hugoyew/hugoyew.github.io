@@ -92,17 +92,17 @@ def md_to_article(md_text):
 
 # ============ research metadata ============
 RESEARCH = {
-    'popmart':   dict(title='POP MART Masterdoc', cat='consumer', no='01', grad='g1',
-                      logo='popmart.png',
+    'popmart':   dict(title='POP MART Masterdoc', cat='consumer', no='01',
+                      logo='popmart.png', cover='',
                       desc='IP 投资引擎 × 全球化零售渠道：从效率三角到造星机制的完整拆解。'),
-    'wandian':   dict(title='万店连锁 × 渠道-供应链-心智识别框架', cat='consumer', no='02', grad='g2',
-                      logo='',
+    'wandian':   dict(title='万店连锁 × 识别框架', cat='consumer', no='02',
+                      logo='', cover='coffee.jpg',
                       desc='从蜜雪到瑞幸：万店连锁背后的渠道、供应链与心智三层识别框架。'),
-    'kuoshouji': dict(title='阔手机 Phase 1 研究', cat='consumer', no='03', grad='g3',
-                      logo='',
+    'kuoshouji': dict(title='阔手机 Phase 1 研究', cat='consumer', no='03',
+                      logo='', cover='kuoshouji.jpg',
                       desc='折叠屏 → 阔手机：品类迁移的早期判断与跟踪。'),
-    'newfrontier': dict(title='新风天域 · 估值案例复盘', cat='healthcare', no='04', grad='g4',
-                        logo='nf.png',
+    'newfrontier': dict(title='新风天域 · 估值案例复盘', cat='healthcare', no='04',
+                        logo='nf.png', cover='',
                         desc='从一次真实的港股 IPO 估值过会，提炼可复用的估值逻辑链与叙事手法。'),
 }
 CATS = [
@@ -306,8 +306,10 @@ def build_index():
                 if meta['cat'] != cat_key: continue
                 if meta['logo']:
                     cover = f'''<div class="r-cover r-logo"><img src="assets/logos/{meta['logo']}" alt="{meta['title']}"><div class="r-no">{meta['no']}</div><div class="r-cat">{cat_en}</div></div>'''
+                elif meta.get('cover'):
+                    cover = f'''<div class="r-cover r-img" style="background-image:url(assets/covers/{meta['cover']})"><div class="r-no">{meta['no']}</div><div class="r-cat">{cat_en}</div><div class="r-title">{meta['title']}</div></div>'''
                 else:
-                    cover = f'''<div class="r-cover {meta['grad']}"><div class="r-no">{meta['no']}</div><div class="r-cat">{cat_en}</div><div class="r-title">{meta['title']}</div></div>'''
+                    cover = f'''<div class="r-cover g1"><div class="r-no">{meta['no']}</div><div class="r-cat">{cat_en}</div><div class="r-title">{meta['title']}</div></div>'''
                 cards += f'''<a class="r-card" href="research/{slug}.html">
   {cover}
   <div class="r-body"><div class="r-title-sm">{meta['title']}</div><div class="r-desc">{meta['desc']}</div><div class="r-meta"><span>{SLUG_TITLES[slug]}</span><span>→</span></div></div>
@@ -437,9 +439,14 @@ def build_articles():
         if fm.get('last_updated') or fm.get('updated'): chips.append(f'<span class="chip">更新 {html.escape(fm.get("last_updated") or fm.get("updated"))}</span>')
         chips_html = '<div class="a-chips">' + ''.join(chips) + '</div>' if chips else ''
 
-        logo_html = f'<img class="a-logo" src="../assets/logos/{meta["logo"]}" alt="">' if meta['logo'] else ''
+        if meta['logo']:
+            hero_media = f'<img class="a-logo" src="../assets/logos/{meta["logo"]}" alt="">'
+        elif meta.get('cover'):
+            hero_media = f'<div class="a-cover" style="background-image:url(../assets/covers/{meta["cover"]})"></div>'
+        else:
+            hero_media = ''
         body = f'''<div class="article-hero">
-  {logo_html}
+  {hero_media}
   <div class="a-hd">
     <div class="r-cat">{cat_en} · {meta['no']}</div>
     <h1>{meta['title']}</h1>
