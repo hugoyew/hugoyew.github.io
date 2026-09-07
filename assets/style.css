@@ -226,25 +226,29 @@ main { max-width: var(--max-width); margin: 0 auto; padding: 0 28px; }
 }
 .life-word {
   position: absolute;
-  top: 18px;
-  left: 22px;
-  font-size: 30px;
+  top: 20px;
+  left: 24px;
+  font-size: 38px;
   font-weight: 800;
-  color: rgba(0,0,0,0.10);
+  color: rgba(0,0,0,0.12);
   letter-spacing: 3px;
   text-transform: uppercase;
   z-index: 2;
 }
 .life-cap {
   position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  bottom: 16px;
+  left: 16px;
   z-index: 3;
-  padding: 40px 20px 16px;
-  font-size: 13px;
-  color: var(--fg-secondary);
-  background: linear-gradient(to top, rgba(255,255,255,0.95) 40%, transparent);
+  padding: 5px 14px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--fg);
+  background: rgba(255,255,255,0.65);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 999px;
+  border: 0.5px solid rgba(255,255,255,0.8);
 }
 .life-note { font-size: 14px; color: var(--fg-secondary); max-width: 560px; }
 
@@ -347,7 +351,7 @@ footer a:hover { color: var(--fg-secondary); }
   .nav-links a { padding: 5px 8px; font-size: 12.5px; }
   .life-masonry { gap: 14px; }
   .life-card { flex: 1 1 calc(50% - 7px); min-width: 160px; border-radius: 16px; }
-  .life-word { font-size: 22px; top: 14px; left: 16px; }
+  .life-word { font-size: 26px; top: 14px; left: 16px; }
 }
 @media (max-width: 480px) {
   .life-card { flex: 1 1 100%; }
