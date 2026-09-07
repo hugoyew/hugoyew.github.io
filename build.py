@@ -93,34 +93,24 @@ def md_to_article(md_text):
 # ============ research metadata ============
 RESEARCH = {
     'popmart':   dict(title='POP MART Masterdoc', cat='consumer', no='01', grad='g1',
+                      logo='popmart.png',
                       desc='IP 投资引擎 × 全球化零售渠道：从效率三角到造星机制的完整拆解。'),
-    'toptoy':    dict(title='TOP TOY Masterdoc', cat='consumer', no='02', grad='g2',
-                      desc='潮玩第二玩家的对照实验：没有 IP，就没有定价权。'),
-    'wandian':   dict(title='万店连锁 × 渠道-供应链-心智识别框架', cat='consumer', no='03', grad='g3',
+    'wandian':   dict(title='万店连锁 × 渠道-供应链-心智识别框架', cat='consumer', no='02', grad='g2',
+                      logo='',
                       desc='从蜜雪到瑞幸：万店连锁背后的渠道、供应链与心智三层识别框架。'),
-    'kuoshouji': dict(title='阔手机 Phase 1 研究', cat='consumer', no='04', grad='g4',
+    'kuoshouji': dict(title='阔手机 Phase 1 研究', cat='consumer', no='03', grad='g3',
+                      logo='',
                       desc='折叠屏 → 阔手机：品类迁移的早期判断与跟踪。'),
-    'newfrontier': dict(title='新风天域 · 估值案例复盘', cat='healthcare', no='05', grad='g5',
+    'newfrontier': dict(title='新风天域 · 估值案例复盘', cat='healthcare', no='04', grad='g4',
+                        logo='nf.png',
                         desc='从一次真实的港股 IPO 估值过会，提炼可复用的估值逻辑链与叙事手法。'),
-    'consumer':  dict(title='Consumer 消费行业研究框架', cat='framework', no='06', grad='g1',
-                      desc='饮料、餐饮连锁、零售、品牌、食品 ToB、家居建材的方法论地图。'),
-    'healthcare': dict(title='Healthcare 医疗行业研究框架', cat='framework', no='07', grad='g2',
-                       desc='医疗服务、医药、生物科技、医疗器械的子赛道研究路径。'),
-    'tmt':       dict(title='TMT 行业研究框架', cat='framework', no='08', grad='g3',
-                      desc='平台经济、内容、AI、SaaS、消费电子与企业服务。'),
-    'industrial': dict(title='Industrial 工业行业研究框架', cat='framework', no='09', grad='g4',
-                       desc='制造业、新能源、生产要素型生意、供应链与农业。'),
-    'financial': dict(title='Financial 金融与投资方法论', cat='framework', no='10', grad='g5',
-                      desc='Buyout、PE 投资、一级半/二级方法论与交易结构。'),
 }
 CATS = [
     ('consumer', '消费 & 零售', 'Consumer & Retail'),
     ('healthcare', '医疗健康', 'Healthcare'),
-    ('framework', '研究框架', 'Frameworks'),
 ]
-SLUG_TITLES = {'popmart':'POP MART Masterdoc','toptoy':'TOP TOY Masterdoc','wandian':'万店连锁识别框架',
-               'kuoshouji':'阔手机 Phase 1','newfrontier':'新风天域估值案例','consumer':'Consumer 框架',
-               'healthcare':'Healthcare 框架','tmt':'TMT 框架','industrial':'Industrial 框架','financial':'Financial 框架'}
+SLUG_TITLES = {'popmart':'POP MART Masterdoc','wandian':'万店连锁识别框架',
+               'kuoshouji':'阔手机 Phase 1','newfrontier':'新风天域估值案例'}
 
 # ============ page shell ============
 def shell(title, body, desc='', lang_switch=False):
@@ -182,12 +172,12 @@ CAPS = {
    ['元生资本 · 消费投资（货拉拉 / 东鹏特饮 / 宁德时代 Pre-IPO 尽调）',
     '源一资本 · 港股新消费（老铺黄金 / 泡泡玛特 / 布鲁可 / 名创优品）',
     '潮玩行业 50+ 页深度报告 · 300 份消费者问卷',
-    '研报：<a href="research/popmart.html">POP MART</a> · <a href="research/toptoy.html">TOP TOY</a> · <a href="research/wandian.html">万店连锁</a> · <a href="research/kuoshouji.html">阔手机</a>']),
+    '研报：<a href="research/popmart.html">POP MART</a>  · <a href="research/wandian.html">万店连锁</a> · <a href="research/kuoshouji.html">阔手机</a>']),
   ('04', '估值建模与投研叙事',
    '把复杂公司讲成清晰投资故事：建模、对标与案例复盘。',
    ['HollySys LBO 分析 · 投资银行课程',
     '<a href="research/newfrontier.html">新风天域估值案例复盘</a>（港股 IPO 过会级）',
-    '覆盖 5 大行业的系统研究框架']),
+    '跨消费零售与医疗健康的深度研究体系']),
 ],
 'tw': [
   ('01', '港股 IPO 執行',
@@ -205,12 +195,12 @@ CAPS = {
    ['元生資本 · 消費投資（貨拉拉 / 東鵬特飲 / 寧德時代 Pre-IPO 盡調）',
     '源壹資本 · 港股新消費（老鋪黃金 / 泡泡瑪特 / 布魯可 / 名創優品）',
     '潮玩行業 50+ 頁深度報告 · 300 份消費者問卷',
-    '研報：<a href="research/popmart.html">POP MART</a> · <a href="research/toptoy.html">TOP TOY</a> · <a href="research/wandian.html">萬店連鎖</a> · <a href="research/kuoshouji.html">闊手機</a>']),
+    '研報：<a href="research/popmart.html">POP MART</a>  · <a href="research/wandian.html">萬店連鎖</a> · <a href="research/kuoshouji.html">闊手機</a>']),
   ('04', '估值建模與投研敘事',
    '把複雜公司講成清晰投資故事：建模、對標與案例復盤。',
    ['HollySys LBO 分析 · 投資銀行課程',
     '<a href="research/newfrontier.html">新風天域估值案例復盤</a>（港股 IPO 過會級）',
-    '覆蓋 5 大行業的系統研究框架']),
+    '跨消費零售與醫療健康的深度研究體系']),
 ],
 'en': [
   ('01', 'Hong Kong IPO Execution',
@@ -228,12 +218,12 @@ CAPS = {
    ['Genesis Capital · Consumer Investing (Lalamove / Eastroc / CATL Pre-IPO CDD)',
     'Being Capital · HK-listed new consumer (LAOPU / POPMART / Bloks / MINISO)',
     '50+ page collectibles deep-dive · 300 consumer surveys',
-    'Reports: <a href="research/popmart.html">POP MART</a> · <a href="research/toptoy.html">TOP TOY</a> · <a href="research/wandian.html">Wan-dian chains</a> · <a href="research/kuoshouji.html">Wide phones</a>']),
+    'Reports: <a href="research/popmart.html">POP MART</a>  · <a href="research/wandian.html">Wan-dian chains</a> · <a href="research/kuoshouji.html">Wide phones</a>']),
   ('04', 'Valuation & Investment Narrative',
    'Turning complex companies into clear stories: modeling, benchmarking and case teardowns.',
    ['HollySys LBO analysis · Investment Banking coursework',
     '<a href="research/newfrontier.html">New Frontier valuation teardown</a> (HK IPO pass-level)',
-    'Systematic research frameworks across 5 industries']),
+    'A deep research system across consumer & retail and healthcare']),
 ],
 }
 HERO = {
@@ -293,25 +283,34 @@ def build_index():
             items += f'''<div class="t-item"><div class="t-left"><div class="t-org">{org}</div><div class="t-role">{role}</div><div class="t-date">{date}</div></div><div class="t-right"><ul>{right}</ul></div></div>'''
         return f'<div class="timeline">{items}</div>'
     def logo_wall():
-        ib = [('新乳业', 'newhope.png', 'IPO 执行', 'white')]
-        pf = [('宁德时代 CATL', 'catl.png', '港股 · Pre-IPO 研究', 'white'),
-              ('Yarbo', 'yarbo.png', '早期投资', 'white'),
-              ('蜜雪冰城', 'mixue-text.png', '港股 · 研究', 'white'),
-              ('古茗', 'guming.png', '港股 · 研究', 'white')]
+        ib = [('新乳业', 'newhope.png', 'IPO 执行', '')]
+        pf = [('宁德时代 CATL', 'catl.png', '港股 · Pre-IPO 研究', ''),
+              ('Yarbo', 'yarbo.png', '早期投资', ''),
+              ('蜜雪冰城', 'mixue-text.png', '港股 · 研究', ''),
+              ('古茗', 'guming.png', '港股 · 研究', ''),
+              ('货拉拉 Lalamove', 'lalamove.png', '港股 · 研究', ''),
+              ('Uwant 友望', 'uwant.png', '早期投资', '')]
         def wall(items):
             return '<div class="logo-wall">' + ''.join(
                 f'<div class="logo-card"><img src="assets/logos/{img}" class="{cls}" alt="{n}"><div class="co">{n}</div><div class="note">{note}</div></div>'
                 for n, img, note, cls in items) + '</div>'
-        return f'<div class="group-label">Investment Banking</div>{wall(ib)}<div class="group-label">Investments</div>{wall(pf)}'
+        return f'''<div class="track-cols">
+  <div class="track-col"><div class="group-label">Investment Banking</div>{wall(ib)}</div>
+  <div class="track-col"><div class="group-label">Investments</div>{wall(pf)}</div>
+</div>'''
     def research_grid():
         out = ''
         for cat_key, cat_zh, cat_en in CATS:
             cards = ''
             for slug, meta in RESEARCH.items():
                 if meta['cat'] != cat_key: continue
+                if meta['logo']:
+                    cover = f'''<div class="r-cover r-logo"><img src="assets/logos/{meta['logo']}" alt="{meta['title']}"><div class="r-no">{meta['no']}</div><div class="r-cat">{cat_en}</div></div>'''
+                else:
+                    cover = f'''<div class="r-cover {meta['grad']}"><div class="r-no">{meta['no']}</div><div class="r-cat">{cat_en}</div><div class="r-title">{meta['title']}</div></div>'''
                 cards += f'''<a class="r-card" href="research/{slug}.html">
-  <div class="r-cover {meta['grad']}"><div class="r-no">{meta['no']}</div><div class="r-cat">{cat_en}</div><div class="r-title">{meta['title']}</div></div>
-  <div class="r-body"><div class="r-desc">{meta['desc']}</div><div class="r-meta"><span>{SLUG_TITLES[slug]}</span><span>→</span></div></div>
+  {cover}
+  <div class="r-body"><div class="r-title-sm">{meta['title']}</div><div class="r-desc">{meta['desc']}</div><div class="r-meta"><span>{SLUG_TITLES[slug]}</span><span>→</span></div></div>
 </a>'''
             out += f'''<div class="r-category"><h3>{cat_zh} <span style="color:var(--fg-tertiary);font-weight:400;font-size:13px;">{cat_en}</span></h3><div class="r-grid">{cards}</div></div>'''
         return out
@@ -365,7 +364,7 @@ def build_index():
 </main>
 <footer>
   <span>© 2026 Hugo Yew · 簡中 / 繁中 / English</span>
-  <span><a href="research.html">Research 索引</a></span>
+
 </footer>
 <script>
 (function(){{
@@ -383,6 +382,32 @@ def build_index():
     return index_shell('姚颂文 Hugo Yew', body, 'Hugo Yew — Investment Banking Analyst at CITIC CLSA')
 
 # ============ research article pages ============
+def parse_frontmatter(md_text):
+    fm = {}
+    m = re.match(r'^(?:<title>.*?</title>\s*)?---\n(.*?)\n---', md_text, flags=re.S)
+    if m:
+        for ln in m.group(1).split('\n'):
+            ln = ln.strip()
+            if ':' in ln:
+                k, _, v = ln.partition(':')
+                fm[k.strip().lower()] = v.strip().strip('"').strip('\'')
+    return fm
+
+def section_after(md_text, keywords):
+    """Return the first matching section (heading + content until next heading)."""
+    lines = md_text.split('\n')
+    for i, ln in enumerate(lines):
+        if re.match(r'^#{1,4}\s+', ln) and re.sub(r'^#{1,4}\s+', '', ln).strip().lower() in keywords:
+            body = []
+            for j in range(i + 1, len(lines)):
+                if re.match(r'^#{1,4}\s+', lines[j]):
+                    break
+                if lines[j].strip():
+                    body.append(lines[j].strip())
+            if body:
+                return md_to_article('\n'.join(body))
+    return ''
+
 def build_articles():
     for slug, meta in RESEARCH.items():
         src = os.path.join(SITE, 'research_raw', f'{slug}.md')
@@ -390,13 +415,50 @@ def build_articles():
             continue
         with open(src, encoding='utf-8') as f:
             md = f.read()
+        fm = parse_frontmatter(md)
         content = md_to_article(md)
         cat_en = dict((k, en) for k, zh, en in CATS)[meta['cat']]
-        body = f'''<div class="article-hero"><div class="r-cat">{cat_en} · {meta['no']}</div><h1>{meta['title']}</h1><div class="a-meta">{meta['desc']}</div></div>
+
+        # executive summary: frontmatter summary -> explicit section -> meta desc
+        summary = fm.get('summary', '')
+        if not summary:
+            summary = section_after(md, ['执行摘要', 'executive summary', '摘要', 'summary'])
+        if not summary:
+            summary = f'<p>{meta["desc"]}</p>'
+
+        # conclusion: explicit section or placeholder
+        conclusion = section_after(md, ['总结', '结论', '结语', 'conclusion', '结论与展望', '核心结论'])
+        if not conclusion:
+            conclusion = '<p class="muted">结论部分整理中——后续将按统一模板补齐。</p>'
+
+        # extra meta chips from frontmatter
+        chips = []
+        if fm.get('ticker'): chips.append(f'<span class="chip">{html.escape(fm["ticker"])}</span>')
+        if fm.get('last_updated') or fm.get('updated'): chips.append(f'<span class="chip">更新 {html.escape(fm.get("last_updated") or fm.get("updated"))}</span>')
+        chips_html = '<div class="a-chips">' + ''.join(chips) + '</div>' if chips else ''
+
+        logo_html = f'<img class="a-logo" src="../assets/logos/{meta["logo"]}" alt="">' if meta['logo'] else ''
+        body = f'''<div class="article-hero">
+  {logo_html}
+  <div class="a-hd">
+    <div class="r-cat">{cat_en} · {meta['no']}</div>
+    <h1>{meta['title']}</h1>
+    <div class="a-meta">{meta['desc']}</div>
+    {chips_html}
+  </div>
+</div>
 <div class="article">
+  <div class="exec-summary"><h2>执行摘要 · Executive Summary</h2>{summary}</div>
+  <div class="a-body">
 {content}
-<div class="a-disclaimer">个人研究笔记，仅供学习交流，不构成投资建议。© Hugo Yew</div>
-<a class="back-link" href="../index.html#research">← 返回研究</a>
+  </div>
+  <div class="conclusion"><h2>总结 · Conclusion</h2>{conclusion}</div>
+  <div class="financials">
+    <h2>财务数据 · Financials</h2>
+    <p class="muted">季度财务数据模块建设中——后续将在此自动同步公司季度财报数据。</p>
+  </div>
+  <div class="a-disclaimer">个人研究笔记，仅供学习交流，不构成投资建议。© Hugo Yew</div>
+  <a class="back-link" href="../index.html#research">← 返回研究</a>
 </div>'''
         out = shell(meta['title'] + ' — Hugo Yew', body, meta['desc'])
         os.makedirs(os.path.join(SITE, 'research'), exist_ok=True)
