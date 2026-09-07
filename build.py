@@ -92,13 +92,13 @@ def md_to_article(md_text):
 
 # ============ research metadata ============
 RESEARCH = {
-    'popmart':   dict(title='POP MART Masterdoc', cat='consumer', no='01',
+    'popmart':   dict(title='泡泡玛特会是下一个伟大的 IP 公司吗？', cat='consumer', no='01',
                       logo='popmart.png', cover='',
                       desc='IP 投资引擎 × 全球化零售渠道：从效率三角到造星机制的完整拆解。'),
-    'wandian':   dict(title='万店连锁 × 识别框架', cat='consumer', no='02',
+    'wandian':   dict(title='万店连锁：什么样的零售业态能跑通？', cat='consumer', no='02',
                       logo='', cover='coffee.jpg',
                       desc='从蜜雪到瑞幸：万店连锁背后的渠道、供应链与心智三层识别框架。'),
-    'kuoshouji': dict(title='阔手机 Phase 1 研究', cat='consumer', no='03',
+    'kuoshouji': dict(title='阔手机：下一个抢滩登陆是一门好生意吗？', cat='consumer', no='03',
                       logo='', cover='kuoshouji.jpg',
                       desc='折叠屏 → 阔手机：品类迁移的早期判断与跟踪。'),
     'newfrontier': dict(title='新风天域 · 估值案例复盘', cat='healthcare', no='04',
@@ -109,8 +109,8 @@ CATS = [
     ('consumer', '消费 & 零售', 'Consumer & Retail'),
     ('healthcare', '医疗健康', 'Healthcare'),
 ]
-SLUG_TITLES = {'popmart':'POP MART Masterdoc','wandian':'万店连锁识别框架',
-               'kuoshouji':'阔手机 Phase 1','newfrontier':'新风天域估值案例'}
+SLUG_TITLES = {'popmart':'泡泡玛特 IP 研究','wandian':'万店零售业态',
+               'kuoshouji':'阔手机品类研究','newfrontier':'新风天域估值案例'}
 
 # ============ page shell ============
 def shell(title, body, desc='', lang_switch=False):
