@@ -5,6 +5,11 @@ summary: |
   - 中国医疗服务市场 2025 年规模约 1.84 万亿元，民营医疗 1.3 万亿元，民营医院数量已超公立。
   - 核心逻辑：需求端老龄化+消费升级双轮驱动，供给端牌照+医生+品牌三重壁垒，头部连锁享受集中度提升红利。
   - 估值案例部分 pending 更新——待最新 equity story 与估值测算底稿。
+summary_en: |
+  - In the AI era, the one thing that cannot be replaced is a healthy body — healthcare is long-term rigid demand, scarce supply
+  - China healthcare services market ~¥1.84T in 2025, private healthcare ¥1.3T, private hospitals exceed public in count
+  - Core logic: demand driven by aging + consumption upgrade; supply barriers = license + doctors + brand; leading chains benefit from concentration
+  - Valuation case pending update — awaiting latest equity story and valuation model
 ---
 
 # Wealth of Health：AI 时代无法被替代的是健康身体

@@ -7,6 +7,12 @@ summary: |
   - 瑞幸证明了数字化运营可以重构咖啡品类：万店后单店模型仍在改善
   - 古茗代表"区域深耕→全国扩张"的茶饮第二梯队路径，供应链是核心壁垒
   - 识别万店潜力的关键：单店模型是否在加密后仍成立、供应链是否随规模线性降本
+summary_en: |
+  - 10,000-store chains = "channel density × supply chain efficiency × mindshare" three-layer flywheel, all required
+  - Mixue proved the ceiling of extreme value: 25,000+ stores, ¥9 AOV, franchise model works
+  - Luckin proved digital operations can重构 coffee: per-store model still improving after 10,000 stores
+  - Guming represents "regional deep-dive → national expansion" second-tier tea path; supply chain is core moat
+  - Key to 10,000-store potential: per-store model holds after densification; supply chain costs scale linearly
 ---
 
 # 万店连锁 × 识别框架

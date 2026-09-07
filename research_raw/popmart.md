@@ -8,6 +8,12 @@ summary: |
   - 联名重构IP生命周期，FIFA世界杯级联名是"不花钱还赚钱的广告"
   - 不该做三丽鸥：授权3%→5-8%是健康溢出，>15%消耗IP价值
   - 赛马机制而非造星SOP，每2-3年押中一个LABUBU级IP即可延续增长
+summary_en: |
+  - The moat is not blind boxes or a single IP, but the efficiency triangle: IP investment × channel quality × high AOV/low expense ratio
+  - Channel is a DTC closed loop: 630 stores are "brand cathedrals" not volume channels, DTC >70%
+  - Collabs重构IP生命周期; FIFA World Cup级联名是 "free advertising that also makes money"
+  - Should not become Sanrio: licensing at 3%→5-8% is healthy spillover, >15% consumes IP value
+  - Horse-racing not star-making SOP; one LABUBU-level IP every 2-3 years sustains growth
 ---
 
 # POP MART Masterdoc

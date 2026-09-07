@@ -7,6 +7,12 @@ summary: |
   - 类比iPad诞生：不是"更大的手机"，而是"新的内容消费形态"
   - 关键变量：折叠屏手机渗透率能否从当前~5%突破到15%以上
   - 跟踪指标：华为/三星/荣耀折叠屏出货量、均价变化、大屏专属App数量
+summary_en: |
+  - Foldables are moving from "luxury" to "wide phones" — a new category between tablet and phone
+  - Core drivers: price down to ¥4,000 tier + hinge/screen maturity + large-screen content ecosystem
+  - Analogy to iPad: not "a bigger phone" but "a new content consumption form"
+  - Key variable: can foldable penetration break from ~5% to 15%+
+  - Tracking: Huawei/Samsung/Honor foldable shipments, ASP changes, large-screen exclusive apps
 ---
 
 # 厂商抢滩登陆：我们真的需要更宽的手机吗？

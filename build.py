@@ -193,23 +193,42 @@ def md_to_article(md_text):
 
 # ============ research metadata ============
 RESEARCH = {
-    'popmart':   dict(title='泡泡玛特会是下一个伟大的 IP 公司吗？', rtype='equity', no='01',
+    'popmart':   dict(title='泡泡玛特会是下一个伟大的 IP 公司吗？',
+                      title_en='Is POP MART the next great IP company?',
+                      rtype='equity', no='01',
                       cover='popmart.jpg', ticker='9992.HK',
                       target_price='HK$172–220', current_price='HK$156.2', price_date='2026-09-07',
                       upside='+10% ~ +41%',
-                      desc='IP 投资引擎 × 全球化零售渠道：从效率三角到造星机制的完整拆解。'),
-    'wandian':   dict(title='万店连锁：什么样的零售业态能跑通？', rtype='sector', no='02',
+                      desc='IP 投资引擎 × 全球化零售渠道：从效率三角到造星机制的完整拆解。',
+                      desc_en='IP investment engine × global retail channel: full teardown from the efficiency triangle to star-making.',
+                      slug_label='泡泡玛特 IP 研究', slug_label_en='POP MART IP Research'),
+    'wandian':   dict(title='万店连锁：什么样的零售业态能跑通？',
+                      title_en='10,000-store chains: which retail formats work?',
+                      rtype='sector', no='02',
                       cover='coffee.jpg',
                       stats=[('现制饮品', '¥7,464亿', '2025 市场规模'), ('零食饮料', '¥4.3万亿', '2025 市场规模'), ('连锁百强门店', '28.9万', '2025 年')],
-                      desc='从蜜雪到瑞幸：万店连锁背后的渠道、供应链与心智三层识别框架。'),
-    'kuoshouji': dict(title='厂商抢滩登陆：我们真的需要更宽的手机吗？', rtype='sector', no='03',
+                      stats_en=[('Beverages', '¥746B', '2025 market'), ('Snacks & drinks', '¥4.3T', '2025 market'), ('Top100 chain stores', '289K', '2025')],
+                      desc='从蜜雪到瑞幸：万店连锁背后的渠道、供应链与心智三层识别框架。',
+                      desc_en='From Mixue to Luckin: a three-layer framework — channel, supply chain, mindshare — for identifying scalable retail formats.',
+                      slug_label='万店零售业态', slug_label_en='Wan-dian Retail Formats'),
+    'kuoshouji': dict(title='厂商抢滩登陆：我们真的需要更宽的手机吗？',
+                      title_en='Wide-phone land grab: do we really need wider phones?',
+                      rtype='sector', no='03',
                       cover='kuoshouji.jpg',
                       stats=[('全球折叠屏', '1,820万台', '2025 出货'), ('2026E 全球', '2,200万+', 'Omdia 预测'), ('中国市场', '~1,000万台', '2025 出货')],
-                      desc='折叠屏 → 阔手机：品类迁移的早期判断与跟踪。'),
-    'newfrontier': dict(title='Wealth of Health：AI 时代无法被替代的是健康身体', rtype='healthcare', no='04',
+                      stats_en=[('Global foldables', '18.2M', '2025 shipments'), ('2026E global', '22M+', 'Omdia forecast'), ('China market', '~10M', '2025 shipments')],
+                      desc='折叠屏 → 阔手机：品类迁移的早期判断与跟踪。',
+                      desc_en='Foldable → wide phone: early judgment and tracking of a category shift.',
+                      slug_label='阔手机品类研究', slug_label_en='Wide-phone Category Research'),
+    'newfrontier': dict(title='Wealth of Health：AI 时代无法被替代的是健康身体',
+                        title_en='Wealth of Health: the one thing AI cannot replace',
+                        rtype='healthcare', no='04',
                         icon='medical', pending=True,
                         stats=[('医疗服务市场', '¥1.84万亿', '2025 年'), ('民营医疗', '¥1.3万亿', '2025 年'), ('民营医院', '26,481家', '2025 年末')],
-                        desc='医疗服务赛道的长期逻辑与估值框架。估值案例 pending 更新。'),
+                        stats_en=[('Healthcare market', '¥1.84T', '2025'), ('Private healthcare', '¥1.3T', '2025'), ('Private hospitals', '26,481', 'end 2025')],
+                        desc='医疗服务赛道的长期逻辑与估值框架。估值案例 pending 更新。',
+                        desc_en='Long-term logic and valuation framework for healthcare services. Valuation case pending update.',
+                        slug_label='医疗服务研究', slug_label_en='Healthcare Services Research'),
 }
 RTYPES = [
     ('equity', '个股研究', 'Equity Research'),
@@ -419,32 +438,38 @@ def build_index():
   <div class="track-col"><div class="group-label">Investment Banking</div>{wall(ib)}</div>
   <div class="track-col"><div class="group-label">Investments</div>{wall(pf)}</div>
 </div>'''
-    def research_grid():
+    def research_grid(lang='zh'):
+        from opencc import OpenCC
+        cc = OpenCC('s2t')
         out = ''
         for rtype_key, rt_zh, rt_en in RTYPES:
+            rt_tw = cc.convert(rt_zh)
+            rt_label = {'zh': rt_zh, 'tw': rt_tw, 'en': rt_en}[lang]
+            rt_sub = {'zh': rt_en, 'tw': rt_en, 'en': ''}[lang]
             cards = ''
             for slug, meta in RESEARCH.items():
                 if meta['rtype'] != rtype_key: continue
                 pending_badge = '<span class="r-pending">PENDING</span>' if meta.get('pending') else ''
+                title = meta['title'] if lang != 'en' else meta.get('title_en', meta['title'])
+                if lang == 'tw': title = cc.convert(title)
+                desc = meta['desc'] if lang != 'en' else meta.get('desc_en', meta['desc'])
+                if lang == 'tw': desc = cc.convert(desc)
+                slug_label = meta.get('slug_label', SLUG_TITLES.get(slug, slug))
+                if lang == 'en': slug_label = meta.get('slug_label_en', slug_label)
+                elif lang == 'tw': slug_label = cc.convert(slug_label)
                 if meta.get('icon'):
                     icon_svg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="7" width="18" height="14" rx="2"/><path d="M12 11v6M9 14h6M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>'
                     cover = f'''<div class="r-cover r-icon"><div class="r-icon-svg">{icon_svg}</div><div class="r-no">{meta['no']}</div><div class="r-cat">{rt_en}</div>{pending_badge}</div>'''
                 elif meta.get('cover'):
-                    cover = f'''<div class="r-cover r-img" style="background-image:url(assets/covers/{meta['cover']})"><div class="r-no">{meta['no']}</div><div class="r-cat">{rt_en}</div><div class="r-title">{meta['title']}</div>{pending_badge}</div>'''
+                    cover = f'''<div class="r-cover r-img" style="background-image:url(assets/covers/{meta['cover']})"><div class="r-no">{meta['no']}</div><div class="r-cat">{rt_en}</div><div class="r-title">{title}</div>{pending_badge}</div>'''
                 else:
-                    cover = f'''<div class="r-cover g1"><div class="r-no">{meta['no']}</div><div class="r-cat">{rt_en}</div><div class="r-title">{meta['title']}</div>{pending_badge}</div>'''
-                # equity: show price teaser; sector/healthcare: show stat teaser
-                if meta['rtype'] == 'equity':
-                    teaser = f'<div class="r-teaser"><span class="rt-label">目标价</span><span class="rt-val">{meta["target_price"]}</span><span class="rt-divider">·</span><span class="rt-label">现价</span><span class="rt-val">{meta["current_price"]}</span></div>'
-                elif meta.get('stats'):
-                    teaser = '<div class="r-teaser">' + ''.join(f'<span class="rt-stat"><b>{s[1]}</b><em>{s[0]}</em></span>' for s in meta['stats'][:2]) + '</div>'
-                else:
-                    teaser = ''
+                    cover = f'''<div class="r-cover g1"><div class="r-no">{meta['no']}</div><div class="r-cat">{rt_en}</div><div class="r-title">{title}</div>{pending_badge}</div>'''
                 cards += f'''<a class="r-card" href="research/{slug}.html">
   {cover}
-  <div class="r-body"><div class="r-title-sm">{meta['title']}</div><div class="r-desc">{meta['desc']}</div>{teaser}<div class="r-meta"><span>{SLUG_TITLES[slug]}</span><span>→</span></div></div>
+  <div class="r-body"><div class="r-title-sm">{title}</div><div class="r-desc">{desc}</div><div class="r-meta"><span>{slug_label}</span><span>→</span></div></div>
 </a>'''
-            out += f'''<div class="r-category"><h3>{rt_zh} <span style="color:var(--fg-tertiary);font-weight:400;font-size:13px;">{rt_en}</span></h3><div class="r-grid">{cards}</div></div>'''
+            sub_html = f' <span style="color:var(--fg-tertiary);font-weight:400;font-size:13px;">{rt_sub}</span>' if rt_sub else ''
+            out += f'''<div class="r-category"><h3>{rt_label}{sub_html}</h3><div class="r-grid">{cards}</div></div>'''
         return out
     def section(ids, tag, title, sub, inner):
         return f'''<div class="section" id="{ids}"><div class="section-tag">{tag}</div><h2 class="section-title">{title}</h2><p class="section-sub">{sub}</p>{inner}</div>'''
@@ -512,9 +537,9 @@ def build_index():
   <div data-lang-block="tw" hidden>{section('track','Track Record','代表性項目','參與過的關鍵交易與投資。', logo_wall())}</div>
   <div data-lang-block="en" hidden>{section('track','Track Record','Selected Work','Key deals and investments I have been part of.', logo_wall())}</div>
 
-  <div data-lang-block="zh">{section('research','Research','研究','成体系的研究输出：消费零售、医疗健康与跨行业框架。', research_grid())}</div>
-  <div data-lang-block="tw" hidden>{section('research','Research','研究','成體係的研究輸出：消費零售、醫療健康與跨行業框架。', research_grid())}</div>
-  <div data-lang-block="en" hidden>{section('research','Research','Research','Systematic research output: consumer & retail, healthcare, and cross-industry frameworks.', research_grid())}</div>
+  <div data-lang-block="zh">{section('research','Research','研究','成体系的研究输出：消费零售、医疗健康与跨行业框架。', research_grid('zh'))}</div>
+  <div data-lang-block="tw" hidden>{section('research','Research','研究','成體係的研究輸出：消費零售、醫療健康與跨行業框架。', research_grid('tw'))}</div>
+  <div data-lang-block="en" hidden>{section('research','Research','Research','Systematic research output: consumer & retail, healthcare, and cross-industry frameworks.', research_grid('en'))}</div>
 
   <div data-lang-block="zh">{section('life','Life','生活之外','工作之外的我。', life_photos([('gym.jpg','FITNESS','健身','3/4'),('nyc.jpg','NYC','Biodesign Challenge 纽约决赛','4/5'),('coffee.jpg','COFFEE','手冲咖啡','3/4'),('referee.jpg','REFEREE','国家二级篮球裁判','4/5'),('captain.jpg','CAPTAIN','岭南队 3 号 · 队长','3/4')]))}</div>
   <div data-lang-block="tw" hidden>{section('life','Life','生活之外','工作之外的我。', life_photos([('gym.jpg','FITNESS','健身','3/4'),('nyc.jpg','NYC','Biodesign Challenge 紐約決賽','4/5'),('coffee.jpg','COFFEE','手沖咖啡','3/4'),('referee.jpg','REFEREE','國家二級籃球裁判','4/5'),('captain.jpg','CAPTAIN','嶺南隊 3 號 · 隊長','3/4')]))}</div>
@@ -583,6 +608,8 @@ def section_after(md_text, keywords):
     return ''
 
 def build_articles():
+    from opencc import OpenCC
+    cc = OpenCC('s2t')
     for slug, meta in RESEARCH.items():
         src = os.path.join(SITE, 'research_raw', f'{slug}.md')
         if not os.path.exists(src):
@@ -590,84 +617,180 @@ def build_articles():
         with open(src, encoding='utf-8') as f:
             md = f.read()
         fm = parse_frontmatter(md)
-        content = md_to_article(md)
-        rtype_en = dict((k, en) for k, zh, en in RTYPES)[meta['rtype']]
+        content_zh = md_to_article(md)
+        # traditional: convert md first, then render
+        content_tw = md_to_article(cc.convert(md))
+        # english: read _en.md if exists
+        src_en = os.path.join(SITE, 'research_raw', f'{slug}_en.md')
+        if os.path.exists(src_en):
+            with open(src_en, encoding='utf-8') as f:
+                md_en = f.read()
+            content_en = md_to_article(md_en)
+            fm_en = parse_frontmatter(md_en)
+            summary_en = fm_en.get('summary', fm.get('summary_en', ''))
+        else:
+            content_en = ''
+            summary_en = fm.get('summary_en', '')
 
-        # price panel for equity
-        price_panel = ''
-        if meta['rtype'] == 'equity' and meta.get('target_price'):
-            price_panel = f'''<div class="price-panel">
-  <div class="pp-item"><div class="pp-label">目标价 Target</div><div class="pp-val pp-target">{meta['target_price']}</div></div>
+        rtype_map = dict((k, (zh, en)) for k, zh, en in RTYPES)
+
+        def article_body(lang):
+            if lang == 'en':
+                title = meta.get('title_en', meta['title'])
+                desc = meta.get('desc_en', meta['desc'])
+                rtype_label = rtype_map[meta['rtype']][1]
+            elif lang == 'tw':
+                title = cc.convert(meta['title'])
+                desc = cc.convert(meta['desc'])
+                rtype_label = cc.convert(rtype_map[meta['rtype']][0])
+            else:
+                title = meta['title']
+                desc = meta['desc']
+                rtype_label = rtype_map[meta['rtype']][0]
+
+            # price panel
+            price_panel = ''
+            if meta['rtype'] == 'equity' and meta.get('target_price'):
+                if lang == 'en':
+                    l1, l2, l3 = 'Target Price', 'Last · ' + meta.get('price_date',''), 'Upside'
+                elif lang == 'tw':
+                    l1, l2, l3 = '目標價', '現價 · ' + meta.get('price_date',''), '上行空間'
+                else:
+                    l1, l2, l3 = '目标价', '现价 · ' + meta.get('price_date',''), '上行空间'
+                price_panel = f'''<div class="price-panel">
+  <div class="pp-item"><div class="pp-label">{l1}</div><div class="pp-val pp-target">{meta['target_price']}</div></div>
   <div class="pp-arrow">→</div>
-  <div class="pp-item"><div class="pp-label">现价 Last · {meta.get('price_date','')}</div><div class="pp-val pp-current">{meta['current_price']}</div></div>
-  <div class="pp-item"><div class="pp-label">上行空间 Upside</div><div class="pp-val pp-upside">{meta.get('upside','')}</div></div>
+  <div class="pp-item"><div class="pp-label">{l2}</div><div class="pp-val pp-current">{meta['current_price']}</div></div>
+  <div class="pp-item"><div class="pp-label">{l3}</div><div class="pp-val pp-upside">{meta.get('upside','')}</div></div>
 </div>'''
 
-        # stat cards for sector / healthcare
-        stat_cards = ''
-        if meta.get('stats'):
-            cards = ''.join(f'<div class="stat-card"><div class="sc-val">{s[1]}</div><div class="sc-label">{s[0]}</div><div class="sc-sub">{s[2]}</div></div>' for s in meta['stats'])
-            stat_cards = f'<div class="stat-cards">{cards}</div>'
+            # stat cards
+            stat_cards = ''
+            stats = meta.get('stats_en' if lang == 'en' else 'stats', meta.get('stats', []))
+            if stats:
+                cards = ''.join(f'<div class="stat-card"><div class="sc-val">{s[1]}</div><div class="sc-label">{cc.convert(s[0]) if lang=="tw" else s[0]}</div><div class="sc-sub">{cc.convert(s[2]) if lang=="tw" else s[2]}</div></div>' for s in stats)
+                stat_cards = f'<div class="stat-cards">{cards}</div>'
 
-        pending_banner = '<div class="pending-banner">估值案例部分 pending 更新——待最新 equity story 与估值测算底稿。</div>' if meta.get('pending') else ''
+            # pending banner
+            if meta.get('pending'):
+                if lang == 'en':
+                    pb = 'Valuation case pending update — awaiting latest equity story and valuation model.'
+                elif lang == 'tw':
+                    pb = '估值案例部分 pending 更新——待最新 equity story 與估值測算底稿。'
+                else:
+                    pb = '估值案例部分 pending 更新——待最新 equity story 与估值测算底稿。'
+                pending_banner = f'<div class="pending-banner">{pb}</div>'
+            else:
+                pending_banner = ''
 
-        # executive summary: frontmatter summary -> explicit section -> meta desc
-        summary = fm.get('summary', '')
-        if not summary:
-            summary = section_after(md, ['执行摘要', 'executive summary', '摘要', 'summary'])
-        if not summary:
-            summary = f'<p>{meta["desc"]}</p>'
-        # render bullet-list summary as <ul>
-        if summary and all(l.strip().startswith('- ') for l in summary.strip().split('\n') if l.strip()):
-            items = ''.join(f'<li>{inline(l.strip()[2:])}</li>' for l in summary.strip().split('\n') if l.strip())
-            summary = f'<ul>{items}</ul>'
+            # executive summary
+            if lang == 'en':
+                summary = summary_en
+                exec_title = 'Executive Summary'
+            elif lang == 'tw':
+                summary = cc.convert(fm.get('summary', ''))
+                exec_title = '執行摘要'
+            else:
+                summary = fm.get('summary', '')
+                exec_title = '执行摘要'
+            if not summary:
+                summary = f'<p>{desc}</p>'
+            if summary and all(l.strip().startswith('- ') for l in summary.strip().split('\n') if l.strip()):
+                items = ''.join(f'<li>{inline(cc.convert(l.strip()[2:]) if lang=="tw" else l.strip()[2:])}</li>' for l in summary.strip().split('\n') if l.strip())
+                summary = f'<ul>{items}</ul>'
 
-        # conclusion: explicit section or placeholder
-        conclusion = section_after(md, ['总结', '结论', '结语', 'conclusion', '结论与展望', '核心结论'])
-        if not conclusion:
-            conclusion = '<p class="muted">结论部分整理中——后续将按统一模板补齐。</p>'
+            # content
+            if lang == 'en':
+                content = content_en if content_en else '<p class="muted">Full English translation of detailed analysis in progress — key takeaways are below.</p>'
+            elif lang == 'tw':
+                content = content_tw
+            else:
+                content = content_zh
 
-        # extra meta chips from frontmatter
-        chips = []
-        if fm.get('ticker'): chips.append(f'<span class="chip">{html.escape(fm["ticker"])}</span>')
-        if fm.get('last_updated') or fm.get('updated'): chips.append(f'<span class="chip">更新 {html.escape(fm.get("last_updated") or fm.get("updated"))}</span>')
-        chips_html = '<div class="a-chips">' + ''.join(chips) + '</div>' if chips else ''
+            # conclusion
+            if lang == 'en':
+                concl_title = 'Conclusion'
+                concl_text = section_after(md_en if os.path.exists(src_en) else md, ['conclusion', 'key takeaways', 'summary']) if os.path.exists(src_en) else ''
+                if not concl_text:
+                    concl_text = '<p class="muted">Conclusion in progress.</p>'
+            elif lang == 'tw':
+                concl_title = '總結'
+                concl_text = section_after(cc.convert(md), ['總結', '結論', '結語', '結論與展望', '核心結論'])
+            else:
+                concl_title = '总结'
+                concl_text = section_after(md, ['总结', '结论', '结语', '结论与展望', '核心结论'])
+            if not concl_text:
+                if lang == 'en':
+                    concl_text = '<p class="muted">Conclusion in progress.</p>'
+                elif lang == 'tw':
+                    concl_text = '<p class="muted">結論部分整理中——後續將按統一模板補齊。</p>'
+                else:
+                    concl_text = '<p class="muted">结论部分整理中——后续将按统一模板补齐。</p>'
 
-        if meta.get('logo'):
-            hero_media = f'<img class="a-logo" src="../assets/logos/{meta["logo"]}" alt="">'
-        elif meta.get('cover'):
-            hero_media = f'<div class="a-cover" style="background-image:url(../assets/covers/{meta["cover"]})"></div>'
-        elif meta.get('icon'):
-            icon_svg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="7" width="18" height="14" rx="2"/><path d="M12 11v6M9 14h6M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>'
-            hero_media = f'<div class="a-cover a-icon-cover"><div class="a-icon-svg">{icon_svg}</div></div>'
-        else:
-            hero_media = ''
-        body = f'''<div class="article-hero">
+            # section labels
+            if lang == 'en':
+                fin_title, fin_text = 'Financials', 'Quarterly financials module in progress — will auto-sync company quarterly results here.'
+                back_text, disclaimer = '← Back to Research', 'Personal research notes, for educational purposes only. Not investment advice. © Hugo Yew'
+            elif lang == 'tw':
+                fin_title, fin_text = '財務數據', '季度財務數據模塊建設中——後續將在此自動同步公司季度財報數據。'
+                back_text, disclaimer = '← 返回研究', '個人研究筆記，僅供學習交流，不構成投資建議。© Hugo Yew'
+            else:
+                fin_title, fin_text = '财务数据', '季度财务数据模块建设中——后续将在此自动同步公司季度财报数据。'
+                back_text, disclaimer = '← 返回研究', '个人研究笔记，仅供学习交流，不构成投资建议。© Hugo Yew'
+
+            # hero media
+            if meta.get('logo'):
+                hero_media = f'<img class="a-logo" src="../assets/logos/{meta["logo"]}" alt="">'
+            elif meta.get('cover'):
+                hero_media = f'<div class="a-cover" style="background-image:url(../assets/covers/{meta["cover"]})"></div>'
+            elif meta.get('icon'):
+                icon_svg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="7" width="18" height="14" rx="2"/><path d="M12 11v6M9 14h6M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>'
+                hero_media = f'<div class="a-cover a-icon-cover"><div class="a-icon-svg">{icon_svg}</div></div>'
+            else:
+                hero_media = ''
+
+            return f'''<div class="article-hero">
   {hero_media}
   <div class="a-hd">
-    <div class="r-cat">{rtype_en} · {meta['no']}</div>
-    <h1>{meta['title']}</h1>
-    <div class="a-meta">{meta['desc']}</div>
-    {chips_html}
+    <div class="r-cat">{rtype_label} · {meta['no']}</div>
+    <h1>{title}</h1>
+    <div class="a-meta">{desc}</div>
   </div>
 </div>
 <div class="article">
   {pending_banner}
   {price_panel}
   {stat_cards}
-  <div class="exec-summary"><h2>执行摘要 · Executive Summary</h2>{summary}</div>
+  <div class="exec-summary"><h2>{exec_title}</h2>{summary}</div>
   <div class="a-body">
 {content}
   </div>
-  <div class="conclusion"><h2>总结 · Conclusion</h2>{conclusion}</div>
+  <div class="conclusion"><h2>{concl_title}</h2>{concl_text}</div>
   <div class="financials">
-    <h2>财务数据 · Financials</h2>
-    <p class="muted">季度财务数据模块建设中——后续将在此自动同步公司季度财报数据。</p>
+    <h2>{fin_title}</h2>
+    <p class="muted">{fin_text}</p>
   </div>
-  <div class="a-disclaimer">个人研究笔记，仅供学习交流，不构成投资建议。© Hugo Yew</div>
-  <a class="back-link" href="../index.html#research">← 返回研究</a>
+  <div class="a-disclaimer">{disclaimer}</div>
+  <a class="back-link" href="../index.html#research">{back_text}</a>
 </div>'''
-        out = shell(meta['title'] + ' — Hugo Yew', body, meta['desc'])
+
+        body = f'''<div data-lang-block="zh">{article_body('zh')}</div>
+<div data-lang-block="tw" hidden>{article_body('tw')}</div>
+<div data-lang-block="en" hidden>{article_body('en')}</div>
+<script>
+(function(){{
+  var btns = document.querySelectorAll('#lang-switch button');
+  var blocks = document.querySelectorAll('[data-lang-block]');
+  function setLang(l){{
+    blocks.forEach(function(b){{ b.hidden = (b.getAttribute('data-lang-block') !== l); }});
+    btns.forEach(function(b){{ b.classList.toggle('active', b.dataset.lang === l); }});
+  }}
+  btns.forEach(function(b){{ b.addEventListener('click', function(){{ setLang(b.dataset.lang); }}); }});
+  setLang('zh');
+}})();
+</script>'''
+        page_title = meta.get('title_en', meta['title'])
+        out = shell(page_title + ' — Hugo Yew', body, meta.get('desc_en', meta['desc']), lang_switch=True)
         os.makedirs(os.path.join(SITE, 'research'), exist_ok=True)
         with open(os.path.join(SITE, 'research', f'{slug}.html'), 'w', encoding='utf-8') as f:
             f.write(out)
