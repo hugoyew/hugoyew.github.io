@@ -6,6 +6,54 @@ import re, os, html
 SITE = os.path.dirname(os.path.abspath(__file__))
 
 # ============ markdown -> article html ============
+def chart_html(ctype, title, data):
+    if not data: return ''
+    maxv = max(v for _, v in data)
+    title_html = f'<div class="chart-title">{title}</div>' if title else ''
+    if ctype == 'bar':
+        rows = ''
+        for label, value in data:
+            pct = value / maxv * 100 if maxv else 0
+            rows += f'''<div class="cb-row"><span class="cb-label">{label}</span><div class="cb-track"><div class="cb-fill" style="--target:{pct:.1f}%"></div></div><span class="cb-value">{value:g}</span></div>'''
+        return f'<div class="chart chart-bar">{title_html}<div class="cb-body">{rows}</div></div>'
+    if ctype == 'pie':
+        total = sum(v for _, v in data)
+        colors = ['#0066FF', '#4D94FF', '#80B3FF', '#B3D1FF', '#CCE0FF', '#E6F0FF']
+        stops = []
+        acc = 0
+        for i, (label, value) in enumerate(data):
+            pct = value / total * 100 if total else 0
+            stops.append(f'{colors[i % len(colors)]} {acc:.1f}% {acc+pct:.1f}%')
+            acc += pct
+        legend = ''
+        for i, (label, value) in enumerate(data):
+            pct = value / total * 100 if total else 0
+            legend += f'<div class="cp-item"><span class="cp-dot" style="background:{colors[i%len(colors)]}"></span><span class="cp-label">{label}</span><span class="cp-pct">{pct:.0f}%</span></div>'
+        return f'<div class="chart chart-pie">{title_html}<div class="cp-body"><div class="cp-circle" style="background:conic-gradient({", ".join(stops)})"></div><div class="cp-legend">{legend}</div></div></div>'
+    if ctype == 'line':
+        w, h = 400, 180
+        pad_l, pad_r, pad_t, pad_b = 40, 20, 20, 30
+        n = len(data)
+        maxv = max(v for _, v in data)
+        minv = min(v for _, v in data)
+        rng = maxv - minv if maxv != minv else 1
+        pts = []
+        for i, (label, value) in enumerate(data):
+            x = pad_l + (w - pad_l - pad_r) * (i / max(n - 1, 1))
+            y = pad_t + (h - pad_t - pad_b) * (1 - (value - minv) / rng)
+            pts.append((x, y, label, value))
+        poly = ' '.join(f'{x:.1f},{y:.1f}' for x, y, _, _ in pts)
+        dots = ''.join(f'<circle cx="{x:.1f}" cy="{y:.1f}" r="3.5" fill="#0066FF"><animate attributeName="opacity" from="0" to="1" begin="{0.3+i*0.15}s" dur="0.3s" fill="freeze"/></circle>' for i, (x, y, _, _) in enumerate(pts))
+        xlabels = ''.join(f'<text x="{x:.1f}" y="{h-8}" text-anchor="middle" font-size="10" fill="#999">{label}</text>' for x, _, label, _ in pts)
+        ylabels = ''
+        for j in range(4):
+            yy = pad_t + (h - pad_t - pad_b) * (j / 3)
+            vv = maxv - rng * (j / 3)
+            ylabels += f'<text x="{pad_l-8}" y="{yy+3:.1f}" text-anchor="end" font-size="9" fill="#bbb">{vv:.0f}</text><line x1="{pad_l}" y1="{yy:.1f}" x2="{w-pad_r}" y2="{yy:.1f}" stroke="#eee" stroke-width="0.5"/>'
+        path_len = 2000
+        return f'<div class="chart chart-line">{title_html}<svg viewBox="0 0 {w} {h}" class="cl-svg">{ylabels}<polyline points="{poly}" fill="none" stroke="#0066FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="{path_len}" stroke-dashoffset="{path_len}"><animate attributeName="stroke-dashoffset" from="{path_len}" to="0" dur="1.5s" fill="freeze"/></polyline>{dots}{xlabels}</svg></div>'
+    return ''
+
 def inline(s):
     s = re.sub(r'\*\*(.+?)\*\*', r'<b>\1</b>', s)
     s = re.sub(r'\$([^$]+)\$', r'<i>\1</i>', s)          # inline latex -> italic
@@ -93,7 +141,7 @@ def md_to_article(md_text):
 # ============ research metadata ============
 RESEARCH = {
     'popmart':   dict(title='泡泡玛特会是下一个伟大的 IP 公司吗？', cat='consumer', no='01',
-                      logo='popmart.png', cover='',
+                      logo='', cover='popmart.jpg',
                       desc='IP 投资引擎 × 全球化零售渠道：从效率三角到造星机制的完整拆解。'),
     'wandian':   dict(title='万店连锁：什么样的零售业态能跑通？', cat='consumer', no='02',
                       logo='', cover='coffee.jpg',
@@ -101,8 +149,8 @@ RESEARCH = {
     'kuoshouji': dict(title='阔手机：下一个抢滩登陆是一门好生意吗？', cat='consumer', no='03',
                       logo='', cover='kuoshouji.jpg',
                       desc='折叠屏 → 阔手机：品类迁移的早期判断与跟踪。'),
-    'newfrontier': dict(title='新风天域 · 估值案例复盘', cat='healthcare', no='04',
-                        logo='nf.png', cover='',
+    'newfrontier': dict(title='某 CN 龙头医疗服务企业 · 估值案例复盘', cat='healthcare', no='04',
+                        logo='', cover='', icon='medical',
                         desc='从一次真实的港股 IPO 估值过会，提炼可复用的估值逻辑链与叙事手法。'),
 }
 CATS = [
@@ -294,12 +342,13 @@ def build_index():
               ('某头部国货美妆', '', 'H 股 IPO · 消费', 'beauty'),
               ('某东南亚龙头医疗服务机构', '', '并购 FA · 医疗', 'medical'),
               ('某 CN 领先 AI 软件服务公司', '', 'H 股 IPO · TMT', 'ai')]
-        pf = [('宁德时代 CATL', 'catl.png', '港股 · Pre-IPO 研究', ''),
-              ('Yarbo', 'yarbo.png', '早期投资', ''),
-              ('蜜雪冰城', 'mixue-text.png', '港股 · 研究', ''),
-              ('古茗', 'guming.png', '港股 · 研究', ''),
-              ('货拉拉 Lalamove', 'lalamove.png', '港股 · 研究', ''),
-              ('Uwant 友望', 'uwant.png', '早期投资', '')]
+        pf = [('宁德时代 CATL', 'catl.png', '2025 HKPO 基石投资', ''),
+              ('Yarbo', 'yarbo.png', '2025 早期投资', ''),
+              ('蜜雪冰城', 'mixue-text.png', '2025 HKPO 锚定投资', ''),
+              ('古茗', 'guming.png', '2025 HKPO 基石投资', ''),
+              ('卡罗特 Carote', 'carote.png', '2025 HKPO 基石投资', ''),
+              ('货拉拉 Lalamove', 'lalamove.png', '覆盖 · pending HKPO 投资', ''),
+              ('Uwant 友望', 'uwant.png', '覆盖 · pending 早期投资', '')]
         def wall(items):
             cards = ''
             for n, img, note, cls in items:
@@ -319,7 +368,10 @@ def build_index():
             cards = ''
             for slug, meta in RESEARCH.items():
                 if meta['cat'] != cat_key: continue
-                if meta['logo']:
+                if meta.get('icon'):
+                    icon_svg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="7" width="18" height="14" rx="2"/><path d="M12 11v6M9 14h6M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>'
+                    cover = f'''<div class="r-cover r-icon"><div class="r-icon-svg">{icon_svg}</div><div class="r-no">{meta['no']}</div><div class="r-cat">{cat_en}</div></div>'''
+                elif meta['logo']:
                     cover = f'''<div class="r-cover r-logo"><img src="assets/logos/{meta['logo']}" alt="{meta['title']}"><div class="r-no">{meta['no']}</div><div class="r-cat">{cat_en}</div></div>'''
                 elif meta.get('cover'):
                     cover = f'''<div class="r-cover r-img" style="background-image:url(assets/covers/{meta['cover']})"><div class="r-no">{meta['no']}</div><div class="r-cat">{cat_en}</div><div class="r-title">{meta['title']}</div></div>'''
