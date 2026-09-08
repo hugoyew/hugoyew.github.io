@@ -248,7 +248,7 @@ def shell(title, body, desc='', lang_switch=False):
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{title}</title>
 <meta name="description" content="{desc}">
-<link rel="stylesheet" href="../assets/style.css?v=4">
+<link rel="stylesheet" href="../assets/style.css?v=5">
 </head>
 <body>
 <nav><div class="nav-inner">
@@ -260,7 +260,23 @@ def shell(title, body, desc='', lang_switch=False):
     <a href="../index.html#life">Life</a>
     {ls}
   </div>
+  <button class="burger" id="navToggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="navSheet"><span></span><span></span><span></span></button>
 </div></nav>
+<div class="navsheet" id="navSheet" inert>
+  <div class="navsheet__scrim" data-nav-close></div>
+  <nav class="navsheet__panel" aria-label="Menu">
+    <ul class="navsheet__list">
+      <li style="--i:0"><a class="navsheet__link" href="../index.html">CV<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></li>
+      <li style="--i:1"><a class="navsheet__link" href="../index.html#track">Track Record<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></li>
+      <li style="--i:2"><a class="navsheet__link" href="../index.html#research">Research<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></li>
+      <li style="--i:3"><a class="navsheet__link" href="../index.html#life">Life<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></li>
+    </ul>
+    <div class="navsheet__foot">
+      <a class="navsheet__cta" href="mailto:hugoyewtt@gmail.com">Talk to me<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <div class="navsheet__contact">hugoyewtt@gmail.com<br>(+86) 134-5005-0927 · (+852) 6956-9276</div>
+    </div>
+  </nav>
+</div>
 {body}
 </body>
 </html>'''
@@ -273,7 +289,7 @@ def index_shell(title, body, desc=''):
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{title}</title>
 <meta name="description" content="{desc}">
-<link rel="stylesheet" href="assets/style.css?v=4">
+<link rel="stylesheet" href="assets/style.css?v=5">
 </head>
 <body>
 <div class="scroll-progress" id="scrollProgress"></div>
@@ -327,9 +343,9 @@ CAPS = {
 ],
 }
 HERO = {
-'zh': dict(slogan='洞察即价值', name='姚颂文', name2='Hugo Yew'),
-'tw': dict(slogan='洞察即價值', name='姚頌文', name2='Hugo Yew'),
-'en': dict(slogan='Insight is Value', name='Chung Man Yew', name2='Hugo Yew'),
+'zh': dict(slogan='洞察即<span class="hl">价值</span>', name='姚颂文', name2='Hugo Yew'),
+'tw': dict(slogan='洞察即<span class="hl">價值</span>', name='姚頌文', name2='Hugo Yew'),
+'en': dict(slogan='Insight is <span class="hl">Value</span>', name='Chung Man Yew', name2='Hugo Yew'),
 }
 TIMELINE = {
 'zh': [
@@ -476,6 +492,8 @@ def build_index():
             for slug, meta in RESEARCH.items():
                 if meta['rtype'] != rtype_key: continue
                 card_idx += 1
+                cta_word = {'zh': '阅读全文', 'tw': '閱讀全文', 'en': 'Read'}[lang]
+                rcta = f'''<span class="r-cta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span class="r-cta-txt">{cta_word}</span></span>'''
                 pending_badge = '<span class="r-pending">PENDING</span>' if meta.get('pending') else ''
                 title = meta['title'] if lang != 'en' else meta.get('title_en', meta['title'])
                 if lang == 'tw': title = cc.convert(title)
@@ -486,11 +504,11 @@ def build_index():
                 elif lang == 'tw': slug_label = cc.convert(slug_label)
                 if meta.get('icon'):
                     icon_svg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="7" width="18" height="14" rx="2"/><path d="M12 11v6M9 14h6M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>'
-                    cover = f'''<div class="r-cover r-icon"><div class="r-icon-svg">{icon_svg}</div><div class="r-no">{meta['no']}</div><div class="r-cat">{rt_en}</div>{pending_badge}</div>'''
+                    cover = f'''<div class="r-cover r-icon"><div class="r-icon-svg">{icon_svg}</div><div class="r-no">{meta['no']}</div><div class="r-cat">{rt_en}</div>{pending_badge}{rcta}</div>'''
                 elif meta.get('cover'):
-                    cover = f'''<div class="r-cover r-img" style="background-image:url(assets/covers/{meta['cover']})"><div class="r-no">{meta['no']}</div><div class="r-cat">{rt_en}</div><div class="r-title">{title}</div>{pending_badge}</div>'''
+                    cover = f'''<div class="r-cover r-img" style="background-image:url(assets/covers/{meta['cover']})"><div class="r-no">{meta['no']}</div><div class="r-cat">{rt_en}</div><div class="r-title">{title}</div>{pending_badge}{rcta}</div>'''
                 else:
-                    cover = f'''<div class="r-cover g1"><div class="r-no">{meta['no']}</div><div class="r-cat">{rt_en}</div><div class="r-title">{title}</div>{pending_badge}</div>'''
+                    cover = f'''<div class="r-cover g1"><div class="r-no">{meta['no']}</div><div class="r-cat">{rt_en}</div><div class="r-title">{title}</div>{pending_badge}{rcta}</div>'''
                 cards += f'''<a class="r-card reveal reveal-d{min(card_idx,4)}" href="research/{slug}.html">
   {cover}
   <div class="r-body"><div class="r-title-sm">{title}</div><div class="r-desc">{desc}</div><div class="r-meta"><span>{slug_label}</span><span>→</span></div></div>
@@ -517,24 +535,43 @@ def build_index():
       <span class="wc wc-12">FISF</span>
       <span class="wc wc-13">SYSU 嶺南</span>
     </div>'''
+        arrow_svg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>'
+        m1 = {'zh': 'CLSA · 投行分析师', 'tw': 'CLSA · 投行分析師', 'en': 'CLSA · IB Analyst'}[lang]
+        m2 = {'zh': '消费 · TMT · 医疗', 'tw': '消費 · TMT · 醫療', 'en': 'Consumer · TMT · Health'}[lang]
+        nav_data = [
+          ('#capabilities', 'Capabilities', {'zh': '核心能力', 'tw': '核心能力', 'en': 'Core'}),
+          ('#experience', 'Experience', {'zh': '经历', 'tw': '經歷', 'en': 'Journey'}),
+          ('#track', 'Track Record', {'zh': '代表性项目', 'tw': '代表性項目', 'en': 'Deals'}),
+          ('#research', 'Research', {'zh': '研究', 'tw': '研究', 'en': 'Insights'}),
+          ('#life', 'Life', {'zh': '生活之外', 'tw': '生活之外', 'en': 'Beyond'}),
+        ]
+        hn_links = ''
+        for idx_d, (href, en_l, subs) in enumerate(nav_data, start=5):
+            sub = subs[lang]
+            sub_html = f'<span class="hn-zh">{sub}</span>' if sub else ''
+            hn_links += f'''<a class="hn-link hero-anim" style="--d:{idx_d}" href="{href}">
+      <span class="hn-col">
+        <span class="hn-roll"><span class="hn-roll-i"><span class="hn-en">{en_l}</span><span class="hn-en">{en_l}</span></span></span>
+        {sub_html}
+      </span>
+      <span class="hn-arrow">{arrow_svg}</span>
+    </a>'''
         return f'''<div class="hero" id="hero">
-  <div class="hero-slogan">{h['slogan']}</div>
+  <div class="hero-slogan hero-anim" style="--d:0">{h['slogan']}</div>
   <div class="hero-center">
     {wc}
-    <div class="hero-photo-cutout parallax-mid" data-speed="0.06"><img src="assets/photos/professional_cutout.png" alt="{h['name']}"></div>
-    <div class="hero-name">{h['name']} <span>{h['name2']}</span></div>
+    <div class="hm hm--l"><span class="hm-dot"></span><span class="hm-label">{m1}</span></div>
+    <div class="hm hm--r"><span class="hm-dot"></span><span class="hm-label">{m2}</span></div>
+    <div class="hero-photo-cutout parallax-mid hero-anim" style="--d:2" data-speed="0.06"><img src="assets/photos/professional_cutout.png" alt="{h['name']}"></div>
+    <div class="hero-name hero-anim" style="--d:3">{h['name']} <span>{h['name2']}</span></div>
   </div>
-  <div class="hero-contact">
+  <div class="hero-contact hero-anim" style="--d:4">
     <span class="hc-item">hugoyewtt@gmail.com</span>
     <span class="hc-item">(+86) 134-5005-0927</span>
     <span class="hc-item">(+852) 6956-9276</span>
   </div>
   <div class="hero-nav">
-    <a href="#capabilities"><span class="hn-en">Capabilities</span><span class="hn-zh">核心能力</span></a>
-    <a href="#experience"><span class="hn-en">Experience</span><span class="hn-zh">经历</span></a>
-    <a href="#track"><span class="hn-en">Track Record</span><span class="hn-zh">代表性项目</span></a>
-    <a href="#research"><span class="hn-en">Research</span><span class="hn-zh">研究</span></a>
-    <a href="#life"><span class="hn-en">Life</span><span class="hn-zh">生活之外</span></a>
+    {hn_links}
   </div>
 </div>'''
     hero_zh = hero_block('zh'); hero_tw = hero_block('tw'); hero_en = hero_block('en')
@@ -550,8 +587,26 @@ def build_index():
     <a href="#life">Life</a>
     <div class="lang-switch" id="lang-switch"><button data-lang="zh" class="active">简</button><button data-lang="tw">繁</button><button data-lang="en">EN</button></div>
   </div>
+  <button class="burger" id="navToggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="navSheet"><span></span><span></span><span></span></button>
 </div></nav>'''
+    navsheet = '''<div class="navsheet" id="navSheet" inert>
+  <div class="navsheet__scrim" data-nav-close></div>
+  <nav class="navsheet__panel" aria-label="Menu">
+    <ul class="navsheet__list">
+      <li style="--i:0"><a class="navsheet__link" href="#capabilities">Capabilities<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></li>
+      <li style="--i:1"><a class="navsheet__link" href="#experience">Experience<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></li>
+      <li style="--i:2"><a class="navsheet__link" href="#track">Track Record<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></li>
+      <li style="--i:3"><a class="navsheet__link" href="#research">Research<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></li>
+      <li style="--i:4"><a class="navsheet__link" href="#life">Life<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></li>
+    </ul>
+    <div class="navsheet__foot">
+      <a class="navsheet__cta" href="mailto:hugoyewtt@gmail.com">Talk to me<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <div class="navsheet__contact">hugoyewtt@gmail.com<br>(+86) 134-5005-0927 · (+852) 6956-9276</div>
+    </div>
+  </nav>
+</div>'''
     body = f'''{nav}
+{navsheet}
 <main>
   <div data-lang-block="zh">{hero_zh}</div>
   <div data-lang-block="tw" hidden>{hero_tw}</div>
@@ -591,6 +646,41 @@ def build_index():
   }}
   btns.forEach(function(b){{ b.addEventListener('click', function(){{ setLang(b.dataset.lang); }}); }});
   setLang('zh');
+
+  /* ---- slide-in nav sheet ---- */
+  var nbtn = document.getElementById('navToggle');
+  var sheet = document.getElementById('navSheet');
+  var panel = sheet ? sheet.querySelector('.navsheet__panel') : null;
+  var isOpen = false;
+  function syncBurgerContrast(){{
+    if(!sheet||!panel||!nbtn) return;
+    var panelLeft = window.innerWidth - panel.getBoundingClientRect().width;
+    var onPanel = nbtn.getBoundingClientRect().right > panelLeft + 4;
+    nbtn.classList.toggle('burger--on-panel', isOpen && onPanel);
+  }}
+  function setOpen(next){{
+    if(!sheet||!nbtn||next===isOpen) return;
+    isOpen = next;
+    if(next) syncBurgerContrast();
+    sheet.classList.toggle('is-open', next);
+    nbtn.classList.toggle('is-active', next);
+    document.body.classList.toggle('nav-open', next);
+    nbtn.setAttribute('aria-expanded', next?'true':'false');
+    nbtn.setAttribute('aria-label', next?'Close menu':'Open menu');
+    if(next) sheet.removeAttribute('inert'); else sheet.setAttribute('inert','');
+    if(!next) nbtn.classList.remove('burger--on-panel');
+  }}
+  if(nbtn&&sheet){{
+    nbtn.addEventListener('click', function(){{ setOpen(!isOpen); }});
+    sheet.addEventListener('click', function(e){{
+      if(e.target.hasAttribute && e.target.hasAttribute('data-nav-close')) setOpen(false);
+      else if(e.target.closest('a')) setOpen(false);
+    }});
+    document.addEventListener('keydown', function(e){{
+      if((e.key==='Escape'||e.key==='Esc')&&isOpen){{ setOpen(false); nbtn.focus(); }}
+    }});
+    window.addEventListener('resize', function(){{ if(isOpen) syncBurgerContrast(); }});
+  }}
 
   /* ---- scroll progress ---- */
   var bar = document.getElementById('scrollProgress');
@@ -886,6 +976,39 @@ def build_articles():
   }}
   btns.forEach(function(b){{ b.addEventListener('click', function(){{ setLang(b.dataset.lang); }}); }});
   setLang('zh');
+
+  var nbtn = document.getElementById('navToggle');
+  var sheet = document.getElementById('navSheet');
+  var panel = sheet ? sheet.querySelector('.navsheet__panel') : null;
+  var isOpen = false;
+  function syncBurger(){{
+    if(!sheet||!panel||!nbtn) return;
+    var pl = window.innerWidth - panel.getBoundingClientRect().width;
+    nbtn.classList.toggle('burger--on-panel', isOpen && nbtn.getBoundingClientRect().right > pl + 4);
+  }}
+  function setOpen(next){{
+    if(!sheet||!nbtn||next===isOpen) return;
+    isOpen = next;
+    if(next) syncBurger();
+    sheet.classList.toggle('is-open', next);
+    nbtn.classList.toggle('is-active', next);
+    document.body.classList.toggle('nav-open', next);
+    nbtn.setAttribute('aria-expanded', next?'true':'false');
+    nbtn.setAttribute('aria-label', next?'Close menu':'Open menu');
+    if(next) sheet.removeAttribute('inert'); else sheet.setAttribute('inert','');
+    if(!next) nbtn.classList.remove('burger--on-panel');
+  }}
+  if(nbtn&&sheet){{
+    nbtn.addEventListener('click', function(){{ setOpen(!isOpen); }});
+    sheet.addEventListener('click', function(e){{
+      if(e.target.hasAttribute && e.target.hasAttribute('data-nav-close')) setOpen(false);
+      else if(e.target.closest('a')) setOpen(false);
+    }});
+    document.addEventListener('keydown', function(e){{
+      if((e.key==='Escape'||e.key==='Esc')&&isOpen){{ setOpen(false); nbtn.focus(); }}
+    }});
+    window.addEventListener('resize', function(){{ if(isOpen) syncBurger(); }});
+  }}
 }})();
 </script>'''
         page_title = meta.get('title_en', meta['title'])

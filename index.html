@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>姚颂文 Hugo Yew</title>
 <meta name="description" content="Hugo Yew — Investment Banking Analyst at CITIC CLSA">
-<link rel="stylesheet" href="assets/style.css?v=4">
+<link rel="stylesheet" href="assets/style.css?v=5">
 </head>
 <body>
 <div class="scroll-progress" id="scrollProgress"></div>
@@ -20,10 +20,27 @@
     <a href="#life">Life</a>
     <div class="lang-switch" id="lang-switch"><button data-lang="zh" class="active">简</button><button data-lang="tw">繁</button><button data-lang="en">EN</button></div>
   </div>
+  <button class="burger" id="navToggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="navSheet"><span></span><span></span><span></span></button>
 </div></nav>
+<div class="navsheet" id="navSheet" inert>
+  <div class="navsheet__scrim" data-nav-close></div>
+  <nav class="navsheet__panel" aria-label="Menu">
+    <ul class="navsheet__list">
+      <li style="--i:0"><a class="navsheet__link" href="#capabilities">Capabilities<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></li>
+      <li style="--i:1"><a class="navsheet__link" href="#experience">Experience<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></li>
+      <li style="--i:2"><a class="navsheet__link" href="#track">Track Record<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></li>
+      <li style="--i:3"><a class="navsheet__link" href="#research">Research<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></li>
+      <li style="--i:4"><a class="navsheet__link" href="#life">Life<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></li>
+    </ul>
+    <div class="navsheet__foot">
+      <a class="navsheet__cta" href="mailto:hugoyewtt@gmail.com">Talk to me<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <div class="navsheet__contact">hugoyewtt@gmail.com<br>(+86) 134-5005-0927 · (+852) 6956-9276</div>
+    </div>
+  </nav>
+</div>
 <main>
   <div data-lang-block="zh"><div class="hero" id="hero">
-  <div class="hero-slogan">洞察即价值</div>
+  <div class="hero-slogan hero-anim" style="--d:0">洞察即<span class="hl">价值</span></div>
   <div class="hero-center">
     <div class="hero-wordcloud">
       <span class="wc wc-1">Investment Banking</span>
@@ -40,24 +57,52 @@
       <span class="wc wc-12">FISF</span>
       <span class="wc wc-13">SYSU 嶺南</span>
     </div>
-    <div class="hero-photo-cutout parallax-mid" data-speed="0.06"><img src="assets/photos/professional_cutout.png" alt="姚颂文"></div>
-    <div class="hero-name">姚颂文 <span>Hugo Yew</span></div>
+    <div class="hm hm--l"><span class="hm-dot"></span><span class="hm-label">CLSA · 投行分析师</span></div>
+    <div class="hm hm--r"><span class="hm-dot"></span><span class="hm-label">消费 · TMT · 医疗</span></div>
+    <div class="hero-photo-cutout parallax-mid hero-anim" style="--d:2" data-speed="0.06"><img src="assets/photos/professional_cutout.png" alt="姚颂文"></div>
+    <div class="hero-name hero-anim" style="--d:3">姚颂文 <span>Hugo Yew</span></div>
   </div>
-  <div class="hero-contact">
+  <div class="hero-contact hero-anim" style="--d:4">
     <span class="hc-item">hugoyewtt@gmail.com</span>
     <span class="hc-item">(+86) 134-5005-0927</span>
     <span class="hc-item">(+852) 6956-9276</span>
   </div>
   <div class="hero-nav">
-    <a href="#capabilities"><span class="hn-en">Capabilities</span><span class="hn-zh">核心能力</span></a>
-    <a href="#experience"><span class="hn-en">Experience</span><span class="hn-zh">经历</span></a>
-    <a href="#track"><span class="hn-en">Track Record</span><span class="hn-zh">代表性项目</span></a>
-    <a href="#research"><span class="hn-en">Research</span><span class="hn-zh">研究</span></a>
-    <a href="#life"><span class="hn-en">Life</span><span class="hn-zh">生活之外</span></a>
+    <a class="hn-link hero-anim" style="--d:5" href="#capabilities">
+      <span class="hn-col">
+        <span class="hn-roll"><span class="hn-roll-i"><span class="hn-en">Capabilities</span><span class="hn-en">Capabilities</span></span></span>
+        <span class="hn-zh">核心能力</span>
+      </span>
+      <span class="hn-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+    </a><a class="hn-link hero-anim" style="--d:6" href="#experience">
+      <span class="hn-col">
+        <span class="hn-roll"><span class="hn-roll-i"><span class="hn-en">Experience</span><span class="hn-en">Experience</span></span></span>
+        <span class="hn-zh">经历</span>
+      </span>
+      <span class="hn-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+    </a><a class="hn-link hero-anim" style="--d:7" href="#track">
+      <span class="hn-col">
+        <span class="hn-roll"><span class="hn-roll-i"><span class="hn-en">Track Record</span><span class="hn-en">Track Record</span></span></span>
+        <span class="hn-zh">代表性项目</span>
+      </span>
+      <span class="hn-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+    </a><a class="hn-link hero-anim" style="--d:8" href="#research">
+      <span class="hn-col">
+        <span class="hn-roll"><span class="hn-roll-i"><span class="hn-en">Research</span><span class="hn-en">Research</span></span></span>
+        <span class="hn-zh">研究</span>
+      </span>
+      <span class="hn-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+    </a><a class="hn-link hero-anim" style="--d:9" href="#life">
+      <span class="hn-col">
+        <span class="hn-roll"><span class="hn-roll-i"><span class="hn-en">Life</span><span class="hn-en">Life</span></span></span>
+        <span class="hn-zh">生活之外</span>
+      </span>
+      <span class="hn-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+    </a>
   </div>
 </div></div>
   <div data-lang-block="tw" hidden><div class="hero" id="hero">
-  <div class="hero-slogan">洞察即價值</div>
+  <div class="hero-slogan hero-anim" style="--d:0">洞察即<span class="hl">價值</span></div>
   <div class="hero-center">
     <div class="hero-wordcloud">
       <span class="wc wc-1">Investment Banking</span>
@@ -74,24 +119,52 @@
       <span class="wc wc-12">FISF</span>
       <span class="wc wc-13">SYSU 嶺南</span>
     </div>
-    <div class="hero-photo-cutout parallax-mid" data-speed="0.06"><img src="assets/photos/professional_cutout.png" alt="姚頌文"></div>
-    <div class="hero-name">姚頌文 <span>Hugo Yew</span></div>
+    <div class="hm hm--l"><span class="hm-dot"></span><span class="hm-label">CLSA · 投行分析師</span></div>
+    <div class="hm hm--r"><span class="hm-dot"></span><span class="hm-label">消費 · TMT · 醫療</span></div>
+    <div class="hero-photo-cutout parallax-mid hero-anim" style="--d:2" data-speed="0.06"><img src="assets/photos/professional_cutout.png" alt="姚頌文"></div>
+    <div class="hero-name hero-anim" style="--d:3">姚頌文 <span>Hugo Yew</span></div>
   </div>
-  <div class="hero-contact">
+  <div class="hero-contact hero-anim" style="--d:4">
     <span class="hc-item">hugoyewtt@gmail.com</span>
     <span class="hc-item">(+86) 134-5005-0927</span>
     <span class="hc-item">(+852) 6956-9276</span>
   </div>
   <div class="hero-nav">
-    <a href="#capabilities"><span class="hn-en">Capabilities</span><span class="hn-zh">核心能力</span></a>
-    <a href="#experience"><span class="hn-en">Experience</span><span class="hn-zh">经历</span></a>
-    <a href="#track"><span class="hn-en">Track Record</span><span class="hn-zh">代表性项目</span></a>
-    <a href="#research"><span class="hn-en">Research</span><span class="hn-zh">研究</span></a>
-    <a href="#life"><span class="hn-en">Life</span><span class="hn-zh">生活之外</span></a>
+    <a class="hn-link hero-anim" style="--d:5" href="#capabilities">
+      <span class="hn-col">
+        <span class="hn-roll"><span class="hn-roll-i"><span class="hn-en">Capabilities</span><span class="hn-en">Capabilities</span></span></span>
+        <span class="hn-zh">核心能力</span>
+      </span>
+      <span class="hn-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+    </a><a class="hn-link hero-anim" style="--d:6" href="#experience">
+      <span class="hn-col">
+        <span class="hn-roll"><span class="hn-roll-i"><span class="hn-en">Experience</span><span class="hn-en">Experience</span></span></span>
+        <span class="hn-zh">經歷</span>
+      </span>
+      <span class="hn-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+    </a><a class="hn-link hero-anim" style="--d:7" href="#track">
+      <span class="hn-col">
+        <span class="hn-roll"><span class="hn-roll-i"><span class="hn-en">Track Record</span><span class="hn-en">Track Record</span></span></span>
+        <span class="hn-zh">代表性項目</span>
+      </span>
+      <span class="hn-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+    </a><a class="hn-link hero-anim" style="--d:8" href="#research">
+      <span class="hn-col">
+        <span class="hn-roll"><span class="hn-roll-i"><span class="hn-en">Research</span><span class="hn-en">Research</span></span></span>
+        <span class="hn-zh">研究</span>
+      </span>
+      <span class="hn-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+    </a><a class="hn-link hero-anim" style="--d:9" href="#life">
+      <span class="hn-col">
+        <span class="hn-roll"><span class="hn-roll-i"><span class="hn-en">Life</span><span class="hn-en">Life</span></span></span>
+        <span class="hn-zh">生活之外</span>
+      </span>
+      <span class="hn-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+    </a>
   </div>
 </div></div>
   <div data-lang-block="en" hidden><div class="hero" id="hero">
-  <div class="hero-slogan">Insight is Value</div>
+  <div class="hero-slogan hero-anim" style="--d:0">Insight is <span class="hl">Value</span></div>
   <div class="hero-center">
     <div class="hero-wordcloud">
       <span class="wc wc-1">Investment Banking</span>
@@ -108,20 +181,48 @@
       <span class="wc wc-12">FISF</span>
       <span class="wc wc-13">SYSU 嶺南</span>
     </div>
-    <div class="hero-photo-cutout parallax-mid" data-speed="0.06"><img src="assets/photos/professional_cutout.png" alt="Chung Man Yew"></div>
-    <div class="hero-name">Chung Man Yew <span>Hugo Yew</span></div>
+    <div class="hm hm--l"><span class="hm-dot"></span><span class="hm-label">CLSA · IB Analyst</span></div>
+    <div class="hm hm--r"><span class="hm-dot"></span><span class="hm-label">Consumer · TMT · Health</span></div>
+    <div class="hero-photo-cutout parallax-mid hero-anim" style="--d:2" data-speed="0.06"><img src="assets/photos/professional_cutout.png" alt="Chung Man Yew"></div>
+    <div class="hero-name hero-anim" style="--d:3">Chung Man Yew <span>Hugo Yew</span></div>
   </div>
-  <div class="hero-contact">
+  <div class="hero-contact hero-anim" style="--d:4">
     <span class="hc-item">hugoyewtt@gmail.com</span>
     <span class="hc-item">(+86) 134-5005-0927</span>
     <span class="hc-item">(+852) 6956-9276</span>
   </div>
   <div class="hero-nav">
-    <a href="#capabilities"><span class="hn-en">Capabilities</span><span class="hn-zh">核心能力</span></a>
-    <a href="#experience"><span class="hn-en">Experience</span><span class="hn-zh">经历</span></a>
-    <a href="#track"><span class="hn-en">Track Record</span><span class="hn-zh">代表性项目</span></a>
-    <a href="#research"><span class="hn-en">Research</span><span class="hn-zh">研究</span></a>
-    <a href="#life"><span class="hn-en">Life</span><span class="hn-zh">生活之外</span></a>
+    <a class="hn-link hero-anim" style="--d:5" href="#capabilities">
+      <span class="hn-col">
+        <span class="hn-roll"><span class="hn-roll-i"><span class="hn-en">Capabilities</span><span class="hn-en">Capabilities</span></span></span>
+        <span class="hn-zh">Core</span>
+      </span>
+      <span class="hn-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+    </a><a class="hn-link hero-anim" style="--d:6" href="#experience">
+      <span class="hn-col">
+        <span class="hn-roll"><span class="hn-roll-i"><span class="hn-en">Experience</span><span class="hn-en">Experience</span></span></span>
+        <span class="hn-zh">Journey</span>
+      </span>
+      <span class="hn-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+    </a><a class="hn-link hero-anim" style="--d:7" href="#track">
+      <span class="hn-col">
+        <span class="hn-roll"><span class="hn-roll-i"><span class="hn-en">Track Record</span><span class="hn-en">Track Record</span></span></span>
+        <span class="hn-zh">Deals</span>
+      </span>
+      <span class="hn-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+    </a><a class="hn-link hero-anim" style="--d:8" href="#research">
+      <span class="hn-col">
+        <span class="hn-roll"><span class="hn-roll-i"><span class="hn-en">Research</span><span class="hn-en">Research</span></span></span>
+        <span class="hn-zh">Insights</span>
+      </span>
+      <span class="hn-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+    </a><a class="hn-link hero-anim" style="--d:9" href="#life">
+      <span class="hn-col">
+        <span class="hn-roll"><span class="hn-roll-i"><span class="hn-en">Life</span><span class="hn-en">Life</span></span></span>
+        <span class="hn-zh">Beyond</span>
+      </span>
+      <span class="hn-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+    </a>
   </div>
 </div></div>
 
@@ -222,42 +323,42 @@
 </div></div></div>
 
   <div data-lang-block="zh"><div class="section" id="research"><div class="section-tag">Research</div><h2 class="section-title">研究</h2><p class="section-sub">成体系的研究输出：消费零售、医疗健康与跨行业框架。</p><div class="r-category"><h3>个股研究 <span style="color:var(--fg-tertiary);font-weight:400;font-size:13px;">Equity Research</span></h3><div class="r-grid"><a class="r-card reveal reveal-d1" href="research/popmart.html">
-  <div class="r-cover r-img" style="background-image:url(assets/covers/popmart.jpg)"><div class="r-no">01</div><div class="r-cat">Equity Research</div><div class="r-title">泡泡玛特会是下一个伟大的 IP 公司吗？</div></div>
+  <div class="r-cover r-img" style="background-image:url(assets/covers/popmart.jpg)"><div class="r-no">01</div><div class="r-cat">Equity Research</div><div class="r-title">泡泡玛特会是下一个伟大的 IP 公司吗？</div><span class="r-cta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span class="r-cta-txt">阅读全文</span></span></div>
   <div class="r-body"><div class="r-title-sm">泡泡玛特会是下一个伟大的 IP 公司吗？</div><div class="r-desc">IP 投资引擎 × 全球化零售渠道：从效率三角到造星机制的完整拆解。</div><div class="r-meta"><span>泡泡玛特 IP 研究</span><span>→</span></div></div>
 </a></div></div><div class="r-category"><h3>行业研究 <span style="color:var(--fg-tertiary);font-weight:400;font-size:13px;">Sector Research</span></h3><div class="r-grid"><a class="r-card reveal reveal-d1" href="research/wandian.html">
-  <div class="r-cover r-img" style="background-image:url(assets/covers/coffee.jpg)"><div class="r-no">02</div><div class="r-cat">Sector Research</div><div class="r-title">万店连锁：什么样的零售业态能跑通？</div></div>
+  <div class="r-cover r-img" style="background-image:url(assets/covers/coffee.jpg)"><div class="r-no">02</div><div class="r-cat">Sector Research</div><div class="r-title">万店连锁：什么样的零售业态能跑通？</div><span class="r-cta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span class="r-cta-txt">阅读全文</span></span></div>
   <div class="r-body"><div class="r-title-sm">万店连锁：什么样的零售业态能跑通？</div><div class="r-desc">从蜜雪到瑞幸：万店连锁背后的渠道、供应链与心智三层识别框架。</div><div class="r-meta"><span>万店零售业态</span><span>→</span></div></div>
 </a><a class="r-card reveal reveal-d2" href="research/kuoshouji.html">
-  <div class="r-cover r-img" style="background-image:url(assets/covers/kuoshouji.jpg)"><div class="r-no">03</div><div class="r-cat">Sector Research</div><div class="r-title">厂商抢滩登陆：我们真的需要更宽的手机吗？</div></div>
+  <div class="r-cover r-img" style="background-image:url(assets/covers/kuoshouji.jpg)"><div class="r-no">03</div><div class="r-cat">Sector Research</div><div class="r-title">厂商抢滩登陆：我们真的需要更宽的手机吗？</div><span class="r-cta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span class="r-cta-txt">阅读全文</span></span></div>
   <div class="r-body"><div class="r-title-sm">厂商抢滩登陆：我们真的需要更宽的手机吗？</div><div class="r-desc">折叠屏 → 阔手机：品类迁移的早期判断与跟踪。</div><div class="r-meta"><span>阔手机品类研究</span><span>→</span></div></div>
 </a></div></div><div class="r-category"><h3>医疗健康 <span style="color:var(--fg-tertiary);font-weight:400;font-size:13px;">Healthcare</span></h3><div class="r-grid"><a class="r-card reveal reveal-d1" href="research/newfrontier.html">
-  <div class="r-cover r-icon"><div class="r-icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="7" width="18" height="14" rx="2"/><path d="M12 11v6M9 14h6M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></div><div class="r-no">04</div><div class="r-cat">Healthcare</div><span class="r-pending">PENDING</span></div>
+  <div class="r-cover r-icon"><div class="r-icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="7" width="18" height="14" rx="2"/><path d="M12 11v6M9 14h6M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></div><div class="r-no">04</div><div class="r-cat">Healthcare</div><span class="r-pending">PENDING</span><span class="r-cta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span class="r-cta-txt">阅读全文</span></span></div>
   <div class="r-body"><div class="r-title-sm">Wealth of Health：AI 时代无法被替代的是健康身体</div><div class="r-desc">医疗服务赛道的长期逻辑与估值框架。估值案例 pending 更新。</div><div class="r-meta"><span>医疗服务研究</span><span>→</span></div></div>
 </a></div></div></div></div>
   <div data-lang-block="tw" hidden><div class="section" id="research"><div class="section-tag">Research</div><h2 class="section-title">研究</h2><p class="section-sub">成體係的研究輸出：消費零售、醫療健康與跨行業框架。</p><div class="r-category"><h3>個股研究 <span style="color:var(--fg-tertiary);font-weight:400;font-size:13px;">Equity Research</span></h3><div class="r-grid"><a class="r-card reveal reveal-d1" href="research/popmart.html">
-  <div class="r-cover r-img" style="background-image:url(assets/covers/popmart.jpg)"><div class="r-no">01</div><div class="r-cat">Equity Research</div><div class="r-title">泡泡瑪特會是下一個偉大的 IP 公司嗎？</div></div>
+  <div class="r-cover r-img" style="background-image:url(assets/covers/popmart.jpg)"><div class="r-no">01</div><div class="r-cat">Equity Research</div><div class="r-title">泡泡瑪特會是下一個偉大的 IP 公司嗎？</div><span class="r-cta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span class="r-cta-txt">閱讀全文</span></span></div>
   <div class="r-body"><div class="r-title-sm">泡泡瑪特會是下一個偉大的 IP 公司嗎？</div><div class="r-desc">IP 投資引擎 × 全球化零售渠道：從效率三角到造星機制的完整拆解。</div><div class="r-meta"><span>泡泡瑪特 IP 研究</span><span>→</span></div></div>
 </a></div></div><div class="r-category"><h3>行業研究 <span style="color:var(--fg-tertiary);font-weight:400;font-size:13px;">Sector Research</span></h3><div class="r-grid"><a class="r-card reveal reveal-d1" href="research/wandian.html">
-  <div class="r-cover r-img" style="background-image:url(assets/covers/coffee.jpg)"><div class="r-no">02</div><div class="r-cat">Sector Research</div><div class="r-title">萬店連鎖：什麼樣的零售業態能跑通？</div></div>
+  <div class="r-cover r-img" style="background-image:url(assets/covers/coffee.jpg)"><div class="r-no">02</div><div class="r-cat">Sector Research</div><div class="r-title">萬店連鎖：什麼樣的零售業態能跑通？</div><span class="r-cta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span class="r-cta-txt">閱讀全文</span></span></div>
   <div class="r-body"><div class="r-title-sm">萬店連鎖：什麼樣的零售業態能跑通？</div><div class="r-desc">從蜜雪到瑞幸：萬店連鎖背後的渠道、供應鏈與心智三層識別框架。</div><div class="r-meta"><span>萬店零售業態</span><span>→</span></div></div>
 </a><a class="r-card reveal reveal-d2" href="research/kuoshouji.html">
-  <div class="r-cover r-img" style="background-image:url(assets/covers/kuoshouji.jpg)"><div class="r-no">03</div><div class="r-cat">Sector Research</div><div class="r-title">廠商搶灘登陸：我們真的需要更寬的手機嗎？</div></div>
+  <div class="r-cover r-img" style="background-image:url(assets/covers/kuoshouji.jpg)"><div class="r-no">03</div><div class="r-cat">Sector Research</div><div class="r-title">廠商搶灘登陸：我們真的需要更寬的手機嗎？</div><span class="r-cta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span class="r-cta-txt">閱讀全文</span></span></div>
   <div class="r-body"><div class="r-title-sm">廠商搶灘登陸：我們真的需要更寬的手機嗎？</div><div class="r-desc">摺疊屏 → 闊手機：品類遷移的早期判斷與跟蹤。</div><div class="r-meta"><span>闊手機品類研究</span><span>→</span></div></div>
 </a></div></div><div class="r-category"><h3>醫療健康 <span style="color:var(--fg-tertiary);font-weight:400;font-size:13px;">Healthcare</span></h3><div class="r-grid"><a class="r-card reveal reveal-d1" href="research/newfrontier.html">
-  <div class="r-cover r-icon"><div class="r-icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="7" width="18" height="14" rx="2"/><path d="M12 11v6M9 14h6M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></div><div class="r-no">04</div><div class="r-cat">Healthcare</div><span class="r-pending">PENDING</span></div>
+  <div class="r-cover r-icon"><div class="r-icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="7" width="18" height="14" rx="2"/><path d="M12 11v6M9 14h6M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></div><div class="r-no">04</div><div class="r-cat">Healthcare</div><span class="r-pending">PENDING</span><span class="r-cta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span class="r-cta-txt">閱讀全文</span></span></div>
   <div class="r-body"><div class="r-title-sm">Wealth of Health：AI 時代無法被替代的是健康身體</div><div class="r-desc">醫療服務賽道的長期邏輯與估值框架。估值案例 pending 更新。</div><div class="r-meta"><span>醫療服務研究</span><span>→</span></div></div>
 </a></div></div></div></div>
   <div data-lang-block="en" hidden><div class="section" id="research"><div class="section-tag">Research</div><h2 class="section-title">Research</h2><p class="section-sub">Systematic research output: consumer & retail, healthcare, and cross-industry frameworks.</p><div class="r-category"><h3>Equity Research</h3><div class="r-grid"><a class="r-card reveal reveal-d1" href="research/popmart.html">
-  <div class="r-cover r-img" style="background-image:url(assets/covers/popmart.jpg)"><div class="r-no">01</div><div class="r-cat">Equity Research</div><div class="r-title">Is POP MART the next great IP company?</div></div>
+  <div class="r-cover r-img" style="background-image:url(assets/covers/popmart.jpg)"><div class="r-no">01</div><div class="r-cat">Equity Research</div><div class="r-title">Is POP MART the next great IP company?</div><span class="r-cta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span class="r-cta-txt">Read</span></span></div>
   <div class="r-body"><div class="r-title-sm">Is POP MART the next great IP company?</div><div class="r-desc">IP investment engine × global retail channel: full teardown from the efficiency triangle to star-making.</div><div class="r-meta"><span>POP MART IP Research</span><span>→</span></div></div>
 </a></div></div><div class="r-category"><h3>Sector Research</h3><div class="r-grid"><a class="r-card reveal reveal-d1" href="research/wandian.html">
-  <div class="r-cover r-img" style="background-image:url(assets/covers/coffee.jpg)"><div class="r-no">02</div><div class="r-cat">Sector Research</div><div class="r-title">10,000-store chains: which retail formats work?</div></div>
+  <div class="r-cover r-img" style="background-image:url(assets/covers/coffee.jpg)"><div class="r-no">02</div><div class="r-cat">Sector Research</div><div class="r-title">10,000-store chains: which retail formats work?</div><span class="r-cta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span class="r-cta-txt">Read</span></span></div>
   <div class="r-body"><div class="r-title-sm">10,000-store chains: which retail formats work?</div><div class="r-desc">From Mixue to Luckin: a three-layer framework — channel, supply chain, mindshare — for identifying scalable retail formats.</div><div class="r-meta"><span>Wan-dian Retail Formats</span><span>→</span></div></div>
 </a><a class="r-card reveal reveal-d2" href="research/kuoshouji.html">
-  <div class="r-cover r-img" style="background-image:url(assets/covers/kuoshouji.jpg)"><div class="r-no">03</div><div class="r-cat">Sector Research</div><div class="r-title">Wide-phone land grab: do we really need wider phones?</div></div>
+  <div class="r-cover r-img" style="background-image:url(assets/covers/kuoshouji.jpg)"><div class="r-no">03</div><div class="r-cat">Sector Research</div><div class="r-title">Wide-phone land grab: do we really need wider phones?</div><span class="r-cta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span class="r-cta-txt">Read</span></span></div>
   <div class="r-body"><div class="r-title-sm">Wide-phone land grab: do we really need wider phones?</div><div class="r-desc">Foldable → wide phone: early judgment and tracking of a category shift.</div><div class="r-meta"><span>Wide-phone Category Research</span><span>→</span></div></div>
 </a></div></div><div class="r-category"><h3>Healthcare</h3><div class="r-grid"><a class="r-card reveal reveal-d1" href="research/newfrontier.html">
-  <div class="r-cover r-icon"><div class="r-icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="7" width="18" height="14" rx="2"/><path d="M12 11v6M9 14h6M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></div><div class="r-no">04</div><div class="r-cat">Healthcare</div><span class="r-pending">PENDING</span></div>
+  <div class="r-cover r-icon"><div class="r-icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="7" width="18" height="14" rx="2"/><path d="M12 11v6M9 14h6M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></div><div class="r-no">04</div><div class="r-cat">Healthcare</div><span class="r-pending">PENDING</span><span class="r-cta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span class="r-cta-txt">Read</span></span></div>
   <div class="r-body"><div class="r-title-sm">Wealth of Health: the one thing AI cannot replace</div><div class="r-desc">Long-term logic and valuation framework for healthcare services. Valuation case pending update.</div><div class="r-meta"><span>Healthcare Services Research</span><span>→</span></div></div>
 </a></div></div></div></div>
 
@@ -324,6 +425,41 @@
   }
   btns.forEach(function(b){ b.addEventListener('click', function(){ setLang(b.dataset.lang); }); });
   setLang('zh');
+
+  /* ---- slide-in nav sheet ---- */
+  var nbtn = document.getElementById('navToggle');
+  var sheet = document.getElementById('navSheet');
+  var panel = sheet ? sheet.querySelector('.navsheet__panel') : null;
+  var isOpen = false;
+  function syncBurgerContrast(){
+    if(!sheet||!panel||!nbtn) return;
+    var panelLeft = window.innerWidth - panel.getBoundingClientRect().width;
+    var onPanel = nbtn.getBoundingClientRect().right > panelLeft + 4;
+    nbtn.classList.toggle('burger--on-panel', isOpen && onPanel);
+  }
+  function setOpen(next){
+    if(!sheet||!nbtn||next===isOpen) return;
+    isOpen = next;
+    if(next) syncBurgerContrast();
+    sheet.classList.toggle('is-open', next);
+    nbtn.classList.toggle('is-active', next);
+    document.body.classList.toggle('nav-open', next);
+    nbtn.setAttribute('aria-expanded', next?'true':'false');
+    nbtn.setAttribute('aria-label', next?'Close menu':'Open menu');
+    if(next) sheet.removeAttribute('inert'); else sheet.setAttribute('inert','');
+    if(!next) nbtn.classList.remove('burger--on-panel');
+  }
+  if(nbtn&&sheet){
+    nbtn.addEventListener('click', function(){ setOpen(!isOpen); });
+    sheet.addEventListener('click', function(e){
+      if(e.target.hasAttribute && e.target.hasAttribute('data-nav-close')) setOpen(false);
+      else if(e.target.closest('a')) setOpen(false);
+    });
+    document.addEventListener('keydown', function(e){
+      if((e.key==='Escape'||e.key==='Esc')&&isOpen){ setOpen(false); nbtn.focus(); }
+    });
+    window.addEventListener('resize', function(){ if(isOpen) syncBurgerContrast(); });
+  }
 
   /* ---- scroll progress ---- */
   var bar = document.getElementById('scrollProgress');

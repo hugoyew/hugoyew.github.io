@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Is POP MART the next great IP company? — Hugo Yew</title>
 <meta name="description" content="IP investment engine × global retail channel: full teardown from the efficiency triangle to star-making.">
-<link rel="stylesheet" href="../assets/style.css?v=4">
+<link rel="stylesheet" href="../assets/style.css?v=5">
 </head>
 <body>
 <nav><div class="nav-inner">
@@ -17,7 +17,23 @@
     <a href="../index.html#life">Life</a>
     <div class="lang-switch" id="lang-switch"><button data-lang="zh" class="active">简</button><button data-lang="tw">繁</button><button data-lang="en">EN</button></div>
   </div>
+  <button class="burger" id="navToggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="navSheet"><span></span><span></span><span></span></button>
 </div></nav>
+<div class="navsheet" id="navSheet" inert>
+  <div class="navsheet__scrim" data-nav-close></div>
+  <nav class="navsheet__panel" aria-label="Menu">
+    <ul class="navsheet__list">
+      <li style="--i:0"><a class="navsheet__link" href="../index.html">CV<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></li>
+      <li style="--i:1"><a class="navsheet__link" href="../index.html#track">Track Record<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></li>
+      <li style="--i:2"><a class="navsheet__link" href="../index.html#research">Research<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></li>
+      <li style="--i:3"><a class="navsheet__link" href="../index.html#life">Life<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></li>
+    </ul>
+    <div class="navsheet__foot">
+      <a class="navsheet__cta" href="mailto:hugoyewtt@gmail.com">Talk to me<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <div class="navsheet__contact">hugoyewtt@gmail.com<br>(+86) 134-5005-0927 · (+852) 6956-9276</div>
+    </div>
+  </nav>
+</div>
 <div data-lang-block="zh"><div class="article-hero">
   <div class="a-cover" style="background-image:url(../assets/covers/popmart.jpg)"></div>
   <div class="a-hd">
@@ -379,6 +395,39 @@
   }
   btns.forEach(function(b){ b.addEventListener('click', function(){ setLang(b.dataset.lang); }); });
   setLang('zh');
+
+  var nbtn = document.getElementById('navToggle');
+  var sheet = document.getElementById('navSheet');
+  var panel = sheet ? sheet.querySelector('.navsheet__panel') : null;
+  var isOpen = false;
+  function syncBurger(){
+    if(!sheet||!panel||!nbtn) return;
+    var pl = window.innerWidth - panel.getBoundingClientRect().width;
+    nbtn.classList.toggle('burger--on-panel', isOpen && nbtn.getBoundingClientRect().right > pl + 4);
+  }
+  function setOpen(next){
+    if(!sheet||!nbtn||next===isOpen) return;
+    isOpen = next;
+    if(next) syncBurger();
+    sheet.classList.toggle('is-open', next);
+    nbtn.classList.toggle('is-active', next);
+    document.body.classList.toggle('nav-open', next);
+    nbtn.setAttribute('aria-expanded', next?'true':'false');
+    nbtn.setAttribute('aria-label', next?'Close menu':'Open menu');
+    if(next) sheet.removeAttribute('inert'); else sheet.setAttribute('inert','');
+    if(!next) nbtn.classList.remove('burger--on-panel');
+  }
+  if(nbtn&&sheet){
+    nbtn.addEventListener('click', function(){ setOpen(!isOpen); });
+    sheet.addEventListener('click', function(e){
+      if(e.target.hasAttribute && e.target.hasAttribute('data-nav-close')) setOpen(false);
+      else if(e.target.closest('a')) setOpen(false);
+    });
+    document.addEventListener('keydown', function(e){
+      if((e.key==='Escape'||e.key==='Esc')&&isOpen){ setOpen(false); nbtn.focus(); }
+    });
+    window.addEventListener('resize', function(){ if(isOpen) syncBurger(); });
+  }
 })();
 </script>
 </body>
