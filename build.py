@@ -285,44 +285,44 @@ CAPS = {
 'zh': [
   ('01', '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="16" y2="17"/></svg>',
    '执行 5+ 港股 IPO 项目全流程',
-   '尽职调查 · 招股书撰写 · 投资者沟通 · 定价配售'),
+   '尽职调查 · 招股书撰写 · 投资者沟通 · 估值分析'),
   ('02', '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>',
    '主导跨境并购 Business & Finance 模块',
-   '估值建模 · 战略买家分析 · 英文 RFP 提案'),
+   '估值分析 · 战略买家分析'),
   ('03', '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>',
    '覆盖 7+ 项目投资研究与深度分析',
-   'Pre-IPO 尽调 · 消费深度研究 · 港股新消费'),
+   '投资研究（消费科技 · 新消费 · TMT）· 行业研究 · 公司研究'),
   ('04', '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg>',
    '精通估值建模与 Equity Story 构建',
-   'DCF · Trading Comps · LBO · 投研叙事'),
+   'DCF · Comps · LBO · Equity Story'),
 ],
 'tw': [
   ('01', '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="16" y2="17"/></svg>',
    '執行 5+ 港股 IPO 項目全流程',
-   '盡職調查 · 招股書撰寫 · 投資者溝通 · 定價配售'),
+   '盡職調查 · 招股書撰寫 · 投資者溝通 · 估值分析'),
   ('02', '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>',
    '主導跨境併購 Business & Finance 模塊',
-   '估值建模 · 戰略買家分析 · 英文 RFP 提案'),
+   '估值分析 · 戰略買家分析'),
   ('03', '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>',
    '覆蓋 7+ 項目投資研究與深度分析',
-   'Pre-IPO 盡調 · 消費深度研究 · 港股新消費'),
+   '投資研究（消費科技 · 新消費 · TMT）· 行業研究 · 公司研究'),
   ('04', '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg>',
    '精通估值建模與 Equity Story 構建',
-   'DCF · Trading Comps · LBO · 投研敘事'),
+   'DCF · Comps · LBO · Equity Story'),
 ],
 'en': [
   ('01', '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="16" y2="17"/></svg>',
    'Execute 5+ HK IPO deals end-to-end',
-   'Due Diligence · Prospectus · Investor Communication · Pricing'),
+   'Due Diligence · Prospectus · Investor Communication · Valuation'),
   ('02', '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>',
    'Lead cross-border M&A Business & Finance',
-   'Valuation · Buyer Analysis · English RFP Pitches'),
+   'Valuation · Strategic Buyer Analysis'),
   ('03', '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>',
    'Cover 7+ deals in investment research',
-   'Pre-IPO CDD · Consumer Deep-dive · HK New Consumer'),
+   'Investment Research (Consumer Tech · New Consumer · TMT) · Sector · Company'),
   ('04', '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg>',
    'Master valuation modeling & equity story',
-   'DCF · Trading Comps · LBO · Investment Narrative'),
+   'DCF · Comps · LBO · Equity Story'),
 ],
 }
 HERO = {
@@ -353,6 +353,47 @@ TIMELINE = {
   ('Sun Yat-sen University · Lingnan', 'BSc International Business', 'Sep 2020 – Jun 2024', ['Champion basketball captain']),
 ],
 }
+EXPERIENCE = {
+'zh': {
+  'work_label': '工作经历',
+  'edu_label': '教育背景',
+  'work': [
+    ('clsa.png', '中信里昂证券 CLSA', '投资银行部分析师', '2026.06 – 至今', '港股 IPO 执行与跨境并购财务顾问'),
+    ('genesis.png', '元生资本', '消费投资实习生', '2025.02 – 2025.09', 'Pre-IPO 投资研究 · 3 起港股 IPO 尽调'),
+    ('being.png', '源一资本', '消费投资实习生', '2024.09 – 2025.02', '港股新消费深度研究 · 潮玩行业独立研究'),
+  ],
+  'edu': [
+    ('fisf.png', '复旦大学 国际金融学院', '金融学硕士', '2024.09 – 2026.06', 'FISF'),
+    ('lingnan.png', '中山大学 岭南学院', '国际商务学士', '2020.09 – 2024.06', '康乐杯篮球赛冠军队长'),
+  ],
+},
+'tw': {
+  'work_label': '工作經歷',
+  'edu_label': '教育背景',
+  'work': [
+    ('clsa.png', '中信里昂證券 CLSA', '投資銀行部分析師', '2026.06 – 至今', '港股 IPO 執行與跨境併購財務顧問'),
+    ('genesis.png', '元生資本', '消費投資實習生', '2025.02 – 2025.09', 'Pre-IPO 投資研究 · 3 起港股 IPO 盡調'),
+    ('being.png', '源壹資本', '消費投資實習生', '2024.09 – 2025.02', '港股新消費深度研究 · 潮玩行業獨立研究'),
+  ],
+  'edu': [
+    ('fisf.png', '復旦大學 國際金融學院', '金融學碩士', '2024.09 – 2026.06', 'FISF'),
+    ('lingnan.png', '中山大學 嶺南學院', '國際商務學士', '2020.09 – 2024.06', '康樂杯籃球賽冠軍隊長'),
+  ],
+},
+'en': {
+  'work_label': 'Work Experience',
+  'edu_label': 'Education',
+  'work': [
+    ('clsa.png', 'CITIC CLSA', 'Analyst, Investment Banking', 'Jun 2026 – Present', 'HK IPO execution & cross-border M&A advisory'),
+    ('genesis.png', 'Genesis Capital', 'Consumer Investment Intern', 'Feb 2025 – Sep 2025', 'Pre-IPO research · CDD on 3 HK IPO deals'),
+    ('being.png', 'Being Capital', 'Consumer Investment Intern', 'Sep 2024 – Feb 2025', 'HK new-consumer deep research · collectibles'),
+  ],
+  'edu': [
+    ('fisf.png', 'Fudan University · FISF', 'MSc Finance', 'Sep 2024 – Jun 2026', ''),
+    ('lingnan.png', 'Sun Yat-sen University · Lingnan', 'BSc International Business', 'Sep 2020 – Jun 2024', 'Champion basketball captain'),
+  ],
+},
+}
 
 def life_photos(items):
     cards = ''
@@ -375,6 +416,20 @@ def build_index():
             right = ''.join(f'<li>{p}</li>' for p in pts) if pts else '<ul></ul>'
             items += f'''<div class="t-item"><div class="t-left"><div class="t-org">{org}</div><div class="t-role">{role}</div><div class="t-date">{date}</div></div><div class="t-right"><ul>{right}</ul></div></div>'''
         return f'<div class="timeline">{items}</div>'
+    def experience_html(lang):
+        data = EXPERIENCE[lang]
+        def exp_group(label, items):
+            items_html = ''
+            for logo, org, role, date, desc in items:
+                desc_html = f'<div class="exp-desc">{desc}</div>' if desc else ''
+                items_html += f'''<div class="exp-item">
+  <div class="exp-logo"><img src="assets/logos/{logo}" alt="{org}"></div>
+  <div class="exp-head"><div class="exp-org">{org}</div><div class="exp-date">{date}</div></div>
+  <div class="exp-role">{role}</div>
+  {desc_html}
+</div>'''
+            return f'<div class="exp-group"><div class="exp-group-label">{label}</div><div class="exp-timeline">{items_html}</div></div>'
+        return f'<div class="exp-groups">{exp_group(data["work_label"], data["work"])}{exp_group(data["edu_label"], data["edu"])}</div>'
     def logo_wall():
         ICONS = {
           'glasses': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="6" cy="15" r="4"/><circle cx="18" cy="15" r="4"/><path d="M10 15h4M2 15l2-6M22 15l-2-6"/></svg>',
@@ -475,6 +530,7 @@ def build_index():
   </div>
   <div class="hero-nav">
     <a href="#capabilities"><span class="hn-en">Capabilities</span><span class="hn-zh">核心能力</span></a>
+    <a href="#experience"><span class="hn-en">Experience</span><span class="hn-zh">经历</span></a>
     <a href="#track"><span class="hn-en">Track Record</span><span class="hn-zh">代表性项目</span></a>
     <a href="#research"><span class="hn-en">Research</span><span class="hn-zh">研究</span></a>
     <a href="#life"><span class="hn-en">Life</span><span class="hn-zh">生活之外</span></a>
@@ -487,6 +543,7 @@ def build_index():
   <div class="nav-links">
     <a href="#hero">Home</a>
     <a href="#capabilities">Capabilities</a>
+    <a href="#experience">Experience</a>
     <a href="#track">Track Record</a>
     <a href="#research">Research</a>
     <a href="#life">Life</a>
@@ -502,6 +559,10 @@ def build_index():
   <div data-lang-block="zh">{section('capabilities','Capabilities','核心能力','中信里昂证券投行部分析师，横跨一级市场投资与二级市场研究，专注消费零售与医疗健康。', caps_html('zh'))}</div>
   <div data-lang-block="tw" hidden>{section('capabilities','Capabilities','核心能力','中信里昂證券投行部分析師，橫跨一級市場投資與二級市場研究，專注消費零售與醫療健康。', caps_html('tw'))}</div>
   <div data-lang-block="en" hidden>{section('capabilities','Capabilities','Core Capabilities','Investment Banking Analyst at CITIC CLSA, spanning primary market investing and secondary research, focused on consumer & retail and healthcare.', caps_html('en'))}</div>
+
+  <div data-lang-block="zh">{section('experience','Experience','经历','职业与教育背景。', experience_html('zh'))}</div>
+  <div data-lang-block="tw" hidden>{section('experience','Experience','經歷','職業與教育背景。', experience_html('tw'))}</div>
+  <div data-lang-block="en" hidden>{section('experience','Experience','Experience','Career & education.', experience_html('en'))}</div>
 
   <div data-lang-block="zh">{section('track','Track Record','代表性项目','参与过的关键交易与投资。', logo_wall())}</div>
   <div data-lang-block="tw" hidden>{section('track','Track Record','代表性項目','參與過的關鍵交易與投資。', logo_wall())}</div>

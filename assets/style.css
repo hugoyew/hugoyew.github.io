@@ -200,6 +200,36 @@ main { max-width: var(--max-width); margin: 0 auto; padding: 0 28px; }
 .g4 { background: linear-gradient(135deg, #f4f3f6 0%, #e4e2ea 70%); }
 .g5 { background: linear-gradient(135deg, #f3f4f5 0%, #e2e4e6 70%); }
 
+/* ===== Experience ===== */
+.exp-groups { display: flex; flex-direction: column; gap: 36px; }
+.exp-group { }
+.exp-group-label { font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--fg-tertiary); margin-bottom: 20px; }
+.exp-timeline { position: relative; padding-left: 88px; }
+.exp-timeline::before { content: ''; position: absolute; left: 34px; top: 8px; bottom: 8px; width: 1.5px; background: var(--hairline); }
+.exp-item { position: relative; margin-bottom: 24px; }
+.exp-item:last-child { margin-bottom: 0; }
+.exp-logo {
+  position: absolute; left: -88px; top: 0;
+  width: 68px; height: 68px; border-radius: 50%;
+  background: #fff; border: 0.5px solid var(--hairline);
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+.exp-logo img { max-width: 72%; max-height: 72%; object-fit: contain; }
+.exp-head { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 6px; }
+.exp-org { font-size: 17px; font-weight: 600; letter-spacing: -0.01em; }
+.exp-date { font-size: 12.5px; color: var(--fg-tertiary); font-variant-numeric: tabular-nums; }
+.exp-role { font-size: 14px; color: var(--fg-secondary); margin-top: 2px; }
+.exp-desc { font-size: 13.5px; color: var(--fg-secondary); margin-top: 6px; line-height: 1.55; }
+
+@media (max-width: 640px) {
+  .exp-timeline { padding-left: 64px; }
+  .exp-timeline::before { left: 24px; }
+  .exp-logo { left: -64px; width: 48px; height: 48px; }
+  .exp-org { font-size: 15px; }
+  .exp-role { font-size: 13px; }
+}
+
 /* ===== Life ===== */
 .life-masonry {
   display: flex;
