@@ -502,7 +502,7 @@ def build_index():
         return f'''<div class="section" id="{ids}"><div class="section-tag">{tag}</div><h2 class="section-title">{title}</h2><p class="section-sub">{sub}</p>{inner}</div>'''
     def hero_block(lang):
         h = HERO[lang]
-        wc = '''<div class="hero-wordcloud parallax-slow" data-speed="0.12">
+        wc = '''<div class="hero-wordcloud">
       <span class="wc wc-1">Investment Banking</span>
       <span class="wc wc-2">消费研究</span>
       <span class="wc wc-3">IPO</span>
@@ -630,16 +630,22 @@ def build_index():
     }});
   }}
 
-  /* ---- hero parallax (rAF throttled) ---- */
-  var pLayers = document.querySelectorAll('[data-speed]');
+  /* ---- hero parallax (rAF throttled, stable offsetTop, no feedback loop) ---- */
+  function docTopOf(el){{
+    var t = 0, n = el;
+    while (n) {{ t += n.offsetTop; n = n.offsetParent; }}
+    return t;
+  }}
+  var pLayers = Array.prototype.map.call(document.querySelectorAll('[data-speed]'), function(el){{
+    return {{ el: el, sp: parseFloat(el.getAttribute('data-speed')) || 0, docTop: docTopOf(el) }};
+  }});
   var ticking = false;
   function parallax(){{
-    var sy = window.scrollY;
-    pLayers.forEach(function(el){{
-      var sp = parseFloat(el.getAttribute('data-speed')) || 0;
-      var rect = el.getBoundingClientRect();
-      var off = (rect.top + sy - window.innerHeight * 0.4);
-      el.style.transform = 'translateY(' + ((sy - off) * sp).toFixed(1) + 'px)';
+    var sy = window.scrollY, vh = window.innerHeight;
+    pLayers.forEach(function(l){{
+      var delta = sy - (l.docTop - vh * 0.5);
+      var ty = Math.max(-36, Math.min(36, delta * l.sp));
+      l.el.style.transform = 'translateY(' + ty.toFixed(1) + 'px)';
     }});
     ticking = false;
   }}
@@ -647,6 +653,11 @@ def build_index():
     updateBar();
     if (!ticking) {{ requestAnimationFrame(parallax); ticking = true; }}
   }}
+  var resizeT;
+  window.addEventListener('resize', function(){{
+    clearTimeout(resizeT);
+    resizeT = setTimeout(function(){{ pLayers.forEach(function(l){{ l.docTop = docTopOf(l.el); }}); parallax(); }}, 200);
+  }});
   window.addEventListener('scroll', onScroll, {{ passive: true }});
   updateBar(); parallax();
 }})();
