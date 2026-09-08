@@ -79,7 +79,7 @@ main { max-width: var(--max-width); margin: 0 auto; padding: 0 28px; }
 .wc-10 { bottom: 0%; left: 44%; font-size: 22px; color: rgba(0,0,0,0.09); }
 .wc-11 { top: 64%; left: 16%; font-size: 20px; color: rgba(0,113,227,0.12); }
 .wc-12 { top: 66%; right: 14%; font-size: 20px; color: rgba(0,0,0,0.08); }
-.hero-photo-cutout { position: relative; z-index: 1; width: 240px; display: flex; align-items: flex-end; justify-content: center; }
+.hero-photo-cutout { position: relative; z-index: 1; width: 220px; }
 .hero-photo-cutout img { width: 100%; height: auto; display: block; filter: drop-shadow(0 12px 32px rgba(0,0,0,0.12)); }
 .hero-name { position: relative; z-index: 2; font-size: 32px; font-weight: 700; letter-spacing: -0.02em; margin-top: 8px; }
 .hero-name span { font-size: 18px; font-weight: 400; color: var(--fg-secondary); margin-left: 8px; }
