@@ -86,7 +86,7 @@ main { max-width: var(--max-width); margin: 0 auto; padding: 0 28px; }
 .hero-photo-cutout img { width: 100%; height: auto; display: block; filter: drop-shadow(0 12px 32px rgba(0,0,0,0.12)); }
 .hero-name { position: relative; z-index: 3; font-size: 32px; font-weight: 700; letter-spacing: -0.02em; margin-top: 8px; }
 .hero-name span { font-size: 18px; font-weight: 400; color: var(--fg-secondary); margin-left: 8px; }
-.hero-contact { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; justify-content: center; font-size: 14px; color: var(--fg-secondary); }
+.hero-contact { display: flex; flex-direction: column; align-items: center; gap: 5px; justify-content: center; font-size: 14px; color: var(--fg-secondary); line-height: 1.5; }
 .hc-item { font-variant-numeric: tabular-nums; }
 .hc-divider { color: var(--fg-tertiary); }
 .hero-nav { display: flex; gap: 28px; flex-wrap: wrap; justify-content: center; margin-top: 4px; }
@@ -733,14 +733,14 @@ footer a:hover { color: var(--fg-secondary); }
 .parallax-slow { will-change: transform; }
 .parallax-mid { will-change: transform; }
 
-/* ===== Glassmorphism contact pill ===== */
+/* ===== Glassmorphism contact pill (3 rows) ===== */
 .hero-contact {
   background: rgba(255,255,255,0.55);
   backdrop-filter: blur(16px) saturate(160%);
   -webkit-backdrop-filter: blur(16px) saturate(160%);
   border: 0.5px solid rgba(255,255,255,0.7);
-  border-radius: 999px;
-  padding: 10px 22px;
+  border-radius: 18px;
+  padding: 14px 30px;
   box-shadow: 0 2px 12px rgba(0,0,0,0.04);
 }
 

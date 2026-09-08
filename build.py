@@ -248,7 +248,7 @@ def shell(title, body, desc='', lang_switch=False):
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{title}</title>
 <meta name="description" content="{desc}">
-<link rel="stylesheet" href="../assets/style.css?v=3">
+<link rel="stylesheet" href="../assets/style.css?v=4">
 </head>
 <body>
 <nav><div class="nav-inner">
@@ -273,7 +273,7 @@ def index_shell(title, body, desc=''):
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{title}</title>
 <meta name="description" content="{desc}">
-<link rel="stylesheet" href="assets/style.css?v=3">
+<link rel="stylesheet" href="assets/style.css?v=4">
 </head>
 <body>
 <div class="scroll-progress" id="scrollProgress"></div>
@@ -526,9 +526,7 @@ def build_index():
   </div>
   <div class="hero-contact">
     <span class="hc-item">hugoyewtt@gmail.com</span>
-    <span class="hc-divider">·</span>
     <span class="hc-item">(+86) 134-5005-0927</span>
-    <span class="hc-divider">·</span>
     <span class="hc-item">(+852) 6956-9276</span>
   </div>
   <div class="hero-nav">
