@@ -386,14 +386,14 @@ def build_index():
               ('某头部 AI 眼镜企业', '', 'H 股 IPO · 消费科技', 'glasses'),
               ('某头部国货美妆', '', 'H 股 IPO · 消费', 'beauty'),
               ('某东南亚龙头医疗服务机构', '', '并购 FA · 医疗', 'medical'),
-              ('某 CN 领先 AI 软件服务公司', '', 'H 股 IPO · TMT', 'ai')]
-        pf = [('宁德时代 CATL', 'catl.png', '2025 HKPO 基石投资', ''),
+              ('某国内领先的 AI 驱动软件服务公司', '', 'H 股 IPO · TMT', 'ai')]
+        pf = [('宁德时代 CATL', 'catl.png', '2025 港股 IPO 基石投资', ''),
               ('Yarbo', 'yarbo.png', '2025 早期投资', ''),
-              ('蜜雪冰城', 'mixue-text.png', '2025 HKPO 锚定投资', ''),
-              ('古茗', 'guming.png', '2025 HKPO 基石投资', ''),
-              ('卡罗特 Carote', 'carote.png', '2025 HKPO 基石投资', ''),
-              ('货拉拉 Lalamove', 'lalamove.png', '覆盖 · pending HKPO 投资', ''),
-              ('Uwant 友望', 'uwant.png', '覆盖 · pending 早期投资', '')]
+              ('蜜雪冰城', 'mixue-text.png', '2025 港股 IPO 锚定投资', ''),
+              ('古茗', 'guming.png', '2025 港股 IPO 基石投资', ''),
+              ('卡罗特 Carote', 'carote.png', '2025 港股 IPO 基石投资', ''),
+              ('货拉拉 Lalamove', 'lalamove.png', '覆盖 · 港股 IPO 投资中', ''),
+              ('Uwant 友望', 'uwant.png', '覆盖 · 早期投资中', '')]
         def wall(items):
             cards = ''
             for n, img, note, cls in items:
