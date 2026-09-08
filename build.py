@@ -451,12 +451,13 @@ def build_index():
       <span class="wc wc-4">M&amp;A</span>
       <span class="wc wc-5">Valuation</span>
       <span class="wc wc-6">Venture</span>
-      <span class="wc wc-7">Equity Research</span>
+      <span class="wc wc-7">Cross-border</span>
       <span class="wc wc-8">CLSA</span>
       <span class="wc wc-9">Healthcare</span>
       <span class="wc wc-10">TMT</span>
       <span class="wc wc-11">Consumer &amp; Retail</span>
-      <span class="wc wc-12">Fudan</span>
+      <span class="wc wc-12">FISF</span>
+      <span class="wc wc-13">SYSU 嶺南</span>
     </div>'''
         return f'''<div class="hero" id="hero">
   <div class="hero-slogan">{h['slogan']}</div>

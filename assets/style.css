@@ -79,8 +79,9 @@ main { max-width: var(--max-width); margin: 0 auto; padding: 0 28px; }
 .wc-10 { bottom: 0%; left: 44%; font-size: 22px; color: rgba(0,0,0,0.09); }
 .wc-11 { top: 64%; left: 16%; font-size: 20px; color: rgba(0,113,227,0.12); }
 .wc-12 { top: 66%; right: 14%; font-size: 20px; color: rgba(0,0,0,0.08); }
+.wc-13 { bottom: 4%; left: 30%; font-size: 18px; color: rgba(0,113,227,0.10); }
 /* front half of ring — passes in front of person */
-.wc-5, .wc-6, .wc-8, .wc-9, .wc-10, .wc-11, .wc-12 { z-index: 2; opacity: 0.55; }
+.wc-5, .wc-6, .wc-8, .wc-9, .wc-10, .wc-11, .wc-12, .wc-13 { z-index: 2; opacity: 0.55; }
 .hero-photo-cutout { position: relative; z-index: 1; width: 220px; }
 .hero-photo-cutout img { width: 100%; height: auto; display: block; filter: drop-shadow(0 12px 32px rgba(0,0,0,0.12)); }
 .hero-name { position: relative; z-index: 3; font-size: 32px; font-weight: 700; letter-spacing: -0.02em; margin-top: 8px; }
@@ -587,7 +588,7 @@ footer a:hover { color: var(--fg-secondary); }
   .wc-1 { font-size: 20px; }
   .wc-3 { font-size: 26px; }
   .wc-8 { font-size: 22px; }
-  .wc-2, .wc-4, .wc-6, .wc-5, .wc-7, .wc-9, .wc-10, .wc-11, .wc-12 { font-size: 16px; }
+  .wc-2, .wc-4, .wc-6, .wc-5, .wc-7, .wc-9, .wc-10, .wc-11, .wc-12, .wc-13 { font-size: 16px; }
   .hero-photo-cutout { width: 150px; }
   .hero-name { font-size: 22px; }
   .hero-name span { font-size: 13px; }
