@@ -195,7 +195,7 @@ def md_to_article(md_text):
 RESEARCH = {
     'popmart':   dict(title='泡泡玛特会是下一个伟大的 IP 公司吗？',
                       title_en='Is POP MART the next great IP company?',
-                      rtype='equity', no='01',
+                      rtype='equity', no='01', src='泡泡玛特研究.md',
                       cover='popmart.jpg', ticker='9992.HK',
                       target_price='HK$172–220', current_price='HK$156.2', price_date='2026-09-07',
                       upside='+10% ~ +41%',
@@ -204,7 +204,7 @@ RESEARCH = {
                       slug_label='泡泡玛特 IP 研究', slug_label_en='POP MART IP Research'),
     'wandian':   dict(title='万店连锁：什么样的零售业态能跑通？',
                       title_en='10,000-store chains: which retail formats work?',
-                      rtype='sector', no='02',
+                      rtype='sector', no='02', src='万店连锁研究.md',
                       cover='coffee.jpg',
                       stats=[('现制饮品', '¥7,464亿', '2025 市场规模'), ('零食饮料', '¥4.3万亿', '2025 市场规模'), ('连锁百强门店', '28.9万', '2025 年')],
                       stats_en=[('Beverages', '¥746B', '2025 market'), ('Snacks & drinks', '¥4.3T', '2025 market'), ('Top100 chain stores', '289K', '2025')],
@@ -213,21 +213,30 @@ RESEARCH = {
                       slug_label='万店零售业态', slug_label_en='Wan-dian Retail Formats'),
     'kuoshouji': dict(title='厂商抢滩登陆：我们真的需要更宽的手机吗？',
                       title_en='Wide-phone land grab: do we really need wider phones?',
-                      rtype='sector', no='03',
+                      rtype='sector', no='03', src='阔手机研究.md',
                       cover='kuoshouji.jpg',
                       stats=[('全球折叠屏', '1,820万台', '2025 出货'), ('2026E 全球', '2,200万+', 'Omdia 预测'), ('中国市场', '~1,000万台', '2025 出货')],
                       stats_en=[('Global foldables', '18.2M', '2025 shipments'), ('2026E global', '22M+', 'Omdia forecast'), ('China market', '~10M', '2025 shipments')],
                       desc='折叠屏 → 阔手机：品类迁移的早期判断与跟踪。',
                       desc_en='Foldable → wide phone: early judgment and tracking of a category shift.',
                       slug_label='阔手机品类研究', slug_label_en='Wide-phone Category Research'),
+    'coffee':    dict(title='精品咖啡：小众风味生意里的价值链机会',
+                      title_en='Specialty coffee: where the value sits in a niche flavour business',
+                      rtype='sector', no='04', src='精品咖啡研究.md',
+                      cover='coffee-specialty.jpg',
+                      stats=[('精品咖啡市场', '¥63亿', '2024 规模'), ('CAGR', '~41%', '2022–2024'), ('手冲爱好者', '208.5万', '2024 人群')],
+                      stats_en=[('Specialty coffee', '¥6.3B', '2024 size'), ('CAGR', '~41%', '2022–2024'), ('Pour-over users', '2.085M', '2024')],
+                      desc='自下而上测算市场规模，沿产业链定位「处理法」这一最具议价权的环节。',
+                      desc_en='Bottom-up market sizing, locating "processing" as the strongest pricing-power link along the value chain.',
+                      slug_label='精品咖啡研究', slug_label_en='Specialty Coffee Research'),
     'newfrontier': dict(title='Wealth of Health：AI 时代无法被替代的是健康身体',
                         title_en='Wealth of Health: the one thing AI cannot replace',
-                        rtype='healthcare', no='04',
-                        icon='medical', pending=True,
-                        stats=[('医疗服务市场', '¥1.84万亿', '2025 年'), ('民营医疗', '¥1.3万亿', '2025 年'), ('民营医院', '26,481家', '2025 年末')],
-                        stats_en=[('Healthcare market', '¥1.84T', '2025'), ('Private healthcare', '¥1.3T', '2025'), ('Private hospitals', '26,481', 'end 2025')],
-                        desc='医疗服务赛道的长期逻辑与估值框架。估值案例 pending 更新。',
-                        desc_en='Long-term logic and valuation framework for healthcare services. Valuation case pending update.',
+                        rtype='healthcare', no='05', src='医疗服务研究.md',
+                        cover='medical.jpg',
+                        stats=[('卫生总费用', '¥9.34万亿', '2025 年'), ('长护险参保', '1.9亿人', '2026 覆盖'), ('60岁以上', '3.2亿', '2025 年末')],
+                        stats_en=[('Total health spend', '¥9.34T', '2025'), ('LTCI enrollees', '190M', '2026'), ('Aged 60+', '320M', 'end 2025')],
+                        desc='全病程闭环平台的 equity story，与相对估值/TAM 双路径交叉验证（案例已脱敏）。',
+                        desc_en='Care-continuum platform equity story, cross-validated by relative and TAM valuations (de-identified case).',
                         slug_label='医疗服务研究', slug_label_en='Healthcare Services Research'),
 }
 RTYPES = [
@@ -236,7 +245,7 @@ RTYPES = [
     ('healthcare', '医疗健康', 'Healthcare'),
 ]
 SLUG_TITLES = {'popmart':'泡泡玛特 IP 研究','wandian':'万店零售业态',
-               'kuoshouji':'阔手机品类研究','newfrontier':'医疗服务研究'}
+               'kuoshouji':'阔手机品类研究','coffee':'精品咖啡研究','newfrontier':'医疗服务研究'}
 
 # ============ page shell ============
 def shell(title, body, desc='', lang_switch=False):
@@ -800,7 +809,10 @@ def build_articles():
     from opencc import OpenCC
     cc = OpenCC('s2t')
     for slug, meta in RESEARCH.items():
-        src = os.path.join(SITE, 'research_raw', f'{slug}.md')
+        src_name = meta.get('src', f'{slug}.md')
+        src = os.path.join(SITE, 'research_raw', src_name)
+        if not os.path.exists(src):
+            src = os.path.join(SITE, 'research_raw', f'{slug}.md')
         if not os.path.exists(src):
             continue
         with open(src, encoding='utf-8') as f:

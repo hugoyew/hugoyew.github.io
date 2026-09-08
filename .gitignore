@@ -1,0 +1,10 @@
+# 飞书拉取的原始底稿（含客户敏感材料，禁止上传公开仓库）
+feishu_src/
+# 本地验证脚本与截图
+verify_shots/
+# Python 缓存
+__pycache__/
+*.pyc
+# 系统文件
+.DS_Store
+Thumbs.db

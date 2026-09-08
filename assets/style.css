@@ -790,6 +790,7 @@ footer a:hover { color: var(--fg-secondary); }
 .burger:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
 /* ---- slide-in nav sheet ---- */
+html, body { max-width: 100%; overflow-x: hidden; }
 body.nav-open { overflow: hidden; }
 .navsheet { position: fixed; inset: 0; z-index: 60; visibility: hidden; overflow: hidden; transition: visibility 0s linear .46s; }
 .navsheet.is-open { visibility: visible; transition: visibility 0s linear 0s; }
