@@ -248,7 +248,7 @@ def shell(title, body, desc='', lang_switch=False):
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{title}</title>
 <meta name="description" content="{desc}">
-<link rel="stylesheet" href="../assets/style.css?v=2">
+<link rel="stylesheet" href="../assets/style.css?v=3">
 </head>
 <body>
 <nav><div class="nav-inner">
@@ -273,9 +273,10 @@ def index_shell(title, body, desc=''):
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{title}</title>
 <meta name="description" content="{desc}">
-<link rel="stylesheet" href="assets/style.css?v=2">
+<link rel="stylesheet" href="assets/style.css?v=3">
 </head>
 <body>
+<div class="scroll-progress" id="scrollProgress"></div>
 {body}
 </body>
 </html>'''
@@ -397,8 +398,8 @@ EXPERIENCE = {
 
 def life_photos(items):
     cards = ''
-    for img, word, cap, ratio in items:
-        cards += f'''<div class="life-card life-card-v2" style="aspect-ratio:{ratio};background-image:url(assets/photos/composed/{img})">
+    for idx, (img, word, cap, ratio) in enumerate(items):
+        cards += f'''<div class="life-card life-card-v2 reveal reveal-d{min(idx+1,4)}" style="aspect-ratio:{ratio};background-image:url(assets/photos/composed/{img})">
   <div class="life-word">{word}</div>
   <div class="life-cap">{cap}</div>
 </div>'''
@@ -407,9 +408,9 @@ def life_photos(items):
 def build_index():
     def caps_html(lang):
         cards = ''
-        for num, icon, headline, tags in CAPS[lang]:
-            cards += f'''<div class="cap-card"><div class="cap-head"><div class="cap-icon">{icon}</div><div class="cap-num">{num}</div></div><h3 class="cap-headline">{headline}</h3><div class="cap-tags">{tags}</div></div>'''
-        return f'<div class="caps">{cards}</div>'
+        for idx, (num, icon, headline, tags) in enumerate(CAPS[lang]):
+            cards += f'''<div class="cap-card tilt-card reveal reveal-d{idx+1}"><div class="cap-head"><div class="cap-icon">{icon}</div><div class="cap-num">{num}</div></div><h3 class="cap-headline">{headline}</h3><div class="cap-tags">{tags}</div></div>'''
+        return f'<div class="caps tilt-wrap">{cards}</div>'
     def timeline_html(lang):
         items = ''
         for org, role, date, pts in TIMELINE[lang]:
@@ -459,8 +460,8 @@ def build_index():
                 cards += f'<div class="logo-card">{media}<div class="co">{n}</div><div class="note">{note}</div></div>'
             return f'<div class="logo-wall">{cards}</div>'
         return f'''<div class="track-cols">
-  <div class="track-col"><div class="group-label">Investment Banking</div>{wall(ib)}</div>
-  <div class="track-col"><div class="group-label">Investments</div>{wall(pf)}</div>
+  <div class="track-col reveal reveal-d1"><div class="group-label">Investment Banking</div>{wall(ib)}</div>
+  <div class="track-col reveal reveal-d2"><div class="group-label">Investments</div>{wall(pf)}</div>
 </div>'''
     def research_grid(lang='zh'):
         from opencc import OpenCC
@@ -471,8 +472,10 @@ def build_index():
             rt_label = {'zh': rt_zh, 'tw': rt_tw, 'en': rt_en}[lang]
             rt_sub = {'zh': rt_en, 'tw': rt_en, 'en': ''}[lang]
             cards = ''
+            card_idx = 0
             for slug, meta in RESEARCH.items():
                 if meta['rtype'] != rtype_key: continue
+                card_idx += 1
                 pending_badge = '<span class="r-pending">PENDING</span>' if meta.get('pending') else ''
                 title = meta['title'] if lang != 'en' else meta.get('title_en', meta['title'])
                 if lang == 'tw': title = cc.convert(title)
@@ -488,7 +491,7 @@ def build_index():
                     cover = f'''<div class="r-cover r-img" style="background-image:url(assets/covers/{meta['cover']})"><div class="r-no">{meta['no']}</div><div class="r-cat">{rt_en}</div><div class="r-title">{title}</div>{pending_badge}</div>'''
                 else:
                     cover = f'''<div class="r-cover g1"><div class="r-no">{meta['no']}</div><div class="r-cat">{rt_en}</div><div class="r-title">{title}</div>{pending_badge}</div>'''
-                cards += f'''<a class="r-card" href="research/{slug}.html">
+                cards += f'''<a class="r-card reveal reveal-d{min(card_idx,4)}" href="research/{slug}.html">
   {cover}
   <div class="r-body"><div class="r-title-sm">{title}</div><div class="r-desc">{desc}</div><div class="r-meta"><span>{slug_label}</span><span>→</span></div></div>
 </a>'''
@@ -499,7 +502,7 @@ def build_index():
         return f'''<div class="section" id="{ids}"><div class="section-tag">{tag}</div><h2 class="section-title">{title}</h2><p class="section-sub">{sub}</p>{inner}</div>'''
     def hero_block(lang):
         h = HERO[lang]
-        wc = '''<div class="hero-wordcloud">
+        wc = '''<div class="hero-wordcloud parallax-slow" data-speed="0.12">
       <span class="wc wc-1">Investment Banking</span>
       <span class="wc wc-2">消费研究</span>
       <span class="wc wc-3">IPO</span>
@@ -518,7 +521,7 @@ def build_index():
   <div class="hero-slogan">{h['slogan']}</div>
   <div class="hero-center">
     {wc}
-    <div class="hero-photo-cutout"><img src="assets/photos/professional_cutout.png" alt="{h['name']}"></div>
+    <div class="hero-photo-cutout parallax-mid" data-speed="0.06"><img src="assets/photos/professional_cutout.png" alt="{h['name']}"></div>
     <div class="hero-name">{h['name']} <span>{h['name2']}</span></div>
   </div>
   <div class="hero-contact">
@@ -590,6 +593,62 @@ def build_index():
   }}
   btns.forEach(function(b){{ b.addEventListener('click', function(){{ setLang(b.dataset.lang); }}); }});
   setLang('zh');
+
+  /* ---- scroll progress ---- */
+  var bar = document.getElementById('scrollProgress');
+  function updateBar(){{
+    var h = document.documentElement;
+    var max = h.scrollHeight - h.clientHeight;
+    var pct = max > 0 ? (h.scrollTop / max) * 100 : 0;
+    if (bar) bar.style.width = pct + '%';
+  }}
+
+  /* ---- reveal on scroll ---- */
+  var revealEls = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {{
+    var io = new IntersectionObserver(function(entries){{
+      entries.forEach(function(e){{
+        if (e.isIntersecting) {{ e.target.classList.add('revealed'); io.unobserve(e.target); }}
+      }});
+    }}, {{ threshold: 0.12, rootMargin: '0px 0px -40px 0px' }});
+    revealEls.forEach(function(el){{ io.observe(el); }});
+  }} else {{
+    revealEls.forEach(function(el){{ el.classList.add('revealed'); }});
+  }}
+
+  /* ---- 3D tilt (pointer / desktop only) ---- */
+  var canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  if (canHover) {{
+    document.querySelectorAll('.tilt-card').forEach(function(card){{
+      card.addEventListener('mousemove', function(ev){{
+        var r = card.getBoundingClientRect();
+        var x = (ev.clientX - r.left) / r.width - 0.5;
+        var y = (ev.clientY - r.top) / r.height - 0.5;
+        card.style.transform = 'rotateY(' + (x * 6).toFixed(2) + 'deg) rotateX(' + (-y * 6).toFixed(2) + 'deg) translateY(-4px)';
+      }});
+      card.addEventListener('mouseleave', function(){{ card.style.transform = ''; }});
+    }});
+  }}
+
+  /* ---- hero parallax (rAF throttled) ---- */
+  var pLayers = document.querySelectorAll('[data-speed]');
+  var ticking = false;
+  function parallax(){{
+    var sy = window.scrollY;
+    pLayers.forEach(function(el){{
+      var sp = parseFloat(el.getAttribute('data-speed')) || 0;
+      var rect = el.getBoundingClientRect();
+      var off = (rect.top + sy - window.innerHeight * 0.4);
+      el.style.transform = 'translateY(' + ((sy - off) * sp).toFixed(1) + 'px)';
+    }});
+    ticking = false;
+  }}
+  function onScroll(){{
+    updateBar();
+    if (!ticking) {{ requestAnimationFrame(parallax); ticking = true; }}
+  }}
+  window.addEventListener('scroll', onScroll, {{ passive: true }});
+  updateBar(); parallax();
 }})();
 </script>
 </body></html>'''
