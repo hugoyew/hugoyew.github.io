@@ -353,12 +353,9 @@ CAPS = {
 ],
 }
 HERO = {
-'zh': dict(slogan='研究驱动执行 · 洞察挖掘价值',
-           name='姚颂文', name2='Hugo Yew'),
-'tw': dict(slogan='研究驅動執行 · 洞察挖掘價值',
-           name='姚頌文', name2='Hugo Yew'),
-'en': dict(slogan='Research-driven Execution · Insight-led Value',
-           name='Chung Man Yew', name2='Hugo Yew'),
+'zh': dict(slogan='洞察即价值', name='姚颂文', name2='Hugo Yew'),
+'tw': dict(slogan='洞察即價值', name='姚頌文', name2='Hugo Yew'),
+'en': dict(slogan='Insight is Value', name='Chung Man Yew', name2='Hugo Yew'),
 }
 TIMELINE = {
 'zh': [
@@ -493,7 +490,7 @@ def build_index():
   <div class="hero-slogan">{h['slogan']}</div>
   <div class="hero-center">
     {wc}
-    <div class="hero-photo-cutout hero-photo-orig"><img src="assets/photos/professional.jpg" alt="{h['name']}"></div>
+    <div class="hero-photo-cutout"><img src="assets/photos/professional_cutout.png" alt="{h['name']}"></div>
     <div class="hero-name">{h['name']} <span>{h['name2']}</span></div>
   </div>
   <div class="hero-contact">
