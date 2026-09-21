@@ -238,6 +238,33 @@ RESEARCH = {
                         desc='全病程闭环平台的 equity story，与相对估值/TAM 双路径交叉验证（案例已脱敏）。',
                         desc_en='Care-continuum platform equity story, cross-validated by relative and TAM valuations (de-identified case).',
                         slug_label='医疗服务研究', slug_label_en='Healthcare Services Research'),
+    'charging':  dict(title='充电配件三强：安克、绿联、酷态科是同一门生意吗？',
+                      title_en='Charging trio: are Anker, Ugreen and Cuktech the same business?',
+                      rtype='sector', no='06', src='充电配件研究.md',
+                      cover='charging.jpg',
+                      stats=[('安克毛利率', '49.8%', '2026H1'), ('绿联营收增速', '+53.8%', '2025'), ('A股 PE', '25.8 vs 24.3', '绿联 vs 安克')],
+                      stats_en=[('Anker gross margin', '49.8%', '1H26'), ('Ugreen rev. growth', '+53.8%', '2025'), ('A-share PE', '25.8 vs 24.3', 'Ugreen vs Anker')],
+                      desc='同一供应链下三种赚钱逻辑：品牌溢价、白牌整合与生态依附；PE 同价，但隐含假设相反。',
+                      desc_en='Three profit logics under one supply chain — brand premium, white-label consolidation and ecosystem dependence; same PE, opposite bets.',
+                      slug_label='充电配件研究', slug_label_en='Charging Accessories Research'),
+    'cleaning':  dict(title='智能清洁三问：什么生意、赚谁的钱、往哪去',
+                      title_en='Smart cleaning: what business, whose money, where next?',
+                      rtype='sector', no='07', src='智能清洁研究.md',
+                      cover='cleaning.jpg',
+                      stats=[('双寡头份额', '66.5%', '2026Q2 国内'), ('石头 PEG', '0.40', '全场最低'), ('追觅一级估值', '~¥700亿', 'Pre-IPO')],
+                      stats_en=[('Duopoly share', '66.5%', '2Q26 China'), ('Roborock PEG', '0.40', 'lowest'), ('Dreame private val.', '~¥70B', 'Pre-IPO')],
+                      desc='双寡头定价期里的四种生意与渠道排他实证；石头是唯一有数字佐证的品牌资产。',
+                      desc_en='Four businesses in a duopoly-pricing era and the evidence on channel exclusivity; Roborock is the only brand-equity story backed by numbers.',
+                      slug_label='智能清洁研究', slug_label_en='Smart Cleaning Research'),
+    'ceocean':   dict(title='中国消费电子出海 2026：什么生意、赚谁的钱、往哪去',
+                      title_en='China electronics going global 2026: what business, whose money, where next?',
+                      rtype='sector', no='08', src='消费电子出海研究.md',
+                      cover='ceocean.jpg',
+                      stats=[('覆盖公司', '9 家', '三赛道'), ('影石毛利率', '52.2%→41.4%', '技术被打穿'), ('GoPro 份额', '84%→18%', '份额可取代')],
+                      stats_en=[('Companies covered', '9', '3 sectors'), ('Insta360 GM', '52.2%→41.4%', 'tech undercut'), ('GoPro share', '84%→18%', 'share replaced')],
+                      desc='充电、影像、清洁三赛道收口：技术、份额、规模都会被抹平，唯有品牌资产最难打穿。',
+                      desc_en='Charging, imaging and cleaning in one framework: technology, share and scale all erode — only brand equity is genuinely defensible.',
+                      slug_label='消费电子出海研究', slug_label_en='Electronics Going-global Research'),
 }
 RTYPES = [
     ('equity', '个股研究', 'Equity Research'),
@@ -245,7 +272,8 @@ RTYPES = [
     ('healthcare', '医疗健康', 'Healthcare'),
 ]
 SLUG_TITLES = {'popmart':'泡泡玛特 IP 研究','wandian':'万店零售业态',
-               'kuoshouji':'阔手机品类研究','coffee':'精品咖啡研究','newfrontier':'医疗服务研究'}
+               'kuoshouji':'阔手机品类研究','coffee':'精品咖啡研究','newfrontier':'医疗服务研究',
+               'charging':'充电配件研究','cleaning':'智能清洁研究','ceocean':'消费电子出海研究'}
 
 # ============ page shell ============
 def shell(title, body, desc='', lang_switch=False):
