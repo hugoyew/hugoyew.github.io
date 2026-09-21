@@ -294,6 +294,76 @@ DISCLAIMER = {
           '<p>All content is &copy; Hugo Yew. No reproduction, excerpt or commercial use is permitted without prior written consent.</p>',
 }
 
+# ============ Latest Views (timeline on homepage, above Research) ============
+# 维护方式：飞书「最新观点」文档 → 用户发「更新网站」→ 助手拉取后更新本列表并重建。
+# 语言策略：简中为主；en 只给标题/标签/一句话摘要（重要条目可全英）。
+NOTES = [
+    {
+        'date': '2026-09',
+        'tag': {'zh': '消费 · 个股', 'en': 'Consumer · Single-name'},
+        'title': {'zh': '泡泡玛特的估值锚，应从「潮玩公司」切换到「IP 平台」',
+                  'en': 'Pop Mart is priced as a toy maker; it should be priced as an IP platform'},
+        'body': '单季增长只是表象，核心变量是 IP 代际能否持续更替，把单 IP 生命周期拉长成平台级现金流。当前股价隐含的假设与 IP 平台化路径存在明显错位。',
+        'body_en': 'The key variable is not quarterly growth but whether IP generations compound into platform-level cash flows; the market prices Pop Mart like a toy maker, not an IP platform.',
+        'slug': 'popmart',
+    },
+    {
+        'date': '2026-09',
+        'tag': {'zh': '消费电子 · 出海', 'en': 'Consumer Tech · Going Global'},
+        'title': {'zh': '技术、份额、规模都会被抹平，品牌资产是出海最后一道护城河',
+                  'en': 'Tech, share and scale get commoditized; brand equity is the last moat in cross-border consumer tech'},
+        'body': '出海竞争进入下半场：技术差距、渠道份额、规模成本都会随时间拉平，最终剩下的是品牌资产——对渠道的议价力、对消费者的心智、对价格带的掌控。这也是充电、影像、清洁三赛道头部与跟随者估值分化的根源。',
+        'body_en': 'As tech gaps, channel share and scale costs converge, the surviving moat is brand equity — pricing power, mindshare and price-band control; it explains the leader-follower valuation gap.',
+        'slug': 'ceocean',
+    },
+    {
+        'date': '2026-09',
+        'tag': {'zh': '智能清洁 · 行业', 'en': 'Smart Cleaning · Sector'},
+        'title': {'zh': '双寡头定价期，盈利质量比增长斜率更重要；石头 PEG 全场最低',
+                  'en': 'A duopoly pricing era: profitability quality beats growth slope, and Roborock is the cheapest on PEG'},
+        'body': '国内扫地机进入双寡头定价期（两家合计份额约 66.5%），价格战烈度收敛后，盈利质量比增长斜率更重要。石头 PEG 0.40 为全场最低，且是唯一在线上 / 线下 / 海外三层渠道都有可验证排他性的公司；追觅约 700 亿的一级估值与二级可比存在明显错位。',
+        'body_en': 'With ~66.5% combined share, pricing discipline matters more than growth slope; Roborock trades at the lowest PEG (0.40) with verifiable exclusivity across online, offline and overseas channels, while Dreame\'s ~RMB70bn private valuation sits at a clear premium to listed peers.',
+        'slug': 'cleaning',
+    },
+    {
+        'date': '2026-09',
+        'tag': {'zh': '医疗健康 · 行业', 'en': 'Healthcare · Sector'},
+        'title': {'zh': 'AI 时代无法被替代的，是健康的身体',
+                  'en': 'Wealth of health: the one asset AI cannot replicate'},
+        'body': '当 AI 快速商品化知识与执行力，「健康」反而成为最稀缺的资产。医疗服务投资的核心不是堆砌科室，而是全病程闭环能力——从预防、诊断到院外管理的连续服务，才是长期现金流与壁垒所在。',
+        'body_en': 'As AI commoditizes knowledge and execution, health becomes the scarcest asset; the winners in healthcare services build full-pathway care loops rather than stacking departments.',
+        'slug': 'newfrontier',
+    },
+]
+
+def views_html(lang='zh'):
+    from opencc import OpenCC
+    cc = OpenCC('s2t')
+    items = ''
+    arrow = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>'
+    for n in NOTES:
+        date = n['date']
+        tag = n['tag']['zh'] if lang != 'en' else n['tag']['en']
+        title = n['title']['zh'] if lang != 'en' else n['title']['en']
+        body = n['body'] if lang != 'en' else n.get('body_en', '')
+        if lang == 'tw':
+            tag = cc.convert(tag); title = cc.convert(title); body = cc.convert(body)
+        body_html = f'<p class="v-body">{body}</p>' if body else ''
+        link = ''
+        if n.get('slug'):
+            link_word = {'zh': '阅读研报', 'tw': '閱讀研報', 'en': 'Read the note'}[lang]
+            link = f'<a class="v-link" href="research/{n["slug"]}.html">{link_word}{arrow}</a>'
+        items += f'''<div class="v-item reveal">
+  <div class="v-rail"><span class="v-dot"></span></div>
+  <div class="v-card">
+    <div class="v-head"><span class="v-date">{date}</span><span class="v-tag">{tag}</span></div>
+    <div class="v-title">{title}</div>
+    {body_html}
+    {link}
+  </div>
+</div>'''
+    return f'<div class="views">{items}</div>'
+
 def shell(title, body, desc='', lang_switch=False):
     ls = '''<div class="lang-switch" id="lang-switch"><button data-lang="zh" class="active">简</button><button data-lang="tw">繁</button><button data-lang="en">EN</button></div>''' if lang_switch else ''
     return f'''<!DOCTYPE html>
@@ -303,7 +373,7 @@ def shell(title, body, desc='', lang_switch=False):
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{title}</title>
 <meta name="description" content="{desc}">
-<link rel="stylesheet" href="../assets/style.css?v=7">
+<link rel="stylesheet" href="../assets/style.css?v=8">
 </head>
 <body>
 <nav><div class="nav-inner">
@@ -344,7 +414,7 @@ def index_shell(title, body, desc=''):
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{title}</title>
 <meta name="description" content="{desc}">
-<link rel="stylesheet" href="assets/style.css?v=7">
+<link rel="stylesheet" href="assets/style.css?v=8">
 </head>
 <body>
 <div class="scroll-progress" id="scrollProgress"></div>
@@ -678,6 +748,10 @@ def build_index():
   <div data-lang-block="zh">{section('track','Track Record','代表性项目','参与过的关键交易与投资。', logo_wall())}</div>
   <div data-lang-block="tw" hidden>{section('track','Track Record','代表性項目','參與過的關鍵交易與投資。', logo_wall())}</div>
   <div data-lang-block="en" hidden>{section('track','Track Record','Selected Work','Key deals and investments I have been part of.', logo_wall())}</div>
+
+  <div data-lang-block="zh">{section('views','Latest Views','最新观点','最近在想什么：从研究立场出发的观点快照。', views_html('zh'))}</div>
+  <div data-lang-block="tw" hidden>{section('views','Latest Views','最新觀點','最近在想什麼：從研究立場出發的觀點快照。', views_html('tw'))}</div>
+  <div data-lang-block="en" hidden>{section('views','Latest Views','Latest Views','Quick takes off my research — what I have been thinking about lately.', views_html('en'))}</div>
 
   <div data-lang-block="zh">{section('research','Research','研究','成体系的研究输出：消费零售、医疗健康与跨行业框架。', research_grid('zh'))}</div>
   <div data-lang-block="tw" hidden>{section('research','Research','研究','成體係的研究輸出：消費零售、醫療健康與跨行業框架。', research_grid('tw'))}</div>
