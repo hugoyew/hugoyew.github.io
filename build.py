@@ -276,6 +276,24 @@ SLUG_TITLES = {'popmart':'泡泡玛特 IP 研究','wandian':'万店零售业态'
                'charging':'充电配件研究','cleaning':'智能清洁研究','ceocean':'消费电子出海研究'}
 
 # ============ page shell ============
+DISCLAIMER = {
+    'zh': '<p class="disc-h">免责声明</p>'
+          '<p>本网站由 Hugo Yew（姚颂文）个人运营，所载研究、观点与数据仅代表作者个人见解，不代表其任职机构或任何关联方的立场，亦不构成任何证券要约、招揽、投资建议或专业顾问服务。</p>'
+          '<p>内容仅供信息参考与学术交流，不应作为买卖任何证券或金融工具的依据；读者据此操作，风险自担，作者不对因使用本网站内容而产生的任何损失承担责任。</p>'
+          '<p>数据与资料来源于作者认为可靠的公开渠道，但作者不保证其准确性、完整性或时效性；目标价、评级与预测均为特定时点的个人研究判断，可能随时变更且不另行通知。过往表现不代表未来收益，投资有风险，决策需谨慎。</p>'
+          '<p>本网站内容版权归作者所有，未经书面许可不得转载、摘编或用于商业用途。© Hugo Yew</p>',
+    'tw': '<p class="disc-h">免責聲明</p>'
+          '<p>本網站由 Hugo Yew（姚頌文）個人營運，所載研究、觀點與數據僅代表作者個人見解，不代表其任職機構或任何關聯方的立場，亦不構成任何證券要約、招攬、投資建議或專業顧問服務。</p>'
+          '<p>內容僅供資訊參考與學術交流，不應作為買賣任何證券或金融工具的依據；讀者據此操作，風險自擔，作者不對因使用本網站內容而產生的任何損失承擔責任。</p>'
+          '<p>數據與資料來源於作者認為可靠的公開渠道，但作者不保證其準確性、完整性或時效性；目標價、評級與預測均為特定時點的個人研究判斷，可能隨時變更且不另行通知。過往表現不代表未來收益，投資有風險，決策需謹慎。</p>'
+          '<p>本網站內容版權歸作者所有，未經書面許可不得轉載、摘編或用於商業用途。© Hugo Yew</p>',
+    'en': '<p class="disc-h">Disclaimer</p>'
+          '<p>This website is maintained personally by Hugo Yew (Chung Man Yew). All research, views and data are solely the author&rsquo;s personal opinions and do not represent those of his employer or any affiliated entity, and do not constitute an offer, solicitation, investment advice or professional service of any kind.</p>'
+          '<p>Content is provided for informational and educational purposes only and should not be relied upon as the basis for buying or selling any security or financial instrument. Readers act on it at their own risk; the author accepts no liability for any loss arising from the use of this content.</p>'
+          '<p>Information is compiled from public sources believed to be reliable, but its accuracy, completeness or timeliness is not guaranteed. Target prices, ratings and forecasts are the author&rsquo;s personal research views as of a specific date and may change without notice. Past performance is not indicative of future results; investments carry risk.</p>'
+          '<p>All content is &copy; Hugo Yew. No reproduction, excerpt or commercial use is permitted without prior written consent.</p>',
+}
+
 def shell(title, body, desc='', lang_switch=False):
     ls = '''<div class="lang-switch" id="lang-switch"><button data-lang="zh" class="active">简</button><button data-lang="tw">繁</button><button data-lang="en">EN</button></div>''' if lang_switch else ''
     return f'''<!DOCTYPE html>
@@ -285,7 +303,7 @@ def shell(title, body, desc='', lang_switch=False):
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{title}</title>
 <meta name="description" content="{desc}">
-<link rel="stylesheet" href="../assets/style.css?v=6">
+<link rel="stylesheet" href="../assets/style.css?v=7">
 </head>
 <body>
 <nav><div class="nav-inner">
@@ -326,7 +344,7 @@ def index_shell(title, body, desc=''):
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{title}</title>
 <meta name="description" content="{desc}">
-<link rel="stylesheet" href="assets/style.css?v=6">
+<link rel="stylesheet" href="assets/style.css?v=7">
 </head>
 <body>
 <div class="scroll-progress" id="scrollProgress"></div>
@@ -670,8 +688,12 @@ def build_index():
   <div data-lang-block="en" hidden>{section('life','Life','Beyond Work','Life outside the desk.', life_photos([('gym.jpg','FITNESS','Fitness','3/4'),('nyc.jpg','NYC','Biodesign Challenge · NYC finals','4/5'),('coffee.jpg','COFFEE','Pour-over','3/4'),('referee.jpg','REFEREE','National Level II referee','4/5'),('captain.jpg','CAPTAIN','Lingnan #3 · team captain','3/4')]))}</div>
 </main>
 <footer>
+  <div class="footer-disc">
+    <div data-lang-block="zh">本网站内容仅供信息参考与学术交流，不构成投资建议；完整免责声明见各研究报告页底。</div>
+    <div data-lang-block="tw" hidden>本網站內容僅供資訊參考與學術交流，不構成投資建議；完整免責聲明見各研究報告頁底。</div>
+    <div data-lang-block="en" hidden>Content is for informational and educational purposes only and is not investment advice; the full disclaimer appears at the foot of each research note.</div>
+  </div>
   <span>© 2026 Hugo Yew · 簡中 / 繁中 / English</span>
-
 </footer>
 <script>
 (function(){{
@@ -959,13 +981,13 @@ def build_articles():
             # section labels
             if lang == 'en':
                 fin_title, fin_text = 'Financials', 'Quarterly financials module in progress — will auto-sync company quarterly results here.'
-                back_text, disclaimer = '← Back to Research', 'Personal research notes, for educational purposes only. Not investment advice. © Hugo Yew'
+                back_text, disclaimer = '← Back to Research', DISCLAIMER['en']
             elif lang == 'tw':
                 fin_title, fin_text = '財務數據', '季度財務數據模塊建設中——後續將在此自動同步公司季度財報數據。'
-                back_text, disclaimer = '← 返回研究', '個人研究筆記，僅供學習交流，不構成投資建議。© Hugo Yew'
+                back_text, disclaimer = '← 返回研究', DISCLAIMER['tw']
             else:
                 fin_title, fin_text = '财务数据', '季度财务数据模块建设中——后续将在此自动同步公司季度财报数据。'
-                back_text, disclaimer = '← 返回研究', '个人研究笔记，仅供学习交流，不构成投资建议。© Hugo Yew'
+                back_text, disclaimer = '← 返回研究', DISCLAIMER['zh']
 
             # hero media
             if meta.get('logo'):
