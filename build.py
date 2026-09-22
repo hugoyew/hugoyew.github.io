@@ -364,6 +364,78 @@ def views_html(lang='zh'):
 </div>'''
     return f'<div class="views">{items}</div>'
 
+# ============ Financial panels (quarterly, static; per covered stock) ============
+# 维护：财报季由月度访谈触发，人工核对口径后更新本字典并重建。行情为收盘价快照。
+# 单位：rev/np 年度序列为「亿元」，英文面板自动换算为 RMB bn（×0.1）。
+FIN = {
+    'cleaning': {
+        'ticker': '688169.SH',
+        'name': {'zh': '石头科技 Roborock', 'tw': '石頭科技 Roborock', 'en': 'Roborock (688169.SH)'},
+        'price_asof': '2026-09-21',
+        'price': '¥118.60',
+        'mktcap': {'zh': '307.9 亿元', 'tw': '307.9 億元', 'en': 'RMB 30.8 bn'},
+        'rev_h1': {'zh': '100.8 亿元', 'tw': '100.8 億元', 'en': 'RMB 10.1 bn'},
+        'np_h1': {'zh': '9.86 亿元', 'tw': '9.86 億元', 'en': 'RMB 0.99 bn'},
+        'rev_yoy': '+27.6%', 'np_yoy': '+45.6%',
+        'pe': '18.4x', 'peg': '0.40', 'gm': '43.3%',
+        'rev': [('2021', 58.37), ('2022', 66.29), ('2023', 86.54), ('2024', 119.45), ('2025', 186.95)],
+        'np': [('2021', 14.02), ('2022', 11.83), ('2023', 20.51), ('2024', 19.77), ('2025', 13.63)],
+    },
+}
+
+def fin_panel_html(slug, lang='zh'):
+    f = FIN.get(slug)
+    if not f:
+        return None
+    L = {
+        'zh': {'market': '现价（收盘）', 'consensus': '一致预期目标价', 'hugo': '我的目标价', 'pending': '待补充',
+               'mktcap': '总市值', 'pe': '市盈率 P/E（TTM）', 'peg': 'PEG（研报口径）',
+               'revh1': '2026H1 营业收入', 'nph1': '2026H1 归母净利', 'gm': '毛利率（2026H1）',
+               'revt': '营业收入（亿元）', 'npt': '归母净利润（亿元）',
+               'note': '行情截至 2026-09-21 收盘；财务为 2026 年中报（报告期截至 2026-06-30）。数据来自公司公告及公开行情（同花顺 / Wind），按季度更新；本表仅供研究参考，不构成投资建议。'},
+        'tw': {'market': '現價（收盤）', 'consensus': '一致預期目標價', 'hugo': '我的目標價', 'pending': '待補充',
+               'mktcap': '總市值', 'pe': '市盈率 P/E（TTM）', 'peg': 'PEG（研報口徑）',
+               'revh1': '2026H1 營業收入', 'nph1': '2026H1 歸母淨利', 'gm': '毛利率（2026H1）',
+               'revt': '營業收入（億元）', 'npt': '歸母淨利潤（億元）',
+               'note': '行情截至 2026-09-21 收盤；財務為 2026 年中報（報告期截至 2026-06-30）。數據來自公司公告及公開行情（同花順 / Wind），按季度更新；本表僅供研究參考，不構成投資建議。'},
+        'en': {'market': 'Market (close)', 'consensus': 'Consensus target', 'hugo': "My target", 'pending': 'Pending',
+               'mktcap': 'Market cap', 'pe': 'P/E (TTM)', 'peg': 'PEG (note basis)',
+               'revh1': 'Revenue, 1H26', 'nph1': 'Net profit, 1H26', 'gm': 'Gross margin, 1H26',
+               'revt': 'Revenue (RMB bn)', 'npt': 'Net profit (RMB bn)',
+               'note': 'Prices as of 2026-09-21 close; financials from the 1H26 report (period ended 2026-06-30). Source: company filings and public market data (Tonghuashun / Wind); updated quarterly. For research reference only — not investment advice.'},
+    }[lang]
+    scale = 0.1 if lang == 'en' else 1.0
+    def conv(rows):
+        return [(k, round(v * scale, 2)) for k, v in rows]
+    rev_chart = chart_html('bar', L['revt'], conv(f['rev']))
+    np_chart = chart_html('bar', L['npt'], conv(f['np']))
+
+    def pricecard(label, val=None, sub='', active=False, pend=False):
+        cls = 'fp-card' + (' fp-active' if active else '') + (' fp-pending' if pend else '')
+        v = f'<span class="fp-pend">{L["pending"]}</span>' if pend else f'<span class="fp-val">{val}</span>'
+        s = f'<div class="fp-sub">{sub}</div>' if sub else ''
+        return f'<div class="{cls}"><div class="fp-l">{label}</div>{v}{s}</div>'
+    cards = (pricecard(L['market'], f['price'], f['price_asof'], active=True)
+             + pricecard(L['consensus'], pend=True)
+             + pricecard(L['hugo'], pend=True))
+
+    def kpi(label, val, delta=None):
+        d = f'<span class="kpi-delta">{delta}</span>' if delta else ''
+        return f'<div class="kpi"><div class="kpi-v">{val}{d}</div><div class="kpi-l">{label}</div></div>'
+    kpis = (kpi(L['mktcap'], f['mktcap'][lang])
+            + kpi(L['pe'], f['pe'])
+            + kpi(L['peg'], f['peg'])
+            + kpi(L['revh1'], f['rev_h1'][lang], f['rev_yoy'])
+            + kpi(L['nph1'], f['np_h1'][lang], f['np_yoy'])
+            + kpi(L['gm'], f['gm']))
+
+    return f'''<div class="fin-panel">
+  <div class="fp-row">{cards}</div>
+  <div class="kpi-grid">{kpis}</div>
+  <div class="fin-charts">{rev_chart}{np_chart}</div>
+  <p class="fin-note">{L['note']}</p>
+</div>'''
+
 def shell(title, body, desc='', lang_switch=False):
     ls = '''<div class="lang-switch" id="lang-switch"><button data-lang="zh" class="active">简</button><button data-lang="tw">繁</button><button data-lang="en">EN</button></div>''' if lang_switch else ''
     return f'''<!DOCTYPE html>
@@ -373,7 +445,7 @@ def shell(title, body, desc='', lang_switch=False):
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{title}</title>
 <meta name="description" content="{desc}">
-<link rel="stylesheet" href="../assets/style.css?v=8">
+<link rel="stylesheet" href="../assets/style.css?v=9">
 </head>
 <body>
 <nav><div class="nav-inner">
@@ -414,7 +486,7 @@ def index_shell(title, body, desc=''):
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{title}</title>
 <meta name="description" content="{desc}">
-<link rel="stylesheet" href="assets/style.css?v=8">
+<link rel="stylesheet" href="assets/style.css?v=9">
 </head>
 <body>
 <div class="scroll-progress" id="scrollProgress"></div>
@@ -918,7 +990,8 @@ def section_after(md_text, keywords):
     """Return the first matching section (heading + content until next heading)."""
     lines = md_text.split('\n')
     for i, ln in enumerate(lines):
-        if re.match(r'^#{1,4}\s+', ln) and re.sub(r'^#{1,4}\s+', '', ln).strip().lower() in keywords:
+        _h = re.sub(r'^#{1,4}\s+', '', ln).strip().lower()
+        if re.match(r'^#{1,4}\s+', ln) and (_h in keywords or any(k.lower() in _h for k in keywords)):
             body = []
             for j in range(i + 1, len(lines)):
                 if re.match(r'^#{1,4}\s+', lines[j]):
@@ -1062,6 +1135,8 @@ def build_articles():
             else:
                 fin_title, fin_text = '财务数据', '季度财务数据模块建设中——后续将在此自动同步公司季度财报数据。'
                 back_text, disclaimer = '← 返回研究', DISCLAIMER['zh']
+            fin_panel = fin_panel_html(slug, lang)
+            fin_block = fin_panel if fin_panel else f'<p class="muted">{fin_text}</p>'
 
             # hero media
             if meta.get('logo'):
@@ -1093,7 +1168,7 @@ def build_articles():
   <div class="conclusion"><h2>{concl_title}</h2>{concl_text}</div>
   <div class="financials">
     <h2>{fin_title}</h2>
-    <p class="muted">{fin_text}</p>
+    {fin_block}
   </div>
   <div class="a-disclaimer">{disclaimer}</div>
   <a class="back-link" href="../index.html#research">{back_text}</a>
