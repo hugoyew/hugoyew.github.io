@@ -265,6 +265,19 @@ RESEARCH = {
                       desc='充电、影像、清洁三赛道收口：技术、份额、规模都会被抹平，唯有品牌资产最难打穿。',
                       desc_en='Charging, imaging and cleaning in one framework: technology, share and scale all erode — only brand equity is genuinely defensible.',
                       slug_label='消费电子出海研究', slug_label_en='Electronics Going-global Research'),
+    'dongpeng':  dict(title='东鹏饮料：杀的是故事，不是能力',
+                      title_en='Eastroc Beverage: the story was sold off, not the capability',
+                      rtype='equity', no='09', src='东鹏饮料研究.md',
+                      cover='dongpeng.jpg', ticker='605499.SH · 9980.HK',
+                      stats=[('A 股 PE(TTM)', '17.0x', '近 5 年 0.66% 分位'),
+                             ('2026H1 毛利率', '48.36%', '创 6 年新高'),
+                             ('Wind 一致目标价', '¥185.70', '较现价 +63%')],
+                      stats_en=[('A-share P/E (TTM)', '17.0x', '0.66th pct, 5y'),
+                                ('Gross margin, 1H26', '48.36%', '6-year high'),
+                                ('Wind consensus target', '¥185.70', '+63% upside')],
+                      desc='H 股腰斩、A 股 PE 压到历史 0.66% 分位，毛利率却创 6 年新高——三重验证，Q3 财报定胜负。',
+                      desc_en='H-shares halved and A-share P/E hit a 5-year low percentile while gross margin reached a six-year high — three tests, with the Q3 report as the verdict.',
+                      slug_label='东鹏饮料研究', slug_label_en='Eastroc Beverage Research'),
 }
 RTYPES = [
     ('equity', '个股研究', 'Equity Research'),
@@ -273,7 +286,7 @@ RTYPES = [
 ]
 SLUG_TITLES = {'popmart':'泡泡玛特 IP 研究','wandian':'万店零售业态',
                'kuoshouji':'阔手机品类研究','coffee':'精品咖啡研究','newfrontier':'医疗服务研究',
-               'charging':'充电配件研究','cleaning':'智能清洁研究','ceocean':'消费电子出海研究'}
+               'charging':'充电配件研究','cleaning':'智能清洁研究','ceocean':'消费电子出海研究','dongpeng':'东鹏饮料研究'}
 
 # ============ page shell ============
 DISCLAIMER = {
@@ -373,13 +386,31 @@ FIN = {
         'name': {'zh': '石头科技 Roborock', 'tw': '石頭科技 Roborock', 'en': 'Roborock (688169.SH)'},
         'price_asof': '2026-09-21',
         'price': '¥118.60',
+        'consensus': None,
         'mktcap': {'zh': '307.9 亿元', 'tw': '307.9 億元', 'en': 'RMB 30.8 bn'},
         'rev_h1': {'zh': '100.8 亿元', 'tw': '100.8 億元', 'en': 'RMB 10.1 bn'},
         'np_h1': {'zh': '9.86 亿元', 'tw': '9.86 億元', 'en': 'RMB 0.99 bn'},
         'rev_yoy': '+27.6%', 'np_yoy': '+45.6%',
-        'pe': '18.4x', 'peg': '0.40', 'gm': '43.3%',
+        'pe': '18.4x', 'valuation3': ('peg', '0.40'), 'gm': '43.3%',
         'rev': [('2021', 58.37), ('2022', 66.29), ('2023', 86.54), ('2024', 119.45), ('2025', 186.95)],
         'np': [('2021', 14.02), ('2022', 11.83), ('2023', 20.51), ('2024', 19.77), ('2025', 13.63)],
+    },
+    'dongpeng': {
+        'ticker': '605499.SH',
+        'name': {'zh': '东鹏饮料 Eastroc', 'tw': '東鵬飲料 Eastroc', 'en': 'Eastroc Beverage (605499.SH)'},
+        'price_asof': '2026-09-22',
+        'price': '¥113.71',
+        'consensus': {
+            'val': {'zh': '¥185.70', 'tw': '¥185.70', 'en': '¥185.70'},
+            'sub': {'zh': 'Wind 一致预期 · 49 家券商', 'tw': 'Wind 一致預期 · 49 家券商', 'en': 'Wind consensus · 49 brokers'},
+        },
+        'mktcap': {'zh': '817 亿元', 'tw': '817 億元', 'en': 'RMB 81.7 bn'},
+        'rev_h1': {'zh': '124.4 亿元', 'tw': '124.4 億元', 'en': 'RMB 12.4 bn'},
+        'np_h1': {'zh': '28.67 亿元', 'tw': '28.67 億元', 'en': 'RMB 2.87 bn'},
+        'rev_yoy': '+15.9%', 'np_yoy': '+20.7%',
+        'pe': '17.0x', 'valuation3': ('divyield', '4.28%'), 'gm': '48.4%',
+        'rev': [('2021', 69.78), ('2022', 85.05), ('2023', 112.63), ('2024', 158.39), ('2025', 208.75)],
+        'np': [('2021', 11.93), ('2022', 14.41), ('2023', 20.40), ('2024', 33.27), ('2025', 44.15)],
     },
 }
 
@@ -389,20 +420,20 @@ def fin_panel_html(slug, lang='zh'):
         return None
     L = {
         'zh': {'market': '现价（收盘）', 'consensus': '一致预期目标价', 'hugo': '我的目标价', 'pending': '待补充',
-               'mktcap': '总市值', 'pe': '市盈率 P/E（TTM）', 'peg': 'PEG（研报口径）',
+               'mktcap': '总市值', 'pe': '市盈率 P/E（TTM）', 'peg': 'PEG（研报口径）', 'divyield': '股息率（TTM · A 股）',
                'revh1': '2026H1 营业收入', 'nph1': '2026H1 归母净利', 'gm': '毛利率（2026H1）',
                'revt': '营业收入（亿元）', 'npt': '归母净利润（亿元）',
-               'note': '行情截至 2026-09-21 收盘；财务为 2026 年中报（报告期截至 2026-06-30）。数据来自公司公告及公开行情（同花顺 / Wind），按季度更新；本表仅供研究参考，不构成投资建议。'},
+               'note': '行情截至 {asof} 收盘；财务为 2026 年中报（报告期截至 2026-06-30）。数据来自公司公告及公开行情（同花顺 / Wind），按季度更新；本表仅供研究参考，不构成投资建议。'},
         'tw': {'market': '現價（收盤）', 'consensus': '一致預期目標價', 'hugo': '我的目標價', 'pending': '待補充',
-               'mktcap': '總市值', 'pe': '市盈率 P/E（TTM）', 'peg': 'PEG（研報口徑）',
+               'mktcap': '總市值', 'pe': '市盈率 P/E（TTM）', 'peg': 'PEG（研報口徑）', 'divyield': '股息率（TTM · A 股）',
                'revh1': '2026H1 營業收入', 'nph1': '2026H1 歸母淨利', 'gm': '毛利率（2026H1）',
                'revt': '營業收入（億元）', 'npt': '歸母淨利潤（億元）',
-               'note': '行情截至 2026-09-21 收盤；財務為 2026 年中報（報告期截至 2026-06-30）。數據來自公司公告及公開行情（同花順 / Wind），按季度更新；本表僅供研究參考，不構成投資建議。'},
+               'note': '行情截至 {asof} 收盤；財務為 2026 年中報（報告期截至 2026-06-30）。數據來自公司公告及公開行情（同花順 / Wind），按季度更新；本表僅供研究參考，不構成投資建議。'},
         'en': {'market': 'Market (close)', 'consensus': 'Consensus target', 'hugo': "My target", 'pending': 'Pending',
-               'mktcap': 'Market cap', 'pe': 'P/E (TTM)', 'peg': 'PEG (note basis)',
+               'mktcap': 'Market cap', 'pe': 'P/E (TTM)', 'peg': 'PEG (note basis)', 'divyield': 'Div yield (TTM · A)',
                'revh1': 'Revenue, 1H26', 'nph1': 'Net profit, 1H26', 'gm': 'Gross margin, 1H26',
                'revt': 'Revenue (RMB bn)', 'npt': 'Net profit (RMB bn)',
-               'note': 'Prices as of 2026-09-21 close; financials from the 1H26 report (period ended 2026-06-30). Source: company filings and public market data (Tonghuashun / Wind); updated quarterly. For research reference only — not investment advice.'},
+               'note': 'Prices as of {asof} close; financials from the 1H26 report (period ended 2026-06-30). Source: company filings and public market data (Tonghuashun / Wind); updated quarterly. For research reference only — not investment advice.'},
     }[lang]
     scale = 0.1 if lang == 'en' else 1.0
     def conv(rows):
@@ -415,16 +446,22 @@ def fin_panel_html(slug, lang='zh'):
         v = f'<span class="fp-pend">{L["pending"]}</span>' if pend else f'<span class="fp-val">{val}</span>'
         s = f'<div class="fp-sub">{sub}</div>' if sub else ''
         return f'<div class="{cls}"><div class="fp-l">{label}</div>{v}{s}</div>'
+    cons = f.get('consensus')
+    if cons:
+        cons_card = pricecard(L['consensus'], cons['val'][lang], cons['sub'][lang])
+    else:
+        cons_card = pricecard(L['consensus'], pend=True)
     cards = (pricecard(L['market'], f['price'], f['price_asof'], active=True)
-             + pricecard(L['consensus'], pend=True)
+             + cons_card
              + pricecard(L['hugo'], pend=True))
 
+    v3key, v3val = f['valuation3']
     def kpi(label, val, delta=None):
         d = f'<span class="kpi-delta">{delta}</span>' if delta else ''
         return f'<div class="kpi"><div class="kpi-v">{val}{d}</div><div class="kpi-l">{label}</div></div>'
     kpis = (kpi(L['mktcap'], f['mktcap'][lang])
             + kpi(L['pe'], f['pe'])
-            + kpi(L['peg'], f['peg'])
+            + kpi(L[v3key], v3val)
             + kpi(L['revh1'], f['rev_h1'][lang], f['rev_yoy'])
             + kpi(L['nph1'], f['np_h1'][lang], f['np_yoy'])
             + kpi(L['gm'], f['gm']))
@@ -433,7 +470,7 @@ def fin_panel_html(slug, lang='zh'):
   <div class="fp-row">{cards}</div>
   <div class="kpi-grid">{kpis}</div>
   <div class="fin-charts">{rev_chart}{np_chart}</div>
-  <p class="fin-note">{L['note']}</p>
+  <p class="fin-note">{L['note'].format(asof=f['price_asof'])}</p>
 </div>'''
 
 def shell(title, body, desc='', lang_switch=False):
